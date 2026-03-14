@@ -1228,7 +1228,7 @@ function initAudio() { if (!audioCtx) { try { audioCtx = new AudioContextAPI(); 
 function playSnd(type) { initAudio(); if(!audioCtx) return; if(audioCtx.state === 'suspended') audioCtx.resume(); let vol = localStorage.getItem('ce_vol_' + type); vol = (vol !== null ? parseInt(vol)/100 : 1.0); if(vol <= 0) return; const t = audioCtx.currentTime; if (type === 'm') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sine'; osc.frequency.setValueAtTime(300, t); osc.frequency.exponentialRampToValueAtTime(100, t + 0.03); gain.gain.setValueAtTime(vol * 1.5, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.03); osc.start(t); osc.stop(t + 0.03); } else if (type === 'c') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'square'; osc.frequency.setValueAtTime(250, t); osc.frequency.exponentialRampToValueAtTime(50, t + 0.06); gain.gain.setValueAtTime(vol * 1.2, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.06); osc.start(t); osc.stop(t + 0.06); } else if (type === 'k') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'triangle'; osc.frequency.setValueAtTime(500, t); osc.frequency.exponentialRampToValueAtTime(550, t + 0.2); gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(vol * 0.9, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3); osc.start(t); osc.stop(t + 0.3); } else if (type === 'e') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sine'; osc.frequency.setValueAtTime(300, t); osc.frequency.exponentialRampToValueAtTime(100, t + 0.8); gain.gain.setValueAtTime(vol * 1.5, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.8); osc.start(t); osc.stop(t + 0.8); } }
 function setAudioVol(id, val) { localStorage.setItem('ce_vol_' + id, val); }
 
-/* --- CHESS ENGINE --- */
+/* --- CHESS BOARD LOGIC (Used for drag/drop, highlighting, validating moves ONLY) --- */
 function createEngine() {
   const F = 'abcdefgh', R = '12345678', s2i = s => F.indexOf(s[0]) + (parseInt(s[1]) - 1) * 8, i2s = i => F[i % 8] + R[Math.floor(i / 8)];
   const isW = p => p >= 1 && p <= 6, pC = p => !p ? null : isW(p) ? 'w' : 'b', opp = c => c === 'w' ? 'b' : 'w', tp = p => { if (!p) return null; const t =['','p','n','b','r','q','k']; return t[isW(p) ? p : p - 6]; };
@@ -1287,34 +1287,136 @@ function createEngine() {
   }
   
   function legMs(s, sq) { return genPs(s).filter(m => (!sq||m.f===sq) && !inChk(apM(s,m), s.turn)); } function isMate(s) { return inChk(s,s.turn) && legMs(s).length===0; }
-  const PV = {1:100,2:300,3:300,4:500,5:900,6:10000, 7:-100,8:-300,9:-300,10:-500,11:-900,12:-10000};
-  const pstP=[0,0,0,0,0,0,0,0, 5,10,10,-20,-20,10,10,5, 5,-5,-10,0,0,-10,-5,5, 0,0,0,20,20,0,0,0, 5,5,10,25,25,10,5,5, 10,10,20,30,30,20,10,10, 50,50,50,50,50,50,50,50, 0,0,0,0,0,0,0,0], pstN=[-50,-40,-30,-30,-30,-30,-40,-50, -40,-20,0,0,0,0,-20,-40, -30,0,10,15,15,10,0,-30, -30,5,15,20,20,15,5,-30, -30,0,15,20,20,15,0,-30, -30,5,10,15,15,10,5,-30, -40,-20,0,5,5,0,-20,-40, -50,-40,-30,-30,-30,-30,-40,-50], pstB=[-20,-10,-10,-10,-10,-10,-10,-20, -10,5,0,0,0,0,5,-10, -10,10,10,10,10,10,10,-10, -10,0,10,10,10,10,0,-10, -10,5,5,10,10,5,5,-10, -10,0,5,10,10,5,0,-10, -10,0,0,0,0,0,0,-10, -20,-10,-10,-10,-10,-10,-10,-20], pstR=[0,0,0,5,5,0,0,0, -5,0,0,0,0,0,0,-5, -5,0,0,0,0,0,0,-5, -5,0,0,0,0,0,0,-5, -5,0,0,0,0,0,0,-5, -5,0,0,0,0,0,0,-5, -5,0,0,0,0,0,0,-5, -5,0,0,0,0,0,0,-5, -5,0,0,0,0,0,0,-5, 5,10,10,10,10,10,10,5, 0,0,0,0,0,0,0,0], pstQ=[-20,-10,-10,-5,-5,-10,-10,-20, -10,0,0,0,0,0,0,-10, -10,0,5,5,5,5,0,-10, -5,0,5,5,5,5,0,-5, 0,0,5,5,5,5,0,-5, -10,5,5,5,5,5,0,-10, -10,0,5,0,0,0,0,-10, -20,-10,-10,-5,-5,-10,-10,-20], pstK=[20,30,10,0,0,10,30,20, 20,20,0,0,0,0,20,20, -10,-20,-20,-20,-20,-20,-20,-10, -20,-30,-30,-40,-40,-30,-30,-20, -30,-40,-40,-50,-50,-40,-40,-30, -30,-40,-40,-50,-50,-40,-40,-30, -30,-40,-40,-50,-50,-40,-40,-30, -30,-40,-40,-50,-50,-40,-40,-30]; const PSTs=[null,pstP,pstN,pstB,pstR,pstQ,pstK, pstP,pstN,pstB,pstR,pstQ,pstK];
-  function evalB(s) { let sc=0; for(let i=0;i<64;i++){ const p = s.board[i]; if(p){ if(p<=6) sc += PV[p] + PSTs[p][i]; else sc += PV[p] - PSTs[p][63-i]; } } return sc; }
   
-  function quiesce(s, a, b, mx) { 
-      let sp = evalB(s); if(mx){if(sp>=b)return b;if(sp>a)a=sp;}else{if(sp<=a)return a;if(sp<b)b=sp;} 
-      let mvs = genPs(s).filter(m => m.fl==='c' || m.fl==='e'); mvs.sort((m1, m2) => (PV[s.board[s2i(m2.t)]]||0) - (PV[s.board[s2i(m1.t)]]||0)); 
-      if (mx) { for(let m of mvs){let v=quiesce(apM(s,m),a,b,0); if(v>a)a=v; if(a>=b)break;} return a; } 
-      else { for(let m of mvs){let v=quiesce(apM(s,m),a,b,1); if(v<b)b=v; if(b<=a)break;} return b; } 
-  }
-  
-  function minimax(s, d, a, b, mx) { 
-      if(d===0) return quiesce(s, a, b, mx); let mvs = legMs(s); if(!mvs.length) return inChk(s,s.turn) ? (mx?-99999:99999) : 0; 
-      mvs.sort((m1, m2) => { let s1=0,s2=0; if(m1.fl==='c'||m1.fl==='e')s1=10*(PV[s.board[s2i(m1.t)]]||0)-(PV[s.board[s2i(m1.f)]]||0); if(m1.pr)s1+=800; if(m2.fl==='c'||m2.fl==='e')s2=10*(PV[s.board[s2i(m2.t)]]||0)-(PV[s.board[s2i(m2.f)]]||0); if(m2.pr)s2+=800; return s2-s1; }); 
-      if(mx){let v=-Infinity; for(let m of mvs){v=Math.max(v, minimax(apM(s,m),d-1,a,b,0)); a=Math.max(a,v); if(b<=a)break;} return v;} 
-      else {let v=Infinity; for(let m of mvs){v=Math.min(v, minimax(apM(s,m),d-1,a,b,1)); b=Math.min(b,v); if(b<=a)break;} return v;} 
-  }
-  
-  return { init, apM, legMs, inChk, isMate, tp, evalB, minimax, s2i, genPs };
+  return { init, apM, legMs, inChk, isMate, tp, s2i };
 }
 const CE = createEngine();
 
+/* --- 100% REAL STOCKFISH (LICHESS STYLE) - NO LOCAL FILES REQUIRED --- */
 let aiWorker = null;
+
+// نستخدم Stockfish.js 10 الأصلي بقوة 3000 ELO (يحفظ كل الافتتاحات الاستراتيجية).
+// جلبه عبر Blob يجعله يعمل حتى لو فتحت اللعبة بدون استضافة (من الكمبيوتر مباشرة).
+const workerData = `
+    importScripts('https://cdnjs.cloudflare.com/ajax/libs/stockfish.js/10.0.2/stockfish.js');
+    // لا نحتاج لعمل أي شيء آخر، المحرك يستمع تلقائياً ويتفاعل!
+`;
+const blob = new Blob([workerData], {type: 'application/javascript'});
+
 try {
-  const workerCode = `const CE = (${createEngine.toString()})(); const BOOK = {"":[{f:"e2",t:"e4"}, {f:"d2",t:"d4"}, {f:"c2",t:"c4"}, {f:"g1",t:"f3"}], "e2e4":[{f:"c7",t:"c5"}, {f:"e7",t:"e5"}, {f:"e7",t:"e6"}, {f:"c7",t:"c6"}, {f:"d7",t:"d6"}, {f:"g8",t:"f6"}], "e2e4,c7c5":[{f:"g1",t:"f3"}, {f:"b1",t:"c3"}], "e2e4,c7c5,g1f3":[{f:"d7",t:"d6"}, {f:"e7",t:"e6"}, {f:"b8",t:"c6"}], "e2e4,e7e5":[{f:"g1",t:"f3"}, {f:"f1",t:"c4"}, {f:"f2",t:"f4"}], "e2e4,e7e5,g1f3":[{f:"b8",t:"c6"}, {f:"g8",t:"f6"}], "d2d4":[{f:"d7",t:"d5"}, {f:"g8",t:"f6"}], "d2d4,g8f6":[{f:"c2",t:"c4"}, {f:"g1",t:"f3"}], "e2e4,e7e6":[{f:"d2",t:"d4"}], "c2c4":[{f:"e7",t:"e5"}, {f:"c7",t:"c5"}, {f:"g8",t:"f6"}] }; self.onmessage = function(e) { const {s, elo, timeControl, history} = e.data; let mvs = CE.legMs(s); if(!mvs.length) { self.postMessage(null); return; } let maxTime = timeControl === 1 ? 150 : timeControl === 3 ? 600 : 2000; let minTime = timeControl === 1 ? 50 : timeControl === 3 ? 200 : 800; if (history && history.length < 15 && elo >= 800) { let histStr = history.map(m => m.f + m.t).join(','); if (BOOK[histStr]) { let validBookMoves = BOOK[histStr].filter(bm => mvs.some(m => m.f === bm.f && m.t === bm.t)); if (validBookMoves.length > 0) { let chosen = validBookMoves[Math.floor(Math.random() * validBookMoves.length)]; setTimeout(() => self.postMessage(mvs.find(m => m.f === chosen.f && m.t === chosen.t)), minTime); return; } } } let targetDepth = Math.max(1, Math.floor(elo / 400)); let errProb = Math.max(0, 0.4 - (elo / 2500)); if (elo < 800) maxTime = Math.min(maxTime, 300); else if (elo < 1800) maxTime = Math.min(maxTime, 800); else maxTime = Math.max(maxTime, 2000); if (Math.random() < errProb) { setTimeout(() => self.postMessage(mvs[Math.floor(Math.random() * mvs.length)]), minTime); return; } let bestMv = mvs[0]; const mx = s.turn === 'w'; let startTime = Date.now(); for(let d = 1; d <= targetDepth; d++) { let currentBest = null, bestScore = mx ? -Infinity : Infinity; mvs.sort((m1, m2) => { let s1=0,s2=0; if(m1.fl==='c'||m1.fl==='e')s1=10*(CE.evalB({...s,board:{[CE.s2i(m1.t)]:s.board[CE.s2i(m1.t)]}})||0); if(m2.fl==='c'||m2.fl==='e')s2=10*(CE.evalB({...s,board:{[CE.s2i(m2.t)]:s.board[CE.s2i(m2.t)]}})||0); return s2-s1; }); for(let m of mvs) { if (Date.now() - startTime > maxTime && d > 1) break; let ns = CE.apM(s, m); let v = CE.minimax(ns, d-1, -Infinity, Infinity, !mx); if (mx ? v > bestScore : v < bestScore) { bestScore = v; currentBest = m; } } if (currentBest) bestMv = currentBest; if (Date.now() - startTime > maxTime) break; } let timeRemaining = minTime - (Date.now() - startTime); if (timeRemaining > 0) setTimeout(() => self.postMessage(bestMv), timeRemaining); else self.postMessage(bestMv); };`;
-  aiWorker = new Worker(URL.createObjectURL(new Blob([workerCode], { type: "application/javascript" })));
-  aiWorker.onmessage = function(e) { const aiM = e.data; if (aiM && gameOn && currentPly === moveHistory.length) execMv(aiM); };
-} catch(e) {}
+    aiWorker = new Worker(URL.createObjectURL(blob));
+    
+    aiWorker.onmessage = function(e) {
+        const line = e.data;
+        if (typeof line !== 'string') return;
+        
+        // تحديث شريط التقييم Lichess Style
+        if (line.includes("info depth") && line.includes("score")) {
+            const matchCP = line.match(/score cp (-?\d+)/);
+            const matchMate = line.match(/score mate (-?\d+)/);
+            
+            let cpValue = null, isMate = false;
+            if (matchMate) {
+                cpValue = parseInt(matchMate[1]);
+                isMate = true;
+            } else if (matchCP) {
+                cpValue = parseInt(matchCP[1]);
+            }
+            if (cpValue !== null) updateEvalBarRealtime(cpValue, isMate);
+        }
+        
+        // التقاط أفضل نقلة يلعبها المحرك
+        if (line.startsWith("bestmove")) {
+            const match = line.match(/^bestmove ([a-h][1-8][a-h][1-8][qrbn]?)/);
+            if (match && gameOn && currentPly === moveHistory.length) {
+                const mvStr = match[1];
+                const f = mvStr.substring(0, 2);
+                const t = mvStr.substring(2, 4);
+                const pr = mvStr.length > 4 ? mvStr[4] : null;
+
+                const isEngineTurn = gM === 'pvc' && ((sC === 'black' ? 'w' : 'b') === GS.turn);
+                if (isEngineTurn) {
+                    let legals = CE.legMs(GS);
+                    let mvObj = legals.find(m => m.f === f && m.t === t);
+                    if (mvObj) {
+                        execMv(mvObj, pr);
+                    }
+                }
+            }
+        }
+    };
+    
+    aiWorker.postMessage("uci");
+    aiWorker.postMessage("isready");
+} catch(err) {
+    console.error("Stockfish Failed to load:", err);
+}
+
+// Lichess Style Eval Bar (Exact Math)
+function updateEvalBarRealtime(val, isMate) {
+    if (!GS || !gameOn) return;
+    
+    // UCI sends evaluation relative to the side whose turn it is. 
+    // We convert it to absolute evaluation (relative to White) for the UI bar.
+    let isWhiteTurn = GS.turn === 'w';
+    let absoluteCp = isWhiteTurn ? val : -val;
+    
+    let sc = 50;
+    let sVal = "";
+    
+    if (isMate) {
+        let relativeMate = isWhiteTurn ? val : -val;
+        sc = relativeMate > 0 ? 100 : 0;
+        
+        if (isWhiteTurn) {
+            sVal = (val > 0 ? "+M" : "-M") + Math.abs(val);
+        } else {
+            sVal = (val > 0 ? "-M" : "+M") + Math.abs(val);
+        }
+    } else {
+        // Lichess formula for eval bar percentage: win chance based on centipawns
+        let winChance = 2 / (1 + Math.exp(-0.00368208 * absoluteCp)) - 1;
+        sc = 50 + (winChance * 50);
+        
+        sVal = (absoluteCp > 0 ? '+' : '') + (absoluteCp / 100).toFixed(1);
+    }
+    
+    const evS = document.getElementById('ev-s'), evF = document.getElementById('ev-f'), evL = document.getElementById('ev-l');
+    if (evS) evS.textContent = sVal;
+    if (evF) evF.style.width = sc + '%';
+    if (evL) {
+        if (isMate) evL.textContent = "Mate";
+        else evL.textContent = Math.abs(absoluteCp) < 30 ? TRANSLATIONS[currentLang].even : (absoluteCp > 0 ? 'White' : 'Black');
+    }
+}
+
+// دالة المحرك الحقيقية للعب وللتقييم
+function triggerEngine() {
+    if (!aiWorker || !GS) return;
+    
+    let movesStr = moveHistory.slice(0, currentPly).map(m => m.mv.f + m.mv.t + (m.mv.pr || "")).join(" ");
+    
+    aiWorker.postMessage("stop");
+    aiWorker.postMessage(movesStr === "" ? "position startpos" : "position startpos moves " + movesStr);
+    
+    const isEngineTurn = gM === 'pvc' && ((sC === 'black' ? 'w' : 'b') === GS.turn);
+    
+    if (isEngineTurn && gameOn) {
+        // ضبط قوة الذكاء (Skill Level 0-20) بناءً على الـ ELO المطلوب
+        let skill = Math.round(((eElo - 250) / 2950) * 20);
+        skill = Math.max(0, Math.min(20, skill));
+        aiWorker.postMessage("setoption name Skill Level value " + skill);
+        
+        // وقت تفكير بشري وطبيعي (يعتمد على القوة، كلما كان أقوى أخذ وقته أكثر)
+        let baseTime = eElo < 1200 ? 500 : (eElo < 2000 ? 1000 : 1500);
+        let thinkTime = baseTime + (Math.random() * 500); // إضافة عشوائية بسيطة ليبدو بشرياً
+        
+        aiWorker.postMessage("go movetime " + Math.floor(thinkTime));
+    } else if (gameOn) {
+        // أثناء تفكير اللاعب البشري، يقوم المحرك بتحليل الرقعة بعمق لشريط التقييم Lichess Style
+        aiWorker.postMessage("go depth 15");
+    }
+}
 
 /* --- GAME STATE & ROUTING --- */
 let gM = 'pvp', sC = 'white', sT = 10, eElo = 1500, initialGS = null, GS = null, moveHistory =[], currentPly = 0, flp = false, drg = null, gameOn = false, pendDrag = false, isResign = false, gameSaved = false, sel = null, lMvs =[], lastM = null, pend = null, tim = null, tw = 0, tb = 0, lastTk = 0, positionCounts = {}; 
@@ -1379,6 +1481,8 @@ function viewHistoryGame(idx) {
   initialGS = CE.init(); GS = initialGS; moveHistory =[]; currentPly = 0;
   if(g.moves && g.moves.length > 0) { g.moves.forEach(m => { let nextGS = CE.apM(GS, m, m.pr); moveHistory.push({ mv: m, san: m.san, GS_after: nextGS, tw: 0, tb: 0 }); GS = nextGS; currentPly++; }); }
   buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); go('game');
+  // Trigger eval only
+  if (aiWorker) { aiWorker.postMessage("stop"); aiWorker.postMessage("position startpos moves " + g.moves.map(m=>m.f+m.t+(m.pr||"")).join(" ")); aiWorker.postMessage("go depth 15"); }
 }
 
 function bdSz() { const w = window.innerWidth, h = window.innerHeight; if(h < 600 && w > h) return Math.floor(h - 40); if(w <= 600) return w; return w <= 950 ? Math.min(w - 40, h - 240) : Math.max(400, Math.floor(Math.min(w - 400, h - 140))); }
@@ -1459,20 +1563,38 @@ function renderMoves() {
   msGrid.innerHTML = html; requestAnimationFrame(() => { const container = document.getElementById('ms-container'), active = msGrid.querySelector('.mc'); if (active && container) { const cRect = container.getBoundingClientRect(), aRect = active.getBoundingClientRect(); if (aRect.right > cRect.right || aRect.left < cRect.left) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); } });
 }
 
-function goToPly(ply) { currentPly = ply; if(ply === 0) { GS = initialGS; lastM = null; tw = sT*60; tb = sT*60; } else { GS = moveHistory[ply - 1].GS_after; lastM = moveHistory[ply - 1].mv; tw = moveHistory[ply - 1].tw; tb = moveHistory[ply - 1].tb; } drawP('cb', GS); updUI(); renderMoves(); drawTim(); }
+function goToPly(ply) { currentPly = ply; if(ply === 0) { GS = initialGS; lastM = null; tw = sT*60; tb = sT*60; } else { GS = moveHistory[ply - 1].GS_after; lastM = moveHistory[ply - 1].mv; tw = moveHistory[ply - 1].tw; tb = moveHistory[ply - 1].tb; } drawP('cb', GS); updUI(); renderMoves(); if(window.updTim) window.updTim(); triggerEngine(); }
 function navPly(dir) { let target = currentPly + dir; if (target < 0) target = 0; if (target > moveHistory.length) target = moveHistory.length; if (target !== currentPly) goToPly(target); }
-function triggerEngine() { if (gM!=='pvc' || ((sC==='black'?'w':'b') !== GS.turn) || !aiWorker) return; window.aiStartTime = Date.now(); let histVals = moveHistory.map(m => m.mv); aiWorker.postMessage({ s: GS, elo: eElo, timeControl: sT, history: histVals }); }
 
 function execMv(mv, pr=null, isDrag=false) {
   if(currentPly < moveHistory.length) moveHistory = moveHistory.slice(0, currentPly);
-  const san = getSAN(GS, mv, pr); GS = CE.apM(GS, mv, pr); lastM = mv; moveHistory.push({ mv: mv, san: san, GS_after: GS, tw: tw, tb: tb }); currentPly++; drawP('cb', GS, isDrag ? null : mv.f, mv.t);
+  const san = getSAN(GS, mv, pr); 
+  GS = CE.apM(GS, mv, pr); 
+  lastM = mv; 
+  
+  let storedMv = { f: mv.f, t: mv.t, fl: mv.fl };
+  if (pr) storedMv.pr = pr;
+  
+  moveHistory.push({ mv: storedMv, san: san, GS_after: GS, tw: tw, tb: tb }); 
+  currentPly++; 
+  drawP('cb', GS, isDrag ? null : mv.f, mv.t);
+  
   const chk = CE.inChk(GS, GS.turn), mate = CE.isMate(GS), isCap = mv.fl==='c'||mv.fl==='e';
   if(mate) playSnd('e'); else if(chk) playSnd('k'); else if(isCap) playSnd('c'); else playSnd('m');
+  
   let currentHash = getPosHash(GS); positionCounts[currentHash] = (positionCounts[currentHash] || 0) + 1; let isThreefold = positionCounts[currentHash] >= 3;
-  updUI(); renderMoves(); let drawReason = ''; let noMoves = CE.legMs(GS).length === 0;
+  
+  updUI(); 
+  renderMoves(); 
+  
+  let drawReason = ''; let noMoves = CE.legMs(GS).length === 0;
   if (noMoves && !mate) drawReason = TRANSLATIONS[currentLang].drawStalemate; else if (isThreefold) drawReason = TRANSLATIONS[currentLang].drawRep; else { let pc = 0; for(let i=0; i<64; i++) if(GS.board[i]) pc++; if (pc <= 2) drawReason = TRANSLATIONS[currentLang].drawMaterial; }
+  
   if(mate || drawReason) { gameOn=false; clearInterval(tim); setTimeout(()=>showEnd(mate, drawReason), 500); return; }
-  if(currentPly === moveHistory.length && gameOn) triggerEngine();
+  
+  if(currentPly === moveHistory.length && gameOn) {
+      triggerEngine();
+  }
 }
 
 function startGame() {
@@ -1500,7 +1622,13 @@ function startGame() {
   
   if(sT>0) { lastTk=Date.now(); tim = setInterval(window.updTim, 100); } 
   document.getElementById('timer-top').style.display = sT>0?'block':'none'; document.getElementById('timer-bot').style.display = sT>0?'block':'none';
-  buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); go('game'); document.getElementById('eng-panel').style.display = 'block'; if(gM==='pvc' && sC==='black') triggerEngine();
+  buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); go('game'); document.getElementById('eng-panel').style.display = 'block'; 
+  
+  // Update eval bar immediately at start
+  const evS = document.getElementById('ev-s'), evF = document.getElementById('ev-f'), evL = document.getElementById('ev-l');
+  if(evS) evS.textContent = "+0.2"; if(evF) evF.style.width = "52%"; if(evL) evL.textContent = TRANSLATIONS[currentLang].even;
+
+  triggerEngine();
 }
 
 function timeOut(col) { gameOn=false; clearInterval(tim); document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].timeout; document.getElementById('go-s').textContent = (col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins; document.getElementById('go-ov').classList.add('open'); saveGame((col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonTimeout, col==='w'?'b':'w'); }
@@ -1514,8 +1642,16 @@ function drawCap(arr, containerId, adv) {
 
 function updUI() {
   const topBar=document.getElementById('pb-top'), botBar=document.getElementById('pb-bot'); topBar.classList.remove('active-turn'); botBar.classList.remove('active-turn'); if(gameOn && currentPly === moveHistory.length) (GS.turn==='w'?!flp:flp) ? botBar.classList.add('active-turn') : topBar.classList.add('active-turn');
-  if (GS) { const matVals = { 1:1, 2:3, 3:3, 4:5, 5:9, 7:1, 8:3, 9:3, 10:5, 11:9 }; let wMat = 0, bMat = 0; for (let i = 0; i < 64; i++) { let p = GS.board[i]; if (p) { if (p >= 1 && p <= 5) wMat += matVals[p]; else if (p >= 7 && p <= 11) bMat += matVals[p]; } } let wAdv = wMat - bMat, bAdv = bMat - wMat; if (flp) { drawCap(GS.cap.b, 'cap-bot', bAdv); drawCap(GS.cap.w, 'cap-top', wAdv); } else { drawCap(GS.cap.w, 'cap-bot', wAdv); drawCap(GS.cap.b, 'cap-top', bAdv); } }
-  if(GS) { const evRaw = CE.evalB(GS), cp = evRaw / 100, sc = Math.max(0, Math.min(100, 50 + (cp * 10))), sVal = (cp > 0 ? '+' : '') + cp.toFixed(1); document.getElementById('ev-s').textContent = sVal; document.getElementById('ev-f').style.width = sc + '%'; document.getElementById('ev-l').textContent = Math.abs(cp) < 0.3 ? TRANSLATIONS[currentLang].even : (cp > 0 ? 'White' : 'Black'); }
+  if (GS) { 
+      const matVals = { 1:1, 2:3, 3:3, 4:5, 5:9, 7:1, 8:3, 9:3, 10:5, 11:9 }; let wMat = 0, bMat = 0; 
+      for (let i = 0; i < 64; i++) { 
+          let p = GS.board[i]; 
+          if (p) { if (p >= 1 && p <= 5) wMat += matVals[p]; else if (p >= 7 && p <= 11) bMat += matVals[p]; } 
+      } 
+      let wAdv = wMat - bMat, bAdv = bMat - wMat; 
+      if (flp) { drawCap(GS.cap.b, 'cap-bot', bAdv); drawCap(GS.cap.w, 'cap-top', wAdv); } 
+      else { drawCap(GS.cap.w, 'cap-bot', wAdv); drawCap(GS.cap.b, 'cap-top', bAdv); } 
+  }
 }
 
 function showProm(isDrag, pColor='w') { pendDrag = isDrag; const isW = pColor === 'w', g = document.getElementById('pgrid'); g.innerHTML = '';['q','r','b','n'].forEach(pt => { const pId = isW ? {q:5,r:4,b:3,n:2}[pt] : {q:11,r:10,b:9,n:8}[pt]; const d = document.createElement('div'); d.className='psq2 gpu-accel'; d.style.backgroundImage=`url(${getPImg(pId)})`; d.onclick = () => { document.getElementById('promo-ov').classList.remove('open'); execMv(pend, pt, pendDrag); pend=null; }; g.appendChild(d); }); document.getElementById('promo-ov').classList.add('open'); }
