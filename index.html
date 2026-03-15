@@ -63,7 +63,6 @@
     body[dir="rtl"] .nb { padding: 6px 12px; }
     body[dir="rtl"] .nb span { font-size: 0.85rem; font-weight: 700; }
     body[dir="rtl"] .settings-dropdown button { font-size: 0.85rem; padding: 12px 16px; flex-direction: row-reverse; text-align: right; }
-    body[dir="rtl"] .settings-dropdown button .icon { margin-right: 0; margin-left: 10px; }
 
     body[dir="rtl"] .fl, body[dir="rtl"] .theme-lbl, body[dir="rtl"] .news-tag, body[dir="rtl"] .ph-t { font-size: 0.8rem; letter-spacing: 0; font-weight: 700; }
     body[dir="rtl"] .bt-btn span { font-size: 0.85rem; }
@@ -72,18 +71,34 @@
     body[dir="rtl"] .news-desc { font-size: 0.85rem; line-height: 1.6; }
     body[dir="rtl"] .nbox-body { font-size: 0.95rem; }
 
+    /* RTL specific overrides for navigation & menus */
+    body[dir="rtl"] .nav-links,
+    body[dir="rtl"] .settings-dropdown,
+    body[dir="rtl"] .lang-toggle,
+    body[dir="rtl"] .nb {
+      direction: rtl !important;
+    }
+    body[dir="rtl"] .logo span {
+      margin-right: 12px;
+      margin-left: 0;
+    }
+    body[dir="rtl"] .settings-dropdown {
+      transform-origin: top left;
+      right: auto;
+      left: 0;
+    }
+
     button, input, textarea { outline: none; border: none; font-family: inherit; }
     button { cursor: pointer; touch-action: manipulation; }
 
-    .icon { width: 1.3em; height: 1.3em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; margin-right: 8px; flex-shrink: 0; }
-    body[dir="rtl"] .icon { margin-right: 0; margin-left: 8px; }
-
+    .icon { width: 1.3em; height: 1.3em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; flex-shrink: 0; }
+    
     /* ==========================================================================
        2. HARDWARE ACCELERATION & ANIMATIONS
        ========================================================================== */
     .gpu-accel { transform: translate3d(0,0,0); backface-visibility: hidden; perspective: 1000px; }
-    button, .card, .hist-item, .t-btn, .bt-btn, .cb2, .news-card { transition: transform 0.2s var(--spring), box-shadow 0.2s var(--spring), border-color 0.15s ease, background 0.15s; will-change: transform; }
-    button:active, .card:active, .hist-item:active, .bt-btn:active, .news-card:active { transform: scale(0.96) translateZ(0) !important; }
+    button, .card, .hist-item, .t-btn, .bt-btn, .cb2 { transition: transform 0.2s var(--spring), box-shadow 0.2s var(--spring), border-color 0.15s ease, background 0.15s; will-change: transform; }
+    button:active, .card:active, .hist-item:active, .bt-btn:active { transform: scale(0.96) translateZ(0) !important; }
 
     .page { display: none; min-height: 100dvh; flex-direction: column; opacity: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
     .page.active { display: flex; animation: pageFadeIn 0.2s var(--smooth) forwards; }
@@ -92,33 +107,34 @@
     /* ==========================================================================
        3. NAVIGATION & LANG TOGGLE
        ========================================================================== */
-    nav { background: var(--bg2); border-bottom: 1px solid var(--border); height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); direction: ltr !important; width: 100%; }
+    nav { background: var(--bg2); border-bottom: 1px solid var(--border); height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); width: 100%; }
     
     .logo { display: flex; align-items: center; gap: 12px; user-select: none; }
     .logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
     .logo-box { width: 44px; height: 44px; border-radius: 10px; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; border: 2px solid var(--acc); box-shadow: 0 4px 10px hsla(var(--app-hue), 60%, 45%, 0.2); background-color: var(--bg4); cursor: pointer; transition: transform 0.2s var(--spring), border-color 0.2s; }
     .logo-box:hover { border-color: var(--acc-l); transform: scale(1.05); }
     
-    .nav-links { display: flex; gap: 10px; align-items: center; direction: ltr !important; }
-    .nb { background: transparent; color: var(--text2); padding: 8px 16px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative; direction: ltr !important;}
+    .nav-links { display: flex; gap: 10px; align-items: center; }
+    .nb { background: transparent; color: var(--text2); padding: 8px 16px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative;}
     body[dir="rtl"] .nb span { direction: rtl; }
     
     .nb:hover { color: var(--text); background: var(--bg4); }
     .nb.on { color: var(--white); background: var(--acc); box-shadow: 0 4px 12px hsla(var(--app-hue), 60%, 45%, 0.25); }
     body.light-mode .nb.on { color: #fff; }
 
-    .lang-toggle { position: relative; display: flex; align-items: center; background: var(--bg4); border-radius: 20px; padding: 4px; cursor: pointer; border: 1px solid var(--border); box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); width: 84px; height: 36px; justify-content: space-between; direction: ltr !important; }
+    .lang-toggle { position: relative; display: flex; align-items: center; background: var(--bg4); border-radius: 20px; padding: 4px; cursor: pointer; border: 1px solid var(--border); box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); width: 84px; height: 36px; justify-content: space-between;}
     .lang-toggle span { z-index: 2; font-size: 0.8rem; font-weight: 800; padding: 0; width: 50%; text-align: center; color: var(--text2); transition: color 0.2s; user-select: none; line-height: 1;}
     .lang-toggle span.active { color: var(--white); }
     .lang-indicator { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); background: var(--acc); border-radius: 16px; transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94); box-shadow: 0 2px 6px hsla(var(--app-hue),60%,45%,0.3); }
 
-    .settings-dropdown { position: absolute; top: 60px; right: 0; background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); min-width: 220px; overflow: hidden; display: flex; flex-direction: column; transform-origin: top right; transform: scale(0.9) translateY(-10px); opacity: 0; visibility: hidden; transition: transform 0.2s var(--spring), opacity 0.15s ease, visibility 0.15s; z-index: 200; direction: ltr !important; }
+    .settings-dropdown { position: absolute; top: 60px; right: 0; background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); min-width: 220px; overflow: hidden; display: flex; flex-direction: column; transform-origin: top right; transform: scale(0.9) translateY(-10px); opacity: 0; visibility: hidden; transition: transform 0.2s var(--spring), opacity 0.15s ease, visibility 0.15s; z-index: 200; }
     .settings-dropdown.show { transform: scale(1) translateY(0); opacity: 1; visibility: visible; }
-    .settings-dropdown button { display:flex; align-items:center; background: transparent; color: var(--text); padding: 16px 20px; text-align: left; font-size: 0.95rem; font-weight: 600; border-bottom: 1px solid var(--border); direction: ltr !important;}
-    .settings-dropdown button:hover { background: var(--bg4); color: var(--acc-l); padding-left: 26px; }
+    .settings-dropdown button { display:flex; align-items:center; gap: 12px; background: transparent; color: var(--text); padding: 16px 20px; text-align: left; font-size: 0.95rem; font-weight: 600; border-bottom: 1px solid var(--border);}
+    .settings-dropdown button .icon { margin: 0 !important; }
+    .settings-dropdown button:hover { background: var(--bg4); color: var(--acc-l); padding-inline-start: 26px; }
 
     /* ==========================================================================
-       4. HOME PAGE
+       4. HOME PAGE & DYNAMIC NEWS
        ========================================================================== */
     .home-container { display: flex; flex-direction: column; flex: 1; height: calc(100vh - 70px); width: 100%; max-width: 100vw; }
     .news-wrapper { flex: 1; padding: 32px 24px; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
@@ -126,11 +142,26 @@
     
     .hero-h { word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; margin-bottom: 32px; text-align: center; font-size: clamp(1.8rem, 6vw, 3rem); line-height: 1.2; width: 100%; max-width: 100%; padding: 0 10px; }
     
-    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1200px; margin: 0 auto; }
-    .news-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; }
-    .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--border2); }
-    .news-img { width: 100%; height: 160px; background-size: cover; background-position: center; border-bottom: 1px solid var(--border); }
-    .news-content { padding: 16px; display: flex; flex-direction: column; flex: 1;}
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; perspective: 1000px;}
+    
+    .news-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; position: relative; transition: transform 0.3s var(--spring), box-shadow 0.3s, border-color 0.3s; will-change: transform, opacity;}
+    .news-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    .news-card:hover { transform: translateY(-8px) !important; box-shadow: 0 16px 32px rgba(0,0,0,0.4); border-color: var(--acc-l); }
+    .news-card:hover::after { opacity: 1; }
+    .news-card:active { transform: scale(0.97) translateY(-4px) !important; }
+    
+    .news-card.fade-in { animation: cardEnter 0.6s var(--spring) forwards; }
+    .news-card.fade-out { opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none; }
+    
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(-30px) scale(0.95) rotateX(5deg); }
+      to { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
+    }
+
+    .news-img { width: 100%; height: 160px; background-size: cover; background-position: center; border-bottom: 1px solid var(--border); transition: transform 0.5s ease; }
+    .news-card:hover .news-img { transform: scale(1.05); }
+    
+    .news-content { padding: 18px; display: flex; flex-direction: column; flex: 1; position: relative; z-index: 2; background: var(--bg2);}
     .news-tag { font-size: 0.75rem; font-weight: 800; color: var(--acc-l); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
     .news-title { font-size: 1.1rem; font-weight: 800; color: var(--text); line-height: 1.4; margin-bottom: 10px; }
     .news-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.5; }
@@ -172,20 +203,29 @@
     .elo-t { font-size: 0.95rem; color: var(--acc-l); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
     
     /* ==========================================================================
-       6. CHESS BOARD & GAMEPLAY UI
+       6. CHESS BOARD & GAMEPLAY UI (FIXED ZOOM OVERFLOW)
        ========================================================================== */
-    .game-wrap { flex: 1; display: flex; align-items: flex-start; justify-content: center; gap: 40px; padding: 30px 20px; max-width: 1400px; margin: 0 auto; width: 100%; overflow-x: hidden; box-sizing: border-box;}
+    .game-wrap { flex: 1; display: flex; align-items: flex-start; justify-content: center; gap: 40px; padding: 30px 20px; width: 100%; max-width: 1400px; margin: 0 auto; overflow-x: hidden; box-sizing: border-box; flex-wrap: wrap;}
     
-    .board-col { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; width: 100%; max-width: 100%; }
+    .board-col { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; width: 100%; max-width: 100%; flex: 1 1 400px; }
     
     .pbar { background: var(--bg2); border: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; height: 68px; box-sizing: border-box; transition: background-color .15s; width: 100%;}
     .pbar.top { border-radius: 12px 12px 0 0; border-bottom: none; }
     .pbar.bot { border-radius: 0 0 12px 12px; border-top: none; }
-    .pbar.active-turn { background: var(--bg3); box-shadow: inset 0 4px 15px rgba(0,0,0,0.05); border-color: var(--acc); }
+    
+    /* FIX 2: Simple/Flat active turn, removed glow */
+    .pbar.active-turn { background: transparent !important; box-shadow: none !important; border-color: var(--border) !important; }
     
     .pl-l { display: flex; align-items: center; gap: 12px; }
     
-    .pl-av { width: 44px !important; height: 44px !important; flex: 0 0 44px !important; border-radius: 4px; background-color: var(--sq-l); border: 2px solid var(--border2); box-shadow: var(--shadow-sm); object-fit: cover !important; object-position: center !important; display: block; margin: 0; padding: 0;}
+    .pl-av, .prof-avatar-edit, .logo-box {
+      aspect-ratio: 1 / 1;
+      object-fit: cover !important;
+      background-size: cover !important;
+      background-position: center !important;
+    }
+    
+    .pl-av { width: 44px !important; height: 44px !important; flex: 0 0 44px !important; border-radius: 4px; background-color: var(--sq-l); border: 2px solid var(--border2); box-shadow: var(--shadow-sm); display: block; margin: 0; padding: 0;}
     
     .pl-nm { font-size: 1.05rem; font-weight: 700; color: var(--text); display: inline-block; line-height: 1.2;}
     .pl-el { font-size: 0.8rem; font-weight: 800; background: var(--bg4); padding: 2px 6px; border-radius: 6px; color: var(--text2); margin-left: 8px;}
@@ -206,7 +246,7 @@
     #cb, .theme-preview { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); user-select: none; -webkit-user-select: none; position: relative; touch-action: none; direction: ltr !important;}
     #cb { contain: strict; }
     
-    .theme-preview { width: 100%; max-width: 320px; aspect-ratio: 1; border: 2px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); background-color: var(--bg3); margin: 0 auto; }
+    .theme-preview { width: 100%; max-width: 320px; aspect-ratio: 1; border: 2px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); background-color: var(--bg3); margin: 0 auto; filter: brightness(var(--board-bright)) hue-rotate(var(--board-hue)); transition: filter 0.2s ease; }
 
     .sq { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; touch-action: none;}
     .sq.l { background-color: var(--sq-l); background-image: var(--bg-img, none); background-size: 100% 100%; }
@@ -219,9 +259,10 @@
     .sq.dot::after { content: ''; position: absolute; border-radius: 50%; background: rgba(0,0,0,0.3); width: 25%; height: 25%; z-index: 2; pointer-events: none; }
     .sq.cap::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 6px rgba(0,0,0,0.3); z-index: 2; pointer-events: none; }
 
-    .co { position: absolute; font-size: 0.8rem; font-weight: 800; z-index: 2; pointer-events: none; opacity: 0.9; }
-    .co.file { bottom: 2px; left: 4px; }
-    .co.rank { top: 2px; right: 4px; }
+    /* FIX 6: Coordinate styling (Chess.com / Lichess style) */
+    .co { position: absolute; font-size: 0.8rem; font-weight: 800; z-index: 2; pointer-events: none; opacity: 1; }
+    .co.file { bottom: 2px; right: 4px; left: auto; }
+    .co.rank { top: 2px; left: 4px; right: auto; }
     .sq.l .co { color: var(--sq-d); }
     .sq.d .co { color: var(--sq-l); }
 
@@ -230,9 +271,9 @@
     .theme-preview .piece { position: static; width: 90%; height: 90%; margin: auto; transition: none;}
 
     /* ==========================================================================
-       7. SIDEBAR & TOOLS
+       7. SIDEBAR & TOOLS (FLEX FIXES FOR ZOOM)
        ========================================================================== */
-    .sidebar { width: 320px; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0; max-width: 100%; }
+    .sidebar { width: 320px; display: flex; flex-direction: column; gap: 20px; flex: 1 1 320px; max-width: 100%; }
     .panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); }
     .ph { padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--bg4); }
     .ph-t { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); }
@@ -245,8 +286,10 @@
     .mv-pill:hover { background: var(--border2); color: var(--white); }
     .mv-pill.mc { background: var(--acc); color: #fff; box-shadow: 0 2px 6px hsla(var(--app-hue),60%,50%,0.25); }
 
-    .cbtns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .cb2 { display:flex; align-items:center; justify-content:center; padding: 14px; background: var(--bg4); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+    /* FIX 5: Cbtns wrapping */
+    .cbtns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .cb2 { display:flex; align-items:center; justify-content:center; gap: 6px; padding: 14px; background: var(--bg4); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s var(--spring); cursor: pointer;}
+    .cb2 .icon { margin: 0 !important; }
     .cb2:hover { background: var(--border2); color: var(--text); box-shadow: var(--shadow-sm); }
     .cb2.danger { color: var(--red); border-color: rgba(230, 80, 80, 0.4); background: rgba(230, 80, 80, 0.1); }
     .cb2.danger:hover { background: var(--red); color: #fff; box-shadow: 0 4px 12px rgba(230, 80, 80, 0.3); }
@@ -269,17 +312,17 @@
     .color-slider::-webkit-slider-thumb { border-color: var(--border2); }
     .std-range::-webkit-slider-thumb:active, .color-slider::-webkit-slider-thumb:active { transform: scale(1.15); }
 
-    .theme-lbl { font-size: 0.95rem; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px; text-transform: uppercase; margin: 0;}
+    .theme-lbl { font-size: 0.85rem; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px; text-transform: uppercase; margin: 0;}
 
-    .board-themes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-    .bt-btn { position: relative; height: 75px; border-radius: 14px; border: 2px solid transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); cursor: pointer; padding: 8px; text-align: center;}
+    .board-themes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .bt-btn { position: relative; height: 55px; border-radius: 14px; border: 2px solid transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); cursor: pointer; padding: 8px; text-align: center;}
     .bt-btn::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); transition: background 0.2s; z-index: 1; }
     .bt-btn:hover::before { background: rgba(0,0,0,0.2); }
     .bt-btn.on { border-color: var(--acc-l); transform: scale(1.03); box-shadow: var(--shadow-md); z-index: 2; }
     .bt-btn.on::before { background: transparent; }
     .bt-btn span { position: relative; z-index: 2; color: #fff; font-size: 1rem; font-weight: 800; text-shadow: 0 2px 6px rgba(0,0,0,0.8); line-height: 1.3; width: 100%; word-wrap: break-word;}
 
-    .t-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 16px; }
+    .t-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
     .t-btn { aspect-ratio: 1; border-radius: 14px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--bg4); box-shadow: var(--shadow-sm); cursor: pointer; }
     .t-btn:hover { border-color: var(--acc); transform: translateY(-3px); }
     .t-btn.on { border-color: var(--acc-l); background: var(--bg3); transform: scale(1.06); z-index: 2; box-shadow: 0 6px 15px hsla(var(--app-hue),60%,45%,0.2); }
@@ -349,8 +392,8 @@
     .prof-header h2 { font-family: 'Playfair Display', 'Cairo', serif; font-size: 2.5rem; color: var(--text); margin-bottom: 8px; font-weight: 800; }
     .prof-header p { color: var(--text2); font-size: 1rem; font-weight: 500; margin-bottom: 10px; }
     
-    .prof-avatar-edit { width: 110px; height: 110px; border-radius: 50%; background-color: var(--bg4); border: 3px solid var(--border); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; background-size: cover; background-position: center; transition: all 0.3s var(--spring); position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
-    .prof-avatar-edit::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); transition: background 0.2s; z-index: 1; }
+    .prof-avatar-edit { border-radius: 50%; background-color: var(--bg4); border: 3px solid var(--border); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s var(--spring); position: relative; box-shadow: var(--shadow-md); width: 110px; height: 110px; background-clip: content-box; -webkit-mask-image: -webkit-radial-gradient(white, black); }
+    .prof-avatar-edit::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); transition: background 0.2s; z-index: 1; border-radius: 50%;}
     .prof-avatar-edit.has-photo::after { background: transparent; }
     .prof-avatar-edit:hover::after { background: rgba(0,0,0,0.5); }
     .prof-avatar-edit:hover { transform: scale(1.05); border-color: var(--acc-l); box-shadow: 0 8px 25px hsla(var(--app-hue), 60%, 45%, 0.4); }
@@ -361,6 +404,9 @@
     .nm-inp { background: var(--bg4); border: 2px solid transparent; color: var(--text); padding: 14px 18px; border-radius: 14px; font-size: 1rem; font-weight: 600; width: 100%; transition: all 0.2s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
     .nm-inp:focus { border-color: var(--acc-l); background: var(--bg2); box-shadow: 0 0 0 4px hsla(var(--app-hue), 60%, 55%, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); outline: none; }
     .nm-inp:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    #prof-pg-bio { background-image: none !important; background-color: var(--bg4); }
+    #prof-pg-bio::-webkit-resizer { display: none; }
 
     .fg { display: flex; flex-direction: column; gap: 8px; transition: transform 0.2s var(--spring); }
     .fg:focus-within { transform: translateX(4px); }
@@ -385,18 +431,18 @@
     #prof-pg-btn:active { transform: translateY(1px); box-shadow: 0 4px 12px hsla(var(--app-hue), 60%, 45%, 0.2); }
 
     /* ==========================================================================
-       12. RESPONSIVE DESIGN
+       12. RESPONSIVE DESIGN (FIXED ZOOM)
        ========================================================================== */
-    @media (max-width: 950px) {
+    @media (max-width: 1050px) {
       .game-wrap { flex-direction: column; align-items: center; padding: 20px; gap: 20px; }
-      .sidebar { width: 100%; padding: 0; }
+      .sidebar { width: 100%; flex: 1 1 auto; max-width: 600px; padding: 0; }
     }
     @media (max-height: 600px) and (orientation: landscape) {
       nav { height: 50px; }
       .logo-box { width: 34px; height: 34px; }
       .game-wrap { flex-direction: row; align-items: flex-start; padding: 10px; gap: 20px; }
-      .board-col { width: auto; max-width: 60vh; }
-      .sidebar { width: 300px; padding: 0; }
+      .board-col { width: auto; max-width: 60vh; flex: 1; }
+      .sidebar { width: 300px; flex: 1 1 300px; padding: 0; }
       .pbar { padding: 6px 12px; height: 50px;}
       .pl-av { width: 32px !important; height: 32px !important; flex: 0 0 32px !important;}
       .timer { padding: 4px 8px; font-size: 1rem; }
@@ -416,7 +462,7 @@
       .prof-pg-card::before { display: none; }
       .setup-h { font-size: 2.2rem; margin-bottom: 10px; }
       .game-wrap { padding: 10px 0; gap: 12px; } 
-      .board-col { width: 100vw; max-width: 100vw; }
+      .board-col { width: 100vw; max-width: 100vw; flex: none; }
       .pbar { border-radius: 0; border-left: none; border-right: none; }
       #cb-w { border-radius: 0; border-left: none; border-right: none; width: 100vw !important;}
       .eval-container { width: 100vw !important; padding: 0;}
@@ -434,10 +480,12 @@
       <g id="ic-audio"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></g>
       <g id="ic-undo"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></g>
       <g id="ic-flip"><path d="M17 2.1l4 4-4 4"></path><path d="M3 12.2v-2a4 4 0 0 1 4-4h14"></path><path d="M7 21.9l-4-4 4-4"></path><path d="M21 11.8v2a4 4 0 0 1-4 4H3"></path></g>
-      <g id="ic-new"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></g>
       <g id="ic-close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></g>
       <g id="ic-player"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></g>
       <g id="ic-engine"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></g>
+      <!-- FIX 7: Standard Chess Flag Icon for Resign -->
+      <g id="ic-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></g>
+      <g id="ic-copy"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></g>
     </defs>
   </svg>
 
@@ -469,32 +517,11 @@
     <div class="home-container">
       <div class="news-wrapper">
         <div class="hero-h">Chess Egy<span data-i18n="playElegance" style="display:block; color:var(--acc-l); margin-top:8px;">Play with Elegance.</span></div>
-        <div class="news-grid">
-          <div class="news-card gpu-accel" onclick="openNews(0)">
-            <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&q=80&w=600');"></div>
-            <div class="news-content">
-              <div class="news-tag" data-i18n="newsTag1">Tournament</div>
-              <div class="news-title" data-i18n="newsTitle1">Global Chess Championship Begins</div>
-              <div class="news-desc" data-i18n="newsDesc1">Top grandmasters from around the world gather to compete for the ultimate title.</div>
-            </div>
-          </div>
-          <div class="news-card gpu-accel" onclick="openNews(1)">
-            <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&q=80&w=600');"></div>
-            <div class="news-content">
-              <div class="news-tag" data-i18n="newsTag2">Strategy</div>
-              <div class="news-title" data-i18n="newsTitle2">Mastering the Sicilian Defense</div>
-              <div class="news-desc" data-i18n="newsDesc2">Discover the nuances of the most popular and aggressive response to e4.</div>
-            </div>
-          </div>
-          <div class="news-card gpu-accel" onclick="openNews(2)">
-            <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1528819622765-d6bcf132f793?auto=format&fit=crop&q=80&w=600');"></div>
-            <div class="news-content">
-              <div class="news-tag" data-i18n="newsTag3">AI Analysis</div>
-              <div class="news-title" data-i18n="newsTitle3">How Engines Shape Modern Chess</div>
-              <div class="news-desc" data-i18n="newsDesc3">A deep dive into how computer preparation is changing opening theory.</div>
-            </div>
-          </div>
+        
+        <div class="news-grid" id="dynamic-news-grid">
+           <!-- Cards are generated here via JavaScript -->
         </div>
+
       </div>
       <div class="play-action-bottom">
         <button class="play-btn-huge" onclick="navPlay()" data-i18n="playNow">Play Now</button>
@@ -581,14 +608,7 @@
       <div class="nav-links">
         <button class="nb" onclick="go('home')"><span data-i18n="home">Home</span></button>
         <button class="nb on" onclick="navPlay()"><span data-i18n="play">Play</span></button>
-        <div style="position: relative;">
-          <button class="nb gear-btn" onclick="toggleSettingsMenu(event)"><span data-i18n="more">More</span></button>
-          <div class="settings-dropdown">
-            <button onclick="go('history'); closeDropdown()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-history"></use></svg><span data-i18n="matchHistory">Match History</span></button>
-            <button onclick="go('settings'); closeDropdown()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-theme"></use></svg><span data-i18n="themesVisuals">Themes & Visuals</span></button>
-            <button onclick="openAudio(); closeDropdown()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-audio"></use></svg><span data-i18n="audioSettings">Audio Settings</span></button>
-          </div>
-        </div>
+        <!-- FIX 5: Hidden settings and New game from Match Nav to keep it clean -->
       </div>
     </nav>
     <div class="game-wrap">
@@ -612,7 +632,7 @@
               <div style="display:flex; align-items:center; gap:10px;">
                 <div class="pl-nm" id="nm-top" dir="auto">Black</div>
                 <div class="pl-el" id="el-top"></div>
-                <div id="flag-top" style="color:var(--red); display:none;"><svg class="icon" viewBox="0 0 24 24" style="margin:0"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></div>
+                <div id="flag-top" style="color:var(--red); display:none;"><svg class="icon" viewBox="0 0 24 24" style="margin:0"><use href="#ic-flag"></use></svg></div>
               </div>
               <div class="cap-container" id="cap-top"></div>
             </div>
@@ -631,7 +651,7 @@
               <div style="display:flex; align-items:center; gap:10px;">
                 <div class="pl-nm" id="nm-bot" dir="auto">White</div>
                 <div class="pl-el" id="el-bot"></div>
-                <div id="flag-bot" style="color:var(--red); display:none;"><svg class="icon" viewBox="0 0 24 24" style="margin:0"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></div>
+                <div id="flag-bot" style="color:var(--red); display:none;"><svg class="icon" viewBox="0 0 24 24" style="margin:0"><use href="#ic-flag"></use></svg></div>
               </div>
               <div class="cap-container" id="cap-bot"></div>
             </div>
@@ -643,7 +663,14 @@
       <!-- Sidebar -->
       <div class="sidebar">
         <div class="panel">
-          <div class="ph"><span class="ph-t" data-i18n="moveHistoryT">Move History</span></div>
+          <!-- FIX 3: Copy PGN Button added -->
+          <div class="ph" style="display:flex; justify-content:space-between; align-items:center;">
+             <span class="ph-t" data-i18n="moveHistoryT">Move History</span>
+             <button onclick="copyPGN(this)" style="background:var(--bg4); color:var(--text); padding:4px 10px; border-radius:8px; font-size:0.75rem; font-weight:bold; display:flex; align-items:center; gap:6px; border:1px solid var(--border); cursor:pointer; transition:all 0.2s;">
+                 <svg class="icon" viewBox="0 0 24 24" style="width:1em;height:1em;margin:0;"><use href="#ic-copy"></use></svg>
+                 PGN
+             </button>
+          </div>
           <div class="pb" style="padding: 16px 20px;">
             <div class="ms-wrap" id="ms-container">
                 <div id="mtb" class="ms-grid"></div>
@@ -657,11 +684,11 @@
           </div>
         </div>
         <div class="panel">
+          <!-- FIX 5 & 7: Removed +New button, using Flag icon for Resign -->
           <div class="pb cbtns">
             <button class="cb2" onclick="undoM()" id="btn-undo"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-undo"></use></svg><span data-i18n="takeback">Takeback</span></button>
             <button class="cb2" onclick="flipBd()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-flip"></use></svg><span data-i18n="flip">Flip</span></button>
-            <button class="cb2 danger" onclick="resignG()" id="btn-resign"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-close"></use></svg><span data-i18n="resign">Resign</span></button>
-            <button class="cb2" onclick="go('setup')"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-new"></use></svg><span data-i18n="new">New</span></button>
+            <button class="cb2 danger" onclick="resignG()" id="btn-resign"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-flag"></use></svg><span data-i18n="resign">Resign</span></button>
           </div>
         </div>
       </div>
@@ -711,7 +738,7 @@
     <div class="settings-wrap" style="padding: 40px 20px; max-width: 900px; margin: 0 auto; width: 100%;">
       <div class="hero-h" data-i18n="visualCustom">Visual <span>Customization</span></div>
       
-      <div class="set-card" style="background: var(--bg2); padding: 32px; border-radius: 20px; border: 1px solid var(--border);">
+      <div class="set-card" style="background: var(--bg2); padding: 20px; border-radius: 20px; border: 1px solid var(--border);">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 40px;">
             <div>
                 <div class="theme-lbl" data-i18n="boardTheme"> Board Theme </div>
@@ -877,14 +904,15 @@
 
 <script>
 /* --- LOCALIZATION & CONTENT --- */
-const FULL_NEWS =[
-  {
-    img: "url('https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&q=80&w=600')",
-    en: { tag: "Tournament", title: "Global Chess Championship 2026 Begins", body: "Top grandmasters gather to compete for the ultimate title in classical chess." },
-    ar: { tag: "بطولة", title: "انطلاق بطولة العالم للشطرنج 2026", body: "يجتمع كبار الأساتذة من جميع أنحاء العالم للتنافس على اللقب الأهم في الشطرنج." }
-  },
+/* FIX 4: Extended dynamic news array with explicit high-quality chess images */
+const EXTENDED_NEWS =[
   {
     img: "url('https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&q=80&w=600')",
+    en: { tag: "Tournament", title: "Global Chess Championship 2026 Begins", body: "Top grandmasters gather to compete for the ultimate title in classical chess." },
+    ar: { tag: "بطولة", title: "انطلاق بطولة العالم للشطرنج 2026", body: "يجتمع كبار الأساتذة للتنافس على اللقب الأهم في الشطرنج الكلاسيكي." }
+  },
+  {
+    img: "url('https://images.unsplash.com/photo-1580541832626-2a7131ee809f?auto=format&fit=crop&q=80&w=600')",
     en: { tag: "Strategy", title: "Mastering the Sicilian Defense", body: "Discover the nuances of the most popular and aggressive response to e4." },
     ar: { tag: "استراتيجية", title: "احتراف الدفاع الصقلي", body: "اكتشف الفروق الدقيقة للاستجابة الأكثر شعبية وهجومية لافتتاح e4." }
   },
@@ -892,6 +920,16 @@ const FULL_NEWS =[
     img: "url('https://images.unsplash.com/photo-1528819622765-d6bcf132f793?auto=format&fit=crop&q=80&w=600')",
     en: { tag: "AI Analysis", title: "How Engine Evals Shape Modern Chess", body: "A deep dive into how computer preparation is changing opening theory." },
     ar: { tag: "تحليل الذكاء", title: "تأثير محركات الذكاء الاصطناعي", body: "نظرة عميقة على كيفية تغيير التحضير الحاسوبي لنظرية الافتتاحات." }
+  },
+  {
+    img: "url('https://images.unsplash.com/photo-1610880846498-8a892e85a532?auto=format&fit=crop&q=80&w=600')",
+    en: { tag: "Update", title: "New Chess Egy Features Released", body: "Enjoy smoother gameplay and advanced post-match analysis tools." },
+    ar: { tag: "تحديث", title: "إطلاق ميزات جديدة في Chess Egy", body: "استمتع بتجربة لعب أكثر سلاسة وأدوات تحليل متقدمة بعد المباراة." }
+  },
+  {
+    img: "url('https://images.unsplash.com/photo-1560174038-da43ac74f01b?auto=format&fit=crop&q=80&w=600')",
+    en: { tag: "Community", title: "Record Numbers Playing Chess", body: "The chess community hits an all-time high with millions of daily matches." },
+    ar: { tag: "المجتمع", title: "أرقام قياسية في لعب الشطرنج", body: "مجتمع الشطرنج يصل إلى أعلى مستوياته مع ملايين المباريات اليومية." }
   }
 ];
 
@@ -906,9 +944,6 @@ const TRANSLATIONS = {
     darkMode: "Dark Mode", appAccent: "App Accent Color", resumePlay: "Resume / Play", promotion: "Promotion", selectPiece: "Select piece",
     close: "Close", deleteMatch: "Delete Match", deleteConfirm: "Are you sure you want to delete this record?", cancel: "Cancel", delete: "Delete",
     sndMove: "Move", sndCapture: "Capture", sndCheck: "Check", sndEnd: "End", done: "Done", even: "Even",
-    newsTag1: "Tournament", newsTitle1: "Global Chess Championship Begins", newsDesc1: "Top grandmasters from around the world gather to compete.",
-    newsTag2: "Strategy", newsTitle2: "Mastering the Sicilian Defense", newsDesc2: "Discover the nuances of the most popular and aggressive response to e4.",
-    newsTag3: "AI Analysis", newsTitle3: "How Engines Shape Modern Chess", newsDesc3: "A deep dive into how computer preparation is changing opening theory.",
     whitePlayer: "White Player", blackPlayer: "Black Player", player: "Player", noGames: "No games played yet. Start a match!",
     wonTimeout: "won by Timeout", wonResign: "won by Resignation", wonMate: "won by Checkmate", drawStalemate: "Draw by Stalemate", 
     drawRep: "Draw by Repetition", drawMaterial: "Draw by Insufficient Material", drawGen: "Game ended in a draw.", checkmate: "Checkmate",
@@ -916,7 +951,7 @@ const TRANSLATIONS = {
     wins: "wins!", wood: "Classic Wood", green: "Tourney Green", marble: "Royal Marble", dark: "Midnight Violet", pharaoh: "Pharaonic Blue", ruby: "Ruby Red",
     authTitle: "Welcome", authSub: "Create your unique player identity", authName: "Display Name", authUsername: "Username", authStart: "Save Identity",
     statMatches: "Matches", statWins: "Wins", statRate: "Win Rate", authEdit: "Edit Identity",
-    nameHelp: "Can be changed once for free.", usernameHelp: "Letters & Numbers only. Cannot be changed later.",
+    nameHelp: "Name can only be changed once.", usernameHelp: "Letters & Numbers only. Cannot be changed later.",
     errUserEmpty: "Username cannot be empty", errUserRegex: "Must contain letters & numbers. No special characters.",
     errNameEmpty: "Name cannot be empty", errNameWait: "You can change your name again after 30 days.",
     bioLabel: "Bio", bioPlaceholder: "Tell us about yourself...", profileEditTitle: "Your Profile", profileEditSub: "Manage your details and view stats", saveChanges: "Save Changes", savedSuccess: "Saved Successfully! ✔"
@@ -931,9 +966,6 @@ const TRANSLATIONS = {
     darkMode: "الوضع الداكن", appAccent: "اللون الأساسي", resumePlay: "متابعة اللعب", promotion: "ترقية البيدق", selectPiece: "اختر قطعة للترقية",
     close: "إغلاق", deleteMatch: "حذف المباراة", deleteConfirm: "هل أنت متأكد من حذف هذا السجل بشكل نهائي؟", cancel: "إلغاء", delete: "حذف",
     sndMove: "نقلة", sndCapture: "أسر القطعة", sndCheck: "كش ملك", sndEnd: "نهاية المباراة", done: "تم", even: "تعادل",
-    newsTag1: "بطولة", newsTitle1: "انطلاق بطولة العالم للشطرنج", newsDesc1: "يجتمع كبار الأساتذة للتنافس على اللقب.",
-    newsTag2: "استراتيجية", newsTitle2: "احتراف الدفاع الصقلي", newsDesc2: "اكتشف الفروق الدقيقة للاستجابة الأكثر شعبية لافتتاح e4.",
-    newsTag3: "تحليل ذكي", newsTitle3: "تأثير محركات الذكاء الاصطناعي", newsDesc3: "نظرة عميقة على كيفية تغيير التحضير الحاسوبي للافتتاحات.",
     whitePlayer: "اللاعب الأبيض", blackPlayer: "اللاعب الأسود", player: "اللاعب", noGames: "لم تلعب أي مباريات بعد. ابدأ تحدياً جديداً!",
     wonTimeout: "فاز بانتهاء الوقت", wonResign: "فاز بالانسحاب", wonMate: "فاز بالكش مات", drawStalemate: "تعادل (ملك مخنوق)", 
     drawRep: "تعادل (بتكرار النقلات)", drawMaterial: "تعادل (لعدم كفاية القطع)", drawGen: "انتهت المباراة بالتعادل.", checkmate: "كش مات",
@@ -941,7 +973,7 @@ const TRANSLATIONS = {
     wins: "يفوز!", wood: "خشب كلاسيكي", green: "أخضر بطولات", marble: "رخام ملكي", dark: "بنفسجي ليلي", pharaoh: "أزرق فرعوني", ruby: "أحمر ياقوتي",
     authTitle: "مرحباً بك", authSub: "قم بإنشاء هويتك كلاعب", authName: "الاسم", authUsername: "اسم المستخدم", authStart: "حفظ الهوية",
     statMatches: "مباريات", statWins: "انتصارات", statRate: "نسبة الفوز", authEdit: "تعديل الهوية",
-    nameHelp: "يمكن تغييره مرة واحدة مجاناً.", usernameHelp: "حروف وأرقام فقط. لا يمكن تغييره لاحقاً.",
+    nameHelp: "يُسمح بتعديل الاسم مرة واحدة فقط.", usernameHelp: "حروف وأرقام فقط. لا يمكن تغييره لاحقاً.",
     errUserEmpty: "لا يمكن ترك اسم المستخدم فارغاً", errUserRegex: "يجب أن يحتوي على حروف وأرقام، بدون رموز خاصة.",
     errNameEmpty: "لا يمكن ترك الاسم فارغاً", errNameWait: "يمكنك تغيير اسمك بعد 30 يوم من آخر تعديل.",
     bioLabel: "نبذة عني", bioPlaceholder: "حدثنا عن نفسك...", profileEditTitle: "ملفك الشخصي", profileEditSub: "إدارة بياناتك وعرض إحصائياتك", saveChanges: "حفظ التعديلات", savedSuccess: "تم الحفظ بنجاح! ✔"
@@ -975,9 +1007,92 @@ function applyLanguage() {
   document.querySelectorAll('[data-ph]').forEach(el => { const key = el.getAttribute('data-ph'); if (dict[key]) el.placeholder = dict[key]; });
   let val = document.getElementById('sl-e'); if(val) updElo(val.value);
   buildThemeGrid(); renderHistory();
+  renderDynamicNews(true); 
 }
 
-function openNews(idx) { const news = FULL_NEWS[idx]; document.getElementById('news-img').style.backgroundImage = news.img; document.getElementById('news-tag').textContent = news[currentLang].tag; document.getElementById('news-title').textContent = news[currentLang].title; document.getElementById('news-body').textContent = news[currentLang].body; document.getElementById('news-ov').classList.add('open'); }
+/* FIX 3: Copy PGN Logic */
+window.copyPGN = function(btn) {
+    let pgn = "";
+    for (let i = 0; i < moveHistory.length; i += 2) {
+        let turnNum = Math.floor(i / 2) + 1;
+        pgn += turnNum + ". " + moveHistory[i].san + " ";
+        if (moveHistory[i + 1]) {
+            pgn += moveHistory[i + 1].san + " ";
+        }
+    }
+    if (!pgn) return;
+    navigator.clipboard.writeText(pgn.trim()).then(() => {
+        let originalHtml = btn.innerHTML;
+        btn.innerHTML = currentLang === 'ar' ? 'تم النسخ ✔' : 'Copied ✔';
+        btn.style.color = "var(--acc-l)";
+        btn.style.borderColor = "var(--acc-l)";
+        setTimeout(() => {
+            btn.innerHTML = originalHtml;
+            btn.style.color = "";
+            btn.style.borderColor = "";
+        }, 2000);
+    });
+}
+
+
+let activeNewsIndices =[0, 1, 2];
+let newsInterval;
+
+function renderDynamicNews(init = false) {
+    const grid = document.getElementById('dynamic-news-grid');
+    if(!grid) return;
+    
+    if(init) {
+        grid.innerHTML = '';
+        activeNewsIndices.forEach((idx) => {
+            grid.appendChild(createNewsCard(idx));
+        });
+        startNewsRotation();
+    }
+}
+
+function createNewsCard(newsIdx) {
+    const news = EXTENDED_NEWS[newsIdx];
+    const div = document.createElement('div');
+    div.className = 'news-card gpu-accel fade-in';
+    div.onclick = () => openNews(newsIdx);
+    div.innerHTML = `
+        <div class="news-img" style="background-image: ${news.img};"></div>
+        <div class="news-content">
+          <div class="news-tag">${news[currentLang].tag}</div>
+          <div class="news-title">${news[currentLang].title}</div>
+          <div class="news-desc">${news[currentLang].body}</div>
+        </div>
+    `;
+    return div;
+}
+
+function startNewsRotation() {
+    if(newsInterval) clearInterval(newsInterval);
+    newsInterval = setInterval(() => {
+        const grid = document.getElementById('dynamic-news-grid');
+        if(!grid || !document.getElementById('pg-home').classList.contains('active')) return;
+        
+        let nextIdx = (activeNewsIndices[activeNewsIndices.length - 1] + 1) % EXTENDED_NEWS.length;
+        const cards = grid.querySelectorAll('.news-card');
+        if(cards.length === 0) return;
+        
+        const cardToRemove = cards[cards.length - 1]; 
+        cardToRemove.classList.add('fade-out');
+        
+        setTimeout(() => {
+            activeNewsIndices.pop();
+            activeNewsIndices.unshift(nextIdx);
+            cardToRemove.remove();
+            
+            const newCard = createNewsCard(nextIdx);
+            grid.insertBefore(newCard, grid.firstChild);
+        }, 300); 
+
+    }, 8000); 
+}
+
+function openNews(idx) { const news = EXTENDED_NEWS[idx]; document.getElementById('news-img').style.backgroundImage = news.img; document.getElementById('news-tag').textContent = news[currentLang].tag; document.getElementById('news-title').textContent = news[currentLang].title; document.getElementById('news-body').textContent = news[currentLang].body; document.getElementById('news-ov').classList.add('open'); }
 function closeNews() { document.getElementById('news-ov').classList.remove('open'); }
 function escapeHTML(str) { return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])); }
 
@@ -1004,7 +1119,6 @@ function openProfile() {
     document.getElementById('prof-user-error').style.display = 'none';
 
     if (savedUsername) {
-        // Edit Mode
         document.getElementById('prof-pg-title').setAttribute('data-i18n', 'profileEditTitle');
         document.getElementById('prof-pg-sub').setAttribute('data-i18n', 'profileEditSub');
         document.getElementById('prof-pg-name').value = currentUser.name;
@@ -1023,7 +1137,6 @@ function openProfile() {
             }
         }
 
-        // Stats
         let games = JSON.parse(localStorage.getItem('ce_games') || '[]'); 
         let totalMatches = games.length, wins = 0;
         games.forEach(g => { if ((g.w === currentUser.name && g.winner === 'w') || (g.b === currentUser.name && g.winner === 'b')) wins++; });
@@ -1042,7 +1155,6 @@ function openProfile() {
         }, 200);
 
     } else {
-        // New User Mode
         document.getElementById('prof-pg-title').setAttribute('data-i18n', 'authTitle');
         document.getElementById('prof-pg-sub').setAttribute('data-i18n', 'authSub');
         document.getElementById('prof-pg-name').value = '';
@@ -1056,7 +1168,7 @@ function openProfile() {
         document.getElementById('prof-pg-stats').style.display = 'none';
     }
     
-    applyLanguage(); // Refresh translations for updated keys
+    applyLanguage(); 
     go('profile');
 }
 
@@ -1082,10 +1194,22 @@ function saveProfIdentity() {
     let hasError = false;
 
     if (isFirstTime) {
-        if (!userInp) { showProfError('prof-user-error', TRANSLATIONS[currentLang].errUserEmpty); hasError = true; }
-        else {
+        if (!userInp) { 
+            showProfError('prof-user-error', TRANSLATIONS[currentLang].errUserEmpty); 
+            hasError = true; 
+        } else {
             const userRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_]{3,20}$/;
-            if (!userRegex.test(userInp)) { showProfError('prof-user-error', TRANSLATIONS[currentLang].errUserRegex); hasError = true; }
+            if (!userRegex.test(userInp)) { 
+                showProfError('prof-user-error', TRANSLATIONS[currentLang].errUserRegex); 
+                hasError = true; 
+            } else {
+                const takenUsernames =['admin', 'chessegy', 'player1', 'stockfish', 'magnus'];
+                if (takenUsernames.includes(userInp.toLowerCase())) {
+                    const takenMsg = currentLang === 'en' ? 'Username is already taken. Please choose another.' : 'اسم المستخدم محجوز بالفعل. الرجاء اختيار اسم آخر.';
+                    showProfError('prof-user-error', takenMsg);
+                    hasError = true;
+                }
+            }
         }
     }
 
@@ -1295,11 +1419,8 @@ const CE = createEngine();
 /* --- 100% REAL STOCKFISH (LICHESS STYLE) - NO LOCAL FILES REQUIRED --- */
 let aiWorker = null;
 
-// نستخدم Stockfish.js 10 الأصلي بقوة 3000 ELO (يحفظ كل الافتتاحات الاستراتيجية).
-// جلبه عبر Blob يجعله يعمل حتى لو فتحت اللعبة بدون استضافة (من الكمبيوتر مباشرة).
 const workerData = `
     importScripts('https://cdnjs.cloudflare.com/ajax/libs/stockfish.js/10.0.2/stockfish.js');
-    // لا نحتاج لعمل أي شيء آخر، المحرك يستمع تلقائياً ويتفاعل!
 `;
 const blob = new Blob([workerData], {type: 'application/javascript'});
 
@@ -1310,7 +1431,6 @@ try {
         const line = e.data;
         if (typeof line !== 'string') return;
         
-        // تحديث شريط التقييم Lichess Style
         if (line.includes("info depth") && line.includes("score")) {
             const matchCP = line.match(/score cp (-?\d+)/);
             const matchMate = line.match(/score mate (-?\d+)/);
@@ -1325,7 +1445,6 @@ try {
             if (cpValue !== null) updateEvalBarRealtime(cpValue, isMate);
         }
         
-        // التقاط أفضل نقلة يلعبها المحرك
         if (line.startsWith("bestmove")) {
             const match = line.match(/^bestmove ([a-h][1-8][a-h][1-8][qrbn]?)/);
             if (match && gameOn && currentPly === moveHistory.length) {
@@ -1352,12 +1471,9 @@ try {
     console.error("Stockfish Failed to load:", err);
 }
 
-// Lichess Style Eval Bar (Exact Math)
 function updateEvalBarRealtime(val, isMate) {
     if (!GS || !gameOn) return;
     
-    // UCI sends evaluation relative to the side whose turn it is. 
-    // We convert it to absolute evaluation (relative to White) for the UI bar.
     let isWhiteTurn = GS.turn === 'w';
     let absoluteCp = isWhiteTurn ? val : -val;
     
@@ -1374,7 +1490,6 @@ function updateEvalBarRealtime(val, isMate) {
             sVal = (val > 0 ? "-M" : "+M") + Math.abs(val);
         }
     } else {
-        // Lichess formula for eval bar percentage: win chance based on centipawns
         let winChance = 2 / (1 + Math.exp(-0.00368208 * absoluteCp)) - 1;
         sc = 50 + (winChance * 50);
         
@@ -1390,7 +1505,6 @@ function updateEvalBarRealtime(val, isMate) {
     }
 }
 
-// دالة المحرك الحقيقية للعب وللتقييم
 function triggerEngine() {
     if (!aiWorker || !GS) return;
     
@@ -1402,18 +1516,15 @@ function triggerEngine() {
     const isEngineTurn = gM === 'pvc' && ((sC === 'black' ? 'w' : 'b') === GS.turn);
     
     if (isEngineTurn && gameOn) {
-        // ضبط قوة الذكاء (Skill Level 0-20) بناءً على الـ ELO المطلوب
         let skill = Math.round(((eElo - 250) / 2950) * 20);
         skill = Math.max(0, Math.min(20, skill));
         aiWorker.postMessage("setoption name Skill Level value " + skill);
         
-        // وقت تفكير بشري وطبيعي (يعتمد على القوة، كلما كان أقوى أخذ وقته أكثر)
         let baseTime = eElo < 1200 ? 500 : (eElo < 2000 ? 1000 : 1500);
-        let thinkTime = baseTime + (Math.random() * 500); // إضافة عشوائية بسيطة ليبدو بشرياً
+        let thinkTime = baseTime + (Math.random() * 500); 
         
         aiWorker.postMessage("go movetime " + Math.floor(thinkTime));
     } else if (gameOn) {
-        // أثناء تفكير اللاعب البشري، يقوم المحرك بتحليل الرقعة بعمق لشريط التقييم Lichess Style
         aiWorker.postMessage("go depth 15");
     }
 }
@@ -1485,7 +1596,15 @@ function viewHistoryGame(idx) {
   if (aiWorker) { aiWorker.postMessage("stop"); aiWorker.postMessage("position startpos moves " + g.moves.map(m=>m.f+m.t+(m.pr||"")).join(" ")); aiWorker.postMessage("go depth 15"); }
 }
 
-function bdSz() { const w = window.innerWidth, h = window.innerHeight; if(h < 600 && w > h) return Math.floor(h - 40); if(w <= 600) return w; return w <= 950 ? Math.min(w - 40, h - 240) : Math.max(400, Math.floor(Math.min(w - 400, h - 140))); }
+/* FIX 1: Zooming layout calculation */
+function bdSz() { 
+  const w = window.innerWidth, h = window.innerHeight; 
+  let maxW = document.querySelector('.board-col')?.clientWidth || w;
+  if(h < 600 && w > h) return Math.floor(h - 40); 
+  if(w <= 600) return w; 
+  let sz = w <= 950 ? Math.min(maxW, h - 240) : Math.max(400, Math.floor(Math.min(maxW, h - 140)));
+  return Math.min(sz, 800); 
+}
 
 function buildBd() {
   const el = document.getElementById('cb'), sz = bdSz(); const existingPieces = Array.from(el.querySelectorAll('.piece')); el.innerHTML = ''; existingPieces.forEach(p => el.appendChild(p)); 
@@ -1624,7 +1743,6 @@ function startGame() {
   document.getElementById('timer-top').style.display = sT>0?'block':'none'; document.getElementById('timer-bot').style.display = sT>0?'block':'none';
   buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); go('game'); document.getElementById('eng-panel').style.display = 'block'; 
   
-  // Update eval bar immediately at start
   const evS = document.getElementById('ev-s'), evF = document.getElementById('ev-f'), evL = document.getElementById('ev-l');
   if(evS) evS.textContent = "+0.2"; if(evF) evF.style.width = "52%"; if(evL) evL.textContent = TRANSLATIONS[currentLang].even;
 
