@@ -260,7 +260,7 @@
     .sq.cap::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 6px rgba(0,0,0,0.3); z-index: 2; pointer-events: none; }
 
     /* FIX 6: Coordinate styling (Chess.com / Lichess style) */
-    .co { position: absolute; font-size: 0.8rem; font-weight: 800; z-index: 2; pointer-events: none; opacity: 1; }
+    .co { position: absolute; font-size: 0.8rem; font-weight: 800; z-index: 20; pointer-events: none; opacity: 1; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
     .co.file { bottom: 2px; right: 4px; left: auto; }
     .co.rank { top: 2px; left: 4px; right: auto; }
     .sq.l .co { color: var(--sq-d); }
@@ -468,6 +468,8 @@
       .eval-container { width: 100vw !important; padding: 0;}
       .eval-bar-track { border-radius: 0; }
       .nbox-content { padding: 20px; }
+      /* تقليل حجم الإحداثيات على الشاشات الصغيرة */
+      .co { font-size: 0.6rem; }
     }
   </style>
 </head>
@@ -616,7 +618,7 @@
         <!-- Eval Bar -->
         <div id="eng-panel" class="eval-container">
           <div class="eval-text-row">
-            <strong id="ev-s" class="eval-score" style="font-size:1rem; font-family:monospace">+0.0</strong>
+            <strong id="ev-s" class="eval-score" style="font-size:1rem; font-family:monospace" title="Evaluation: positive favors White, negative favors Black">+0.0</strong>
             <span id="ev-l" class="eval-label" data-i18n="even" style="font-size:0.8rem; text-transform:uppercase; font-weight:700">Even</span>
           </div>
           <div class="eval-bar-track">
@@ -1291,7 +1293,7 @@ function animateValue(id, start, end, duration, suffix = '') {
 /* --- THEMES & ENGINE DEFAULTS --- */
 const P_MAP = {1:'wP',2:'wN',3:'wB',4:'wR',5:'wQ',6:'wK',7:'bP',8:'bN',9:'bB',10:'bR',11:'bQ',12:'bK'};
 const PIECE_THEMES =[ { id: 'cburnett', name: 'Classic' }, { id: 'alpha', name: 'Alpha' }, { id: 'merida', name: 'Merida' }, { id: 'fantasy', name: 'Fantasy' } ];
-const wood_texture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEUAAAAAAAClZ7nPAAAAAnRSTlMAM8lE1QwAAACXSURBVDjLzZExDsMgDAVN2aF7pK/S0/Q2XSVXyFChQpUIEAgw32AobxXJz9hm/oHjO45fE1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E/0B/zQp9q0sAAAAASUVORK5CYII=";
+const wood_texture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEUAAAAAAAClZ7nPAAAAAnRSTlMAM8lE1QwAAACXSURBVDjLzZExDsMgDAVN2aF7pK/S0/Q2XSVXyFChQpUIEAgw32AobxXJz9hm/oHjO45fE1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E/0B/zQp9q0sAAAAASUVORK5CYII=";
 const THEMES =[ 
   { id: 'wood', l: '#ccb07f', d: '#774f2c', name: 'Classic Wood', bg: `url('${wood_texture}')` }, 
   { id: 'green', l: '#ebecd0', d: '#739552', name: 'Tourney Green' }, 
@@ -1799,4 +1801,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+              </html>
