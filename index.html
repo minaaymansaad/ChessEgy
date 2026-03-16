@@ -51,26 +51,7 @@
     body[dir="rtl"] { font-family: 'Cairo', sans-serif; }
     body[dir="rtl"] button, body[dir="rtl"] input, body[dir="rtl"] textarea { font-family: 'Cairo', sans-serif; }
 
-    /* RTL font size adjustments */
-    body[dir="rtl"] .hero-h { font-size: clamp(1.5rem, 5vw, 2.4rem); font-weight: 800; line-height: 1.3; margin-bottom: 20px;}
-    body[dir="rtl"] .setup-h, body[dir="rtl"] .m-t { font-size: 1.9rem; margin-bottom: 5px; }
-    body[dir="rtl"] .nbox-title { font-size: 1.6rem; margin-bottom: 12px; }
-    body[dir="rtl"] .elo-n { font-size: 2rem; }
-    body[dir="rtl"] .nm-inp { font-size: 0.95rem; }
-    body[dir="rtl"] .sb { font-size: 0.9rem; padding: 8px 10px; }
-    body[dir="rtl"] .cb2 { font-size: 0.9rem; padding: 11px; }
-    body[dir="rtl"] .go-btn, body[dir="rtl"] .play-btn-huge { font-size: 1.1rem; padding: 14px; letter-spacing: 0; }
-    body[dir="rtl"] .nb { padding: 6px 12px; }
-    body[dir="rtl"] .nb span { font-size: 0.9rem; font-weight: 700; }
-    body[dir="rtl"] .settings-dropdown button { font-size: 0.9rem; padding: 12px 16px; flex-direction: row-reverse; text-align: right; }
-    body[dir="rtl"] .fl, body[dir="rtl"] .theme-lbl, body[dir="rtl"] .news-tag, body[dir="rtl"] .ph-t { font-size: 0.85rem; letter-spacing: 0; font-weight: 700; }
-    body[dir="rtl"] .bt-btn span { font-size: 0.9rem; }
-    body[dir="rtl"] .mv-pill { font-size: 0.9rem; padding: 4px 8px; }
-    body[dir="rtl"] .news-title { font-size: 1.1rem; margin-bottom: 6px;}
-    body[dir="rtl"] .news-desc { font-size: 0.9rem; line-height: 1.6; }
-    body[dir="rtl"] .nbox-body { font-size: 1rem; }
-
-    /* RTL specific overrides for navigation & menus */
+    /* RTL specific overrides for navigation & menus (no font-size changes) */
     body[dir="rtl"] .nav-links,
     body[dir="rtl"] .settings-dropdown,
     body[dir="rtl"] .lang-toggle,
@@ -503,7 +484,6 @@
       <g id="ic-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></g>
       <g id="ic-copy"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></g>
       <g id="ic-handshake"><path d="M20 12c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8 8 3.58 8 8z"/><path d="M9 11v2"/><path d="M15 11v2"/><path d="M12 16a4 4 0 0 0 4-4"/></g>
-      <g id="ic-share"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></g>
     </defs>
   </svg>
 
@@ -516,9 +496,9 @@
       </div>
       <div class="nav-links">
         <div class="lang-toggle" onclick="toggleLanguage()" title="تغيير اللغة / Change Language">
-          <div class="lang-indicator" id="lang-ind"></div>
-          <span id="lang-en" class="active">EN</span>
-          <span id="lang-ar">عربي</span>
+          <div class="lang-indicator"></div>
+          <span class="lang-en active">EN</span>
+          <span class="lang-ar">عربي</span>
         </div>
         <button class="nb on" onclick="go('home')"><span data-i18n="home">Home</span></button>
         <button class="nb" onclick="navPlay()"><span data-i18n="play">Play</span></button>
@@ -553,7 +533,7 @@
       <div class="logo"><div class="logo-box setup-logo-box" onclick="openProfile()"></div><span>Chess Egy</span></div>
       <div class="nav-links">
         <div class="lang-toggle" onclick="toggleLanguage()">
-          <div class="lang-indicator" id="lang-ind2"></div>
+          <div class="lang-indicator"></div>
           <span class="lang-en active">EN</span>
           <span class="lang-ar">عربي</span>
         </div>
@@ -643,7 +623,7 @@
           <div class="eval-bar-track">
             <div class="eval-bar-fill" id="ev-f"></div>
           </div>
-          <!-- Opening name display (improved styling) -->
+          <!-- Opening name display -->
           <div id="opening-name"></div>
         </div>
 
@@ -712,9 +692,7 @@
             <button class="cb2 danger" onclick="offerDraw()" id="btn-draw"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-handshake"></use></svg><span data-i18n="draw">Draw</span></button>
             <button class="cb2 danger" onclick="resignG()" id="btn-resign"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-flag"></use></svg><span data-i18n="resign">Resign</span></button>
           </div>
-          <div style="padding: 0 20px 20px 20px;">
-            <button class="cb2" style="width:100%;" onclick="shareGame()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg><span data-i18n="share">Share Game</span></button>
-          </div>
+          <!-- تم إزالة زر مشاركة اللعبة بناءً على طلب المستخدم -->
         </div>
       </div>
     </div>
@@ -778,7 +756,10 @@
                       <label class="switch"><input type="checkbox" id="coord-toggle" checked onchange="toggleCoords(this.checked)"><span class="slider"></span></label>
                     </div>
                     <div class="theme-lbl" style="color: var(--text);" data-i18n="brightness">Brightness</div>
-                    <input type="range" class="std-range" min="0.6" max="1.2" value="1" step="0.05" oninput="setBright(this.value)">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <input type="range" class="std-range" min="0.6" max="1.2" value="1" step="0.05" oninput="setBright(this.value)" style="flex:1;">
+                      <span id="brightness-value" class="slider-val">100%</span>
+                    </div>
                     <div class="theme-lbl" style="margin-top:24px; color: var(--text);" data-i18n="colorHue">Color Hue</div>
                     <input type="range" class="color-slider" min="0" max="360" value="0" step="1" oninput="setHue(this.value)">
                     <div class="theme-lbl" style="margin-top:24px; color: var(--text);" data-i18n="pieceSize">Piece Size</div>
@@ -918,19 +899,31 @@
       <div style="display: flex; flex-direction: column; gap: 16px; text-align: start; background: var(--bg3); padding: 16px; border-radius: 16px; border: 1px solid var(--border);">
           <div style="display: flex; align-items: center; justify-content: space-between;">
               <div class="theme-lbl" style="margin:0; font-size: 0.95rem;"><span data-i18n="sndMove">Move</span></div>
-              <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="m" min="0" max="100" value="100" step="1" oninput="setAudioVol('m', this.value)" onchange="playSnd('m')">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="m" min="0" max="100" value="100" step="1" oninput="setAudioVol('m', this.value); updateAudioPercent(this)" onchange="playSnd('m')">
+                <span class="audio-val" data-snd="m">100%</span>
+              </div>
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
               <div class="theme-lbl" style="margin:0; font-size: 0.95rem;"><span data-i18n="sndCapture">Capture</span></div>
-              <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="c" min="0" max="100" value="100" step="1" oninput="setAudioVol('c', this.value)" onchange="playSnd('c')">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="c" min="0" max="100" value="100" step="1" oninput="setAudioVol('c', this.value); updateAudioPercent(this)" onchange="playSnd('c')">
+                <span class="audio-val" data-snd="c">100%</span>
+              </div>
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
               <div class="theme-lbl" style="margin:0; font-size: 0.95rem;"><span data-i18n="sndCheck">Check</span></div>
-              <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="k" min="0" max="100" value="100" step="1" oninput="setAudioVol('k', this.value)" onchange="playSnd('k')">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="k" min="0" max="100" value="100" step="1" oninput="setAudioVol('k', this.value); updateAudioPercent(this)" onchange="playSnd('k')">
+                <span class="audio-val" data-snd="k">100%</span>
+              </div>
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
               <div class="theme-lbl" style="margin:0; font-size: 0.95rem;"><span data-i18n="sndEnd">End</span></div>
-              <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="e" min="0" max="100" value="100" step="1" oninput="setAudioVol('e', this.value)" onchange="playSnd('e')">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <input type="range" class="std-range snd-slider" style="width: 120px; margin:0;" data-snd="e" min="0" max="100" value="100" step="1" oninput="setAudioVol('e', this.value); updateAudioPercent(this)" onchange="playSnd('e')">
+                <span class="audio-val" data-snd="e">100%</span>
+              </div>
           </div>
       </div>
       <button class="cb2" style="width:100%; margin-top:20px; padding: 14px;" onclick="closeAudio()" data-i18n="done">Done</button>
@@ -986,7 +979,6 @@ const TRANSLATIONS = {
     errNameEmpty: "Name cannot be empty", errNameWait: "You can change your name again after 30 days.",
     bioLabel: "Bio", bioPlaceholder: "Tell us about yourself...", profileEditTitle: "Your Profile", profileEditSub: "Manage your details and view stats", saveChanges: "Save Changes", savedSuccess: "Saved Successfully! ✔",
     drawOffer: "Draw Offer", drawConfirm: "Do you want to accept the draw?", accept: "Accept",
-    share: "Share Game", shareCopied: "Game link copied to clipboard!",
     opening: "Opening: "
   },
   ar: {
@@ -1011,12 +1003,11 @@ const TRANSLATIONS = {
     errNameEmpty: "لا يمكن ترك الاسم فارغاً", errNameWait: "يمكنك تغيير اسمك بعد 30 يوم من آخر تعديل.",
     bioLabel: "نبذة عني", bioPlaceholder: "حدثنا عن نفسك...", profileEditTitle: "ملفك الشخصي", profileEditSub: "إدارة بياناتك وعرض إحصائياتك", saveChanges: "حفظ التعديلات", savedSuccess: "تم الحفظ بنجاح! ✔",
     drawOffer: "عرض التعادل", drawConfirm: "هل ترغب في قبول التعادل؟", accept: "قبول",
-    share: "مشاركة اللعبة", shareCopied: "تم نسخ رابط اللعبة!",
     opening: "الافتتاحية: "
   }
 };
 
-let currentLang = localStorage.getItem('ce_lang') || (navigator.language.startsWith('ar') ? 'ar' : 'en'); // FIX: detect browser language
+let currentLang = localStorage.getItem('ce_lang') || (navigator.language.startsWith('ar') ? 'ar' : 'en');
 const defaultAvatarSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32' fill='%23a39e95'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
 
 function toggleLanguage() {
@@ -1029,11 +1020,11 @@ function applyLanguage() {
   document.documentElement.lang = currentLang; 
   document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
   
-  // Update all language toggles (there are multiple due to different pages)
+  // Update all language toggles (using classes)
   document.querySelectorAll('.lang-toggle').forEach(el => {
      let ind = el.querySelector('.lang-indicator');
-     let spanEn = el.querySelector('#lang-en') || el.querySelector('.lang-en');
-     let spanAr = el.querySelector('#lang-ar') || el.querySelector('.lang-ar');
+     let spanEn = el.querySelector('.lang-en');
+     let spanAr = el.querySelector('.lang-ar');
      if(ind && spanEn && spanAr) { 
        if(currentLang === 'ar') { 
          ind.style.transform = 'translateX(100%)'; 
@@ -1106,7 +1097,7 @@ window.copyPGN = function(btn) {
     });
 }
 
-let activeNewsIndices =[0, 1, 2]; // now only 4 items, but we keep 3 active at a time
+let activeNewsIndices =[0, 1, 2];
 let newsInterval;
 
 function renderDynamicNews(init = false) {
@@ -1417,7 +1408,10 @@ function buildPreview() {
 function buildThemeGrid() { const tGrid = document.getElementById('t-grid'); if(!tGrid) return; tGrid.innerHTML = ''; THEMES.forEach((t, i) => { let translatedName = TRANSLATIONS[currentLang][t.id] || t.name; tGrid.innerHTML += `<button class="bt-btn gpu-accel ${i === curT ? 'on' : ''}" style="background-color:${t.d}; background-image:${t.bg||'none'};" onclick="setTheme(${i})"><span>${translatedName}</span></button>`; }); }
 function setTheme(idx) { curT = idx; localStorage.setItem('ce_theme', idx); const t = THEMES[idx]; requestAnimationFrame(() => { setCSSVar('--sq-l', t.l); setCSSVar('--sq-d', t.d); setCSSVar('--bg-img', t.bg || 'none'); document.querySelectorAll('#t-grid .bt-btn').forEach((b, i) => b.classList.toggle('on', i === idx)); }); }
 function setPieceTheme(idx) { curPTheme = idx; localStorage.setItem('ce_p_theme', idx); document.querySelectorAll('#p-grid .t-btn').forEach((b, i) => b.classList.toggle('on', i === idx)); document.querySelectorAll('.piece[data-p]').forEach(el => { el.style.backgroundImage = `url(${getPImg(el.dataset.p)})`; }); updAvatars(); updColorBtns(); const prevPces = document.querySelectorAll('#theme-preview .piece'); if(prevPces) prevPces.forEach(el => el.style.backgroundImage = `url(${getPImg(el.dataset.p)})`); }
-function setBright(val) { setCSSVar('--board-bright', val); } function setHue(val) { setCSSVar('--board-hue', val + 'deg'); } function setPieceSize(val) { setCSSVar('--piece-scale', val + '%'); } function updColorBtns() { const w = `url(${getPImg(6)})`, b = `url(${getPImg(12)})`; document.querySelectorAll('.img-w').forEach(x => x.style.backgroundImage = w); document.querySelectorAll('.img-b').forEach(x => x.style.backgroundImage = b); }
+function setBright(val) { setCSSVar('--board-bright', val); document.getElementById('brightness-value').textContent = Math.round(val*100) + '%'; }
+function setHue(val) { setCSSVar('--board-hue', val + 'deg'); } 
+function setPieceSize(val) { setCSSVar('--piece-scale', val + '%'); } 
+function updColorBtns() { const w = `url(${getPImg(6)})`, b = `url(${getPImg(12)})`; document.querySelectorAll('.img-w').forEach(x => x.style.backgroundImage = w); document.querySelectorAll('.img-b').forEach(x => x.style.backgroundImage = b); }
 function toggleDarkMode(isDark) { if (isDark) document.body.classList.remove('light-mode'); else document.body.classList.add('light-mode'); localStorage.setItem('ce_dark', isDark ? '1' : '0'); }
 function setAppHue(val) { setCSSVar('--app-hue', val); } function saveAppHue(val) { localStorage.setItem('ce_app_hue', val); }
 
@@ -1462,6 +1456,11 @@ function playSnd(type) {
   } 
 }
 function setAudioVol(id, val) { localStorage.setItem('ce_vol_' + id, val); }
+function updateAudioPercent(slider) {
+    let snd = slider.getAttribute('data-snd');
+    let span = document.querySelector(`.audio-val[data-snd="${snd}"]`);
+    if (span) span.textContent = slider.value + '%';
+}
 
 /* --- CHESS ENGINE (Fixed) --- */
 function createEngine() {
@@ -1943,7 +1942,6 @@ function execMv(mv, pr=null, isDrag=false) {
   updateOpeningName();
 }
 
-// FIX: Improved opening name detection and display
 const OPENINGS = {
   "e2e4 e7e5": "Open Game",
   "e2e4 c7c5": "Sicilian Defense",
@@ -2094,15 +2092,6 @@ function showEnd(mate, drawReason = '') {
 }
 function closeGO() { document.getElementById('go-ov').classList.remove('open'); if(isResign) { go('home'); GS = null; } }
 
-function shareGame() {
-  if (moveHistory.length === 0) return;
-  let movesStr = moveHistory.map(m => m.mv.f + m.mv.t + (m.mv.pr || "")).join(" ");
-  let dummyLink = `https://chessegy.com/share?moves=${encodeURIComponent(movesStr)}`;
-  navigator.clipboard.writeText(dummyLink).then(() => {
-    alert(TRANSLATIONS[currentLang].shareCopied);
-  });
-}
-
 window.addEventListener('resize', () => { 
   if(document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.isContentEditable)) return; 
   clearTimeout(window.resizeTimeout); 
@@ -2131,7 +2120,12 @@ window.onload = () => {
     document.querySelectorAll('.pl-nm, .nm-inp').forEach(el => { el.addEventListener('keydown', e => { if (e.key === 'Enter' && el.tagName !== 'TEXTAREA') { e.preventDefault(); el.blur(); } }); el.addEventListener('pointerdown', e => e.stopPropagation()); });
     
     initStockfish();
+    
+    // Initialize percentage displays for audio and brightness
+    document.querySelectorAll('.snd-slider').forEach(slider => updateAudioPercent(slider));
+    let brightSlider = document.querySelector('.std-range[oninput*="setBright"]');
+    if (brightSlider) setBright(brightSlider.value);
 };
 </script>
 </body>
-                                                                                                          </html>
+            </html>
