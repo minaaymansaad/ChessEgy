@@ -48,35 +48,34 @@
       -webkit-tap-highlight-color: transparent; overscroll-behavior-x: none; position: relative; 
     }
     
-    body[dir="rtl"] { font-family: 'Cairo', sans-serif; font-size: 0.9rem; }
+    body[dir="rtl"] { font-family: 'Cairo', sans-serif; }
     body[dir="rtl"] button, body[dir="rtl"] input, body[dir="rtl"] textarea { font-family: 'Cairo', sans-serif; }
 
+    /* RTL font size adjustments */
     body[dir="rtl"] .hero-h { font-size: clamp(1.5rem, 5vw, 2.4rem); font-weight: 800; line-height: 1.3; margin-bottom: 20px;}
     body[dir="rtl"] .setup-h, body[dir="rtl"] .m-t { font-size: 1.9rem; margin-bottom: 5px; }
     body[dir="rtl"] .nbox-title { font-size: 1.6rem; margin-bottom: 12px; }
     body[dir="rtl"] .elo-n { font-size: 2rem; }
-
-    body[dir="rtl"] .nm-inp { font-size: 0.9rem; }
-    body[dir="rtl"] .sb { font-size: 0.85rem; padding: 8px 10px; }
-    body[dir="rtl"] .cb2 { font-size: 0.85rem; padding: 11px; }
+    body[dir="rtl"] .nm-inp { font-size: 0.95rem; }
+    body[dir="rtl"] .sb { font-size: 0.9rem; padding: 8px 10px; }
+    body[dir="rtl"] .cb2 { font-size: 0.9rem; padding: 11px; }
     body[dir="rtl"] .go-btn, body[dir="rtl"] .play-btn-huge { font-size: 1.1rem; padding: 14px; letter-spacing: 0; }
     body[dir="rtl"] .nb { padding: 6px 12px; }
-    body[dir="rtl"] .nb span { font-size: 0.85rem; font-weight: 700; }
-    body[dir="rtl"] .settings-dropdown button { font-size: 0.85rem; padding: 12px 16px; flex-direction: row-reverse; text-align: right; }
-
-    body[dir="rtl"] .fl, body[dir="rtl"] .theme-lbl, body[dir="rtl"] .news-tag, body[dir="rtl"] .ph-t { font-size: 0.8rem; letter-spacing: 0; font-weight: 700; }
-    body[dir="rtl"] .bt-btn span { font-size: 0.85rem; }
-    body[dir="rtl"] .mv-pill { font-size: 0.85rem; padding: 4px 8px; }
-    body[dir="rtl"] .news-title { font-size: 1.05rem; margin-bottom: 6px;}
-    body[dir="rtl"] .news-desc { font-size: 0.85rem; line-height: 1.6; }
-    body[dir="rtl"] .nbox-body { font-size: 0.95rem; }
+    body[dir="rtl"] .nb span { font-size: 0.9rem; font-weight: 700; }
+    body[dir="rtl"] .settings-dropdown button { font-size: 0.9rem; padding: 12px 16px; flex-direction: row-reverse; text-align: right; }
+    body[dir="rtl"] .fl, body[dir="rtl"] .theme-lbl, body[dir="rtl"] .news-tag, body[dir="rtl"] .ph-t { font-size: 0.85rem; letter-spacing: 0; font-weight: 700; }
+    body[dir="rtl"] .bt-btn span { font-size: 0.9rem; }
+    body[dir="rtl"] .mv-pill { font-size: 0.9rem; padding: 4px 8px; }
+    body[dir="rtl"] .news-title { font-size: 1.1rem; margin-bottom: 6px;}
+    body[dir="rtl"] .news-desc { font-size: 0.9rem; line-height: 1.6; }
+    body[dir="rtl"] .nbox-body { font-size: 1rem; }
 
     /* RTL specific overrides for navigation & menus */
     body[dir="rtl"] .nav-links,
     body[dir="rtl"] .settings-dropdown,
     body[dir="rtl"] .lang-toggle,
     body[dir="rtl"] .nb {
-      direction: rtl !important;
+      direction: rtl;
     }
     body[dir="rtl"] .logo span {
       margin-right: 12px;
@@ -116,7 +115,6 @@
     
     .nav-links { display: flex; gap: 10px; align-items: center; }
     .nb { background: transparent; color: var(--text2); padding: 8px 16px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative;}
-    body[dir="rtl"] .nb span { direction: rtl; }
     
     .nb:hover { color: var(--text); background: var(--bg4); }
     .nb.on { color: var(--white); background: var(--acc); box-shadow: 0 4px 12px hsla(var(--app-hue), 60%, 45%, 0.25); }
@@ -203,7 +201,7 @@
     .elo-t { font-size: 0.95rem; color: var(--acc-l); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
     
     /* ==========================================================================
-       6. CHESS BOARD & GAMEPLAY UI (FIXED ZOOM OVERFLOW)
+       6. CHESS BOARD & GAMEPLAY UI
        ========================================================================== */
     .game-wrap { flex: 1; display: flex; align-items: flex-start; justify-content: center; gap: 40px; padding: 30px 20px; width: 100%; max-width: 1400px; margin: 0 auto; overflow-x: hidden; box-sizing: border-box; flex-wrap: wrap;}
     
@@ -213,7 +211,6 @@
     .pbar.top { border-radius: 12px 12px 0 0; border-bottom: none; }
     .pbar.bot { border-radius: 0 0 12px 12px; border-top: none; }
     
-    /* FIX 2: Simple/Flat active turn, removed glow */
     .pbar.active-turn { background: transparent !important; box-shadow: none !important; border-color: var(--border) !important; }
     
     .pl-l { display: flex; align-items: center; gap: 12px; }
@@ -259,7 +256,7 @@
     .sq.dot::after { content: ''; position: absolute; border-radius: 50%; background: rgba(0,0,0,0.3); width: 25%; height: 25%; z-index: 2; pointer-events: none; }
     .sq.cap::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 6px rgba(0,0,0,0.3); z-index: 2; pointer-events: none; }
 
-    /* FIX 6: Coordinate styling (Chess.com / Lichess style) */
+    /* Coordinates */
     .co { position: absolute; font-size: 0.8rem; font-weight: 800; z-index: 20; pointer-events: none; opacity: 1; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
     .co.file { bottom: 2px; right: 4px; left: auto; }
     .co.rank { top: 2px; left: 4px; right: auto; }
@@ -271,7 +268,7 @@
     .theme-preview .piece { position: static; width: 90%; height: 90%; margin: auto; transition: none;}
 
     /* ==========================================================================
-       7. SIDEBAR & TOOLS (FLEX FIXES FOR ZOOM)
+       7. SIDEBAR & TOOLS
        ========================================================================== */
     .sidebar { width: 320px; display: flex; flex-direction: column; gap: 20px; flex: 1 1 320px; max-width: 100%; }
     .panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); }
@@ -286,13 +283,32 @@
     .mv-pill:hover { background: var(--border2); color: var(--white); }
     .mv-pill.mc { background: var(--acc); color: #fff; box-shadow: 0 2px 6px hsla(var(--app-hue),60%,50%,0.25); }
 
-    /* FIX 5: Cbtns wrapping */
-    .cbtns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    /* Game action buttons - responsive grid */
+    .cbtns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 500px) {
+      .cbtns { grid-template-columns: repeat(2, 1fr); }
+    }
     .cb2 { display:flex; align-items:center; justify-content:center; gap: 6px; padding: 14px; background: var(--bg4); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s var(--spring); cursor: pointer;}
     .cb2 .icon { margin: 0 !important; }
     .cb2:hover { background: var(--border2); color: var(--text); box-shadow: var(--shadow-sm); }
     .cb2.danger { color: var(--red); border-color: rgba(230, 80, 80, 0.4); background: rgba(230, 80, 80, 0.1); }
     .cb2.danger:hover { background: var(--red); color: #fff; box-shadow: 0 4px 12px rgba(230, 80, 80, 0.3); }
+
+    /* Opening name styling */
+    #opening-name { 
+      font-size: 0.8rem; 
+      margin-top: 6px; 
+      color: var(--acc-l); 
+      text-align: center; 
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      opacity: 0.9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      padding: 0 5px;
+    }
 
     /* ==========================================================================
        8. SLIDERS & SETTINGS CONTROLS
@@ -361,7 +377,7 @@
     .h-info { display: flex; flex-direction: column; gap: 6px; flex: 1; }
     .h-date { font-size: 0.8rem; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; direction: ltr; text-align: left; width: fit-content; }
     body[dir="rtl"] .h-date { text-align: right; }
-    .h-players { font-size: 1.15rem; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .h-players { font-size: 1.15rem; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .h-vs { font-style: normal; font-weight: 900; font-size: 1.1rem; color: var(--acc-l); margin: 0 8px; }
     .h-king { width: 28px; height: 28px; display: inline-block; background-size: contain; background-position: center; }
     .h-actions { display: flex; align-items: center; gap: 12px; }
@@ -372,7 +388,7 @@
     .del-btn:hover { background: var(--red); color: #fff; transform: scale(1.1) rotate(5deg); box-shadow: 0 4px 12px rgba(230,80,80,0.3); }
 
     /* ==========================================================================
-       11. IDENTITY & PROFILE PAGE (NEW CLEAN DESIGN)
+       11. IDENTITY & PROFILE PAGE
        ========================================================================== */
     .prof-wrap { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px; width: 100%; max-width: 100vw; overflow-y: auto; overflow-x: hidden; }
     .prof-pg-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 48px 40px; width: 100%; max-width: 480px; box-shadow: var(--shadow-lg); position: relative; z-index: 1; overflow: hidden; }
@@ -468,7 +484,6 @@
       .eval-container { width: 100vw !important; padding: 0;}
       .eval-bar-track { border-radius: 0; }
       .nbox-content { padding: 20px; }
-      /* تقليل حجم الإحداثيات على الشاشات الصغيرة */
       .co { font-size: 0.6rem; }
     }
   </style>
@@ -485,9 +500,10 @@
       <g id="ic-close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></g>
       <g id="ic-player"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></g>
       <g id="ic-engine"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></g>
-      <!-- FIX 7: Standard Chess Flag Icon for Resign -->
       <g id="ic-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></g>
       <g id="ic-copy"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></g>
+      <g id="ic-handshake"><path d="M20 12c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8 8 3.58 8 8z"/><path d="M9 11v2"/><path d="M15 11v2"/><path d="M12 16a4 4 0 0 0 4-4"/></g>
+      <g id="ic-share"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></g>
     </defs>
   </svg>
 
@@ -536,7 +552,11 @@
     <nav>
       <div class="logo"><div class="logo-box setup-logo-box" onclick="openProfile()"></div><span>Chess Egy</span></div>
       <div class="nav-links">
-        <div class="lang-toggle" onclick="toggleLanguage()"><div class="lang-indicator" id="lang-ind2"></div><span class="lang-en active">EN</span><span class="lang-ar">عربي</span></div>
+        <div class="lang-toggle" onclick="toggleLanguage()">
+          <div class="lang-indicator" id="lang-ind2"></div>
+          <span class="lang-en active">EN</span>
+          <span class="lang-ar">عربي</span>
+        </div>
         <button class="nb" onclick="go('home')"><span data-i18n="home">Home</span></button>
         <button class="nb on" onclick="navPlay()"><span data-i18n="play">Play</span></button>
         <div style="position: relative;">
@@ -610,13 +630,12 @@
       <div class="nav-links">
         <button class="nb" onclick="go('home')"><span data-i18n="home">Home</span></button>
         <button class="nb on" onclick="navPlay()"><span data-i18n="play">Play</span></button>
-        <!-- FIX 5: Hidden settings and New game from Match Nav to keep it clean -->
       </div>
     </nav>
     <div class="game-wrap">
       <div class="board-col">
-        <!-- Eval Bar -->
-        <div id="eng-panel" class="eval-container">
+        <!-- Eval Bar with click to toggle units -->
+        <div id="eng-panel" class="eval-container" onclick="toggleEvalUnit()" style="cursor: pointer;">
           <div class="eval-text-row">
             <strong id="ev-s" class="eval-score" style="font-size:1rem; font-family:monospace" title="Evaluation: positive favors White, negative favors Black">+0.0</strong>
             <span id="ev-l" class="eval-label" data-i18n="even" style="font-size:0.8rem; text-transform:uppercase; font-weight:700">Even</span>
@@ -624,6 +643,8 @@
           <div class="eval-bar-track">
             <div class="eval-bar-fill" id="ev-f"></div>
           </div>
+          <!-- Opening name display (improved styling) -->
+          <div id="opening-name"></div>
         </div>
 
         <!-- Top Player -->
@@ -631,7 +652,7 @@
           <div class="pl-l">
             <img class="pl-av" id="av-top" src="" alt="">
             <div>
-              <div style="display:flex; align-items:center; gap:10px;">
+              <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <div class="pl-nm" id="nm-top" dir="auto">Black</div>
                 <div class="pl-el" id="el-top"></div>
                 <div id="flag-top" style="color:var(--red); display:none;"><svg class="icon" viewBox="0 0 24 24" style="margin:0"><use href="#ic-flag"></use></svg></div>
@@ -650,7 +671,7 @@
           <div class="pl-l">
             <img class="pl-av" id="av-bot" src="" alt="">
             <div>
-              <div style="display:flex; align-items:center; gap:10px;">
+              <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <div class="pl-nm" id="nm-bot" dir="auto">White</div>
                 <div class="pl-el" id="el-bot"></div>
                 <div id="flag-bot" style="color:var(--red); display:none;"><svg class="icon" viewBox="0 0 24 24" style="margin:0"><use href="#ic-flag"></use></svg></div>
@@ -665,7 +686,6 @@
       <!-- Sidebar -->
       <div class="sidebar">
         <div class="panel">
-          <!-- FIX 3: Copy PGN Button added -->
           <div class="ph" style="display:flex; justify-content:space-between; align-items:center;">
              <span class="ph-t" data-i18n="moveHistoryT">Move History</span>
              <button onclick="copyPGN(this)" style="background:var(--bg4); color:var(--text); padding:4px 10px; border-radius:8px; font-size:0.75rem; font-weight:bold; display:flex; align-items:center; gap:6px; border:1px solid var(--border); cursor:pointer; transition:all 0.2s;">
@@ -686,11 +706,14 @@
           </div>
         </div>
         <div class="panel">
-          <!-- FIX 5 & 7: Removed +New button, using Flag icon for Resign -->
           <div class="pb cbtns">
             <button class="cb2" onclick="undoM()" id="btn-undo"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-undo"></use></svg><span data-i18n="takeback">Takeback</span></button>
             <button class="cb2" onclick="flipBd()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-flip"></use></svg><span data-i18n="flip">Flip</span></button>
+            <button class="cb2 danger" onclick="offerDraw()" id="btn-draw"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-handshake"></use></svg><span data-i18n="draw">Draw</span></button>
             <button class="cb2 danger" onclick="resignG()" id="btn-resign"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-flag"></use></svg><span data-i18n="resign">Resign</span></button>
+          </div>
+          <div style="padding: 0 20px 20px 20px;">
+            <button class="cb2" style="width:100%;" onclick="shareGame()"><svg class="icon" viewBox="0 0 24 24"><use href="#ic-share"></use></svg><span data-i18n="share">Share Game</span></button>
           </div>
         </div>
       </div>
@@ -784,7 +807,7 @@
     </div>
   </div>
 
-  <!-- PAGE: PROFILE (NEW) -->
+  <!-- PAGE: PROFILE -->
   <div id="pg-profile" class="page gpu-accel">
     <nav>
       <div class="logo"><div class="logo-box profile-logo-box" onclick="openProfile()"></div><span>Chess Egy</span></div>
@@ -879,6 +902,16 @@
       </div>
     </div>
   </div>
+  <div class="ov" id="draw-ov">
+    <div class="mbox">
+      <div class="m-t" style="font-size: 1.8rem;" data-i18n="drawOffer">Draw Offer</div>
+      <p style="color:var(--text2); margin-bottom:30px; font-size:1rem;" id="draw-msg" data-i18n="drawConfirm">Do you want to accept the draw?</p>
+      <div style="display: flex; gap: 16px;">
+        <button class="cb2" style="flex:1" onclick="closeDrawModal()" data-i18n="cancel">Cancel</button>
+        <button class="cb2" style="flex:1; background:var(--acc); color:#fff;" onclick="acceptDraw()" data-i18n="accept">Accept</button>
+      </div>
+    </div>
+  </div>
   <div class="ov" id="audio-ov">
     <div class="mbox" style="max-width: 340px; padding: 24px;">
       <div class="m-t" style="font-size: 1.6rem; margin-bottom: 20px;" data-i18n="audioSettings">Audio Settings</div>
@@ -906,7 +939,7 @@
 
 <script>
 /* --- LOCALIZATION & CONTENT --- */
-/* FIX 4: Extended dynamic news array with explicit high-quality chess images */
+// FIX: Removed the "New Chess Egy Features" news item
 const EXTENDED_NEWS =[
   {
     img: "url('https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&q=80&w=600')",
@@ -922,11 +955,6 @@ const EXTENDED_NEWS =[
     img: "url('https://images.unsplash.com/photo-1528819622765-d6bcf132f793?auto=format&fit=crop&q=80&w=600')",
     en: { tag: "AI Analysis", title: "How Engine Evals Shape Modern Chess", body: "A deep dive into how computer preparation is changing opening theory." },
     ar: { tag: "تحليل الذكاء", title: "تأثير محركات الذكاء الاصطناعي", body: "نظرة عميقة على كيفية تغيير التحضير الحاسوبي لنظرية الافتتاحات." }
-  },
-  {
-    img: "url('https://images.unsplash.com/photo-1610880846498-8a892e85a532?auto=format&fit=crop&q=80&w=600')",
-    en: { tag: "Update", title: "New Chess Egy Features Released", body: "Enjoy smoother gameplay and advanced post-match analysis tools." },
-    ar: { tag: "تحديث", title: "إطلاق ميزات جديدة في Chess Egy", body: "استمتع بتجربة لعب أكثر سلاسة وأدوات تحليل متقدمة بعد المباراة." }
   },
   {
     img: "url('https://images.unsplash.com/photo-1560174038-da43ac74f01b?auto=format&fit=crop&q=80&w=600')",
@@ -956,7 +984,10 @@ const TRANSLATIONS = {
     nameHelp: "Name can only be changed once.", usernameHelp: "Letters & Numbers only. Cannot be changed later.",
     errUserEmpty: "Username cannot be empty", errUserRegex: "Must contain letters & numbers. No special characters.",
     errNameEmpty: "Name cannot be empty", errNameWait: "You can change your name again after 30 days.",
-    bioLabel: "Bio", bioPlaceholder: "Tell us about yourself...", profileEditTitle: "Your Profile", profileEditSub: "Manage your details and view stats", saveChanges: "Save Changes", savedSuccess: "Saved Successfully! ✔"
+    bioLabel: "Bio", bioPlaceholder: "Tell us about yourself...", profileEditTitle: "Your Profile", profileEditSub: "Manage your details and view stats", saveChanges: "Save Changes", savedSuccess: "Saved Successfully! ✔",
+    drawOffer: "Draw Offer", drawConfirm: "Do you want to accept the draw?", accept: "Accept",
+    share: "Share Game", shareCopied: "Game link copied to clipboard!",
+    opening: "Opening: "
   },
   ar: {
     home: "الرئيسية", play: "العب", more: "المزيد", matchHistory: "سجل المباريات", themesVisuals: "المظهر والسمات", audioSettings: "الصوتيات",
@@ -978,11 +1009,14 @@ const TRANSLATIONS = {
     nameHelp: "يُسمح بتعديل الاسم مرة واحدة فقط.", usernameHelp: "حروف وأرقام فقط. لا يمكن تغييره لاحقاً.",
     errUserEmpty: "لا يمكن ترك اسم المستخدم فارغاً", errUserRegex: "يجب أن يحتوي على حروف وأرقام، بدون رموز خاصة.",
     errNameEmpty: "لا يمكن ترك الاسم فارغاً", errNameWait: "يمكنك تغيير اسمك بعد 30 يوم من آخر تعديل.",
-    bioLabel: "نبذة عني", bioPlaceholder: "حدثنا عن نفسك...", profileEditTitle: "ملفك الشخصي", profileEditSub: "إدارة بياناتك وعرض إحصائياتك", saveChanges: "حفظ التعديلات", savedSuccess: "تم الحفظ بنجاح! ✔"
+    bioLabel: "نبذة عني", bioPlaceholder: "حدثنا عن نفسك...", profileEditTitle: "ملفك الشخصي", profileEditSub: "إدارة بياناتك وعرض إحصائياتك", saveChanges: "حفظ التعديلات", savedSuccess: "تم الحفظ بنجاح! ✔",
+    drawOffer: "عرض التعادل", drawConfirm: "هل ترغب في قبول التعادل؟", accept: "قبول",
+    share: "مشاركة اللعبة", shareCopied: "تم نسخ رابط اللعبة!",
+    opening: "الافتتاحية: "
   }
 };
 
-let currentLang = localStorage.getItem('ce_lang') || 'en';
+let currentLang = localStorage.getItem('ce_lang') || (navigator.language.startsWith('ar') ? 'ar' : 'en'); // FIX: detect browser language
 const defaultAvatarSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32' fill='%23a39e95'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
 
 function toggleLanguage() {
@@ -992,27 +1026,53 @@ function toggleLanguage() {
 }
 
 function applyLanguage() {
-  document.documentElement.lang = currentLang; document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = currentLang; 
+  document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  
+  // Update all language toggles (there are multiple due to different pages)
   document.querySelectorAll('.lang-toggle').forEach(el => {
-     let ind = el.querySelector('.lang-indicator'), spanEn = el.querySelector('#lang-en') || el.querySelector('.lang-en'), spanAr = el.querySelector('#lang-ar') || el.querySelector('.lang-ar');
-     if(ind && spanEn && spanAr) { if(currentLang === 'ar') { ind.style.transform = 'translateX(100%)'; spanAr.classList.add('active'); spanEn.classList.remove('active'); } else { ind.style.transform = 'translateX(0)'; spanEn.classList.add('active'); spanAr.classList.remove('active'); } }
+     let ind = el.querySelector('.lang-indicator');
+     let spanEn = el.querySelector('#lang-en') || el.querySelector('.lang-en');
+     let spanAr = el.querySelector('#lang-ar') || el.querySelector('.lang-ar');
+     if(ind && spanEn && spanAr) { 
+       if(currentLang === 'ar') { 
+         ind.style.transform = 'translateX(100%)'; 
+         spanAr.classList.add('active'); 
+         spanEn.classList.remove('active'); 
+       } else { 
+         ind.style.transform = 'translateX(0)'; 
+         spanEn.classList.add('active'); 
+         spanAr.classList.remove('active'); 
+       }
+     }
   });
+  
   const dict = TRANSLATIONS[currentLang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (dict[key]) {
       if(el.tagName === 'SPAN' && el.parentElement.querySelector('svg')) el.innerHTML = dict[key];
-      else if (el.tagName === 'DIV' && el.querySelector('span')) { let parts = dict[key].split('<span>'); if(parts.length>1) el.innerHTML = dict[key]; else el.textContent = dict[key]; } 
+      else if (el.tagName === 'DIV' && el.querySelector('span')) { 
+        let parts = dict[key].split('<span>'); 
+        if(parts.length>1) el.innerHTML = dict[key]; 
+        else el.textContent = dict[key]; 
+      } 
       else el.innerHTML = dict[key];
     }
   });
-  document.querySelectorAll('[data-ph]').forEach(el => { const key = el.getAttribute('data-ph'); if (dict[key]) el.placeholder = dict[key]; });
-  let val = document.getElementById('sl-e'); if(val) updElo(val.value);
-  buildThemeGrid(); renderHistory();
+  document.querySelectorAll('[data-ph]').forEach(el => { 
+    const key = el.getAttribute('data-ph'); 
+    if (dict[key]) el.placeholder = dict[key]; 
+  });
+  let val = document.getElementById('sl-e'); 
+  if(val) updElo(val.value);
+  buildThemeGrid(); 
+  renderHistory();
   renderDynamicNews(true); 
+  if (moveHistory.length > 0) updateOpeningName();
 }
 
-/* FIX 3: Copy PGN Logic */
+/* --- Copy PGN (with result) --- */
 window.copyPGN = function(btn) {
     let pgn = "";
     for (let i = 0; i < moveHistory.length; i += 2) {
@@ -1022,7 +1082,17 @@ window.copyPGN = function(btn) {
             pgn += moveHistory[i + 1].san + " ";
         }
     }
-    if (!pgn) return;
+    // Add result if game ended
+    if (gameSaved || !gameOn) {
+        let result = "*";
+        if (winnerColor) {
+            if (winnerColor === 'w') result = "1-0";
+            else if (winnerColor === 'b') result = "0-1";
+            else if (winnerColor === 'd') result = "1/2-1/2";
+        }
+        pgn += result;
+    }
+    if (!pgn.trim()) return;
     navigator.clipboard.writeText(pgn.trim()).then(() => {
         let originalHtml = btn.innerHTML;
         btn.innerHTML = currentLang === 'ar' ? 'تم النسخ ✔' : 'Copied ✔';
@@ -1036,8 +1106,7 @@ window.copyPGN = function(btn) {
     });
 }
 
-
-let activeNewsIndices =[0, 1, 2];
+let activeNewsIndices =[0, 1, 2]; // now only 4 items, but we keep 3 active at a time
 let newsInterval;
 
 function renderDynamicNews(init = false) {
@@ -1094,7 +1163,14 @@ function startNewsRotation() {
     }, 8000); 
 }
 
-function openNews(idx) { const news = EXTENDED_NEWS[idx]; document.getElementById('news-img').style.backgroundImage = news.img; document.getElementById('news-tag').textContent = news[currentLang].tag; document.getElementById('news-title').textContent = news[currentLang].title; document.getElementById('news-body').textContent = news[currentLang].body; document.getElementById('news-ov').classList.add('open'); }
+function openNews(idx) { 
+  const news = EXTENDED_NEWS[idx]; 
+  document.getElementById('news-img').style.backgroundImage = news.img; 
+  document.getElementById('news-tag').textContent = news[currentLang].tag; 
+  document.getElementById('news-title').textContent = news[currentLang].title; 
+  document.getElementById('news-body').textContent = news[currentLang].body; 
+  document.getElementById('news-ov').classList.add('open'); 
+}
 function closeNews() { document.getElementById('news-ov').classList.remove('open'); }
 function escapeHTML(str) { return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])); }
 
@@ -1351,10 +1427,43 @@ window.addEventListener('click', () => { document.querySelectorAll('.settings-dr
 /* --- AUDIO --- */
 const AudioContextAPI = window.AudioContext || window.webkitAudioContext; let audioCtx = null;
 function initAudio() { if (!audioCtx) { try { audioCtx = new AudioContextAPI(); } catch(e){} } }
-function playSnd(type) { initAudio(); if(!audioCtx) return; if(audioCtx.state === 'suspended') audioCtx.resume(); let vol = localStorage.getItem('ce_vol_' + type); vol = (vol !== null ? parseInt(vol)/100 : 1.0); if(vol <= 0) return; const t = audioCtx.currentTime; if (type === 'm') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sine'; osc.frequency.setValueAtTime(300, t); osc.frequency.exponentialRampToValueAtTime(100, t + 0.03); gain.gain.setValueAtTime(vol * 1.5, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.03); osc.start(t); osc.stop(t + 0.03); } else if (type === 'c') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'square'; osc.frequency.setValueAtTime(250, t); osc.frequency.exponentialRampToValueAtTime(50, t + 0.06); gain.gain.setValueAtTime(vol * 1.2, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.06); osc.start(t); osc.stop(t + 0.06); } else if (type === 'k') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'triangle'; osc.frequency.setValueAtTime(500, t); osc.frequency.exponentialRampToValueAtTime(550, t + 0.2); gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(vol * 0.9, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3); osc.start(t); osc.stop(t + 0.3); } else if (type === 'e') { const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sine'; osc.frequency.setValueAtTime(300, t); osc.frequency.exponentialRampToValueAtTime(100, t + 0.8); gain.gain.setValueAtTime(vol * 1.5, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.8); osc.start(t); osc.stop(t + 0.8); } }
+function playSnd(type) { 
+  initAudio(); 
+  if(!audioCtx) return; 
+  if(audioCtx.state === 'suspended') audioCtx.resume(); 
+  let vol = localStorage.getItem('ce_vol_' + type); 
+  vol = (vol !== null ? parseInt(vol)/100 : 1.0); 
+  if(vol <= 0) return; 
+  const t = audioCtx.currentTime; 
+  if (type === 'm') { 
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); 
+    osc.connect(gain); gain.connect(audioCtx.destination); 
+    osc.type = 'sine'; osc.frequency.setValueAtTime(300, t); osc.frequency.exponentialRampToValueAtTime(100, t + 0.03); 
+    gain.gain.setValueAtTime(vol * 1.5, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.03); 
+    osc.start(t); osc.stop(t + 0.03); 
+  } else if (type === 'c') { 
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); 
+    osc.connect(gain); gain.connect(audioCtx.destination); 
+    osc.type = 'square'; osc.frequency.setValueAtTime(250, t); osc.frequency.exponentialRampToValueAtTime(50, t + 0.06); 
+    gain.gain.setValueAtTime(vol * 1.2, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.06); 
+    osc.start(t); osc.stop(t + 0.06); 
+  } else if (type === 'k') { 
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); 
+    osc.connect(gain); gain.connect(audioCtx.destination); 
+    osc.type = 'triangle'; osc.frequency.setValueAtTime(500, t); osc.frequency.exponentialRampToValueAtTime(550, t + 0.2); 
+    gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(vol * 0.9, t + 0.02); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3); 
+    osc.start(t); osc.stop(t + 0.3); 
+  } else if (type === 'e') { 
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); 
+    osc.connect(gain); gain.connect(audioCtx.destination); 
+    osc.type = 'sine'; osc.frequency.setValueAtTime(300, t); osc.frequency.exponentialRampToValueAtTime(100, t + 0.8); 
+    gain.gain.setValueAtTime(vol * 1.5, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.8); 
+    osc.start(t); osc.stop(t + 0.8); 
+  } 
+}
 function setAudioVol(id, val) { localStorage.setItem('ce_vol_' + id, val); }
 
-/* --- CHESS BOARD LOGIC (Used for drag/drop, highlighting, validating moves ONLY) --- */
+/* --- CHESS ENGINE (Fixed) --- */
 function createEngine() {
   const F = 'abcdefgh', R = '12345678', s2i = s => F.indexOf(s[0]) + (parseInt(s[1]) - 1) * 8, i2s = i => F[i % 8] + R[Math.floor(i / 8)];
   const isW = p => p >= 1 && p <= 6, pC = p => !p ? null : isW(p) ? 'w' : 'b', opp = c => c === 'w' ? 'b' : 'w', tp = p => { if (!p) return null; const t =['','p','n','b','r','q','k']; return t[isW(p) ? p : p - 6]; };
@@ -1389,8 +1498,14 @@ function createEngine() {
               const dirs = ty==='n'?[[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,2],[-1,-2]]:[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]; 
               for(let[dr,dc] of dirs){ const nr=r+dr,nc=c+dc; if(nr>=0&&nr<8&&nc>=0&&nc<8){ const ti=nr*8+nc; if(!b[ti]||pC(b[ti])!==t) mvs.push({f:i2s(i),t:i2s(ti),fl:b[ti]?'c':'n'}); } } 
               if(ty==='k'){ 
-                  if(t==='w'&&r===0&&c===4){ if(s.cast.K&&!b[5]&&!b[6]&&!isAtk(s,'e1','b')&&!isAtk(s,'f1','b')&&!isAtk(s,'g1','b')) mvs.push({f:'e1',t:'g1',fl:'k'}); if(s.cast.Q&&!b[3]&&!b[2]&&!b[1]&&!isAtk(s,'e1','b')&&!isAtk(s,'d1','b')&&!isAtk(s,'c1','b')) mvs.push({f:'e1',t:'c1',fl:'q'}); } 
-                  if(t==='b'&&r===7&&c===4){ if(s.cast.k&&!b[61]&&!b[62]&&!isAtk(s,'e8','w')&&!isAtk(s,'f8','w')&&!isAtk(s,'g8','w')) mvs.push({f:'e8',t:'g8',fl:'k'}); if(s.cast.q&&!b[59]&&!b[58]&&!b[57]&&!isAtk(s,'e8','w')&&!isAtk(s,'d8','w')&&!isAtk(s,'c8','w')) mvs.push({f:'e8',t:'c8',fl:'q'}); } 
+                  if(t==='w'&&r===0&&c===4){ 
+                      if(s.cast.K && b[7]===4 && !b[5] && !b[6] && !isAtk(s,'e1','b') && !isAtk(s,'f1','b') && !isAtk(s,'g1','b')) mvs.push({f:'e1',t:'g1',fl:'k'}); 
+                      if(s.cast.Q && b[0]===4 && !b[3] && !b[2] && !b[1] && !isAtk(s,'e1','b') && !isAtk(s,'d1','b') && !isAtk(s,'c1','b')) mvs.push({f:'e1',t:'c1',fl:'q'}); 
+                  } 
+                  if(t==='b'&&r===7&&c===4){ 
+                      if(s.cast.k && b[63]===10 && !b[61] && !b[62] && !isAtk(s,'e8','w') && !isAtk(s,'f8','w') && !isAtk(s,'g8','w')) mvs.push({f:'e8',t:'g8',fl:'k'}); 
+                      if(s.cast.q && b[56]===10 && !b[59] && !b[58] && !b[57] && !isAtk(s,'e8','w') && !isAtk(s,'d8','w') && !isAtk(s,'c8','w')) mvs.push({f:'e8',t:'c8',fl:'q'}); 
+                  } 
               } 
           } else { 
               const dirs = ty==='r'?[[1,0],[-1,0],[0,1],[0,-1]]:ty==='b'?[[1,1],[1,-1],[-1,1],[-1,-1]]:[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]; 
@@ -1412,65 +1527,101 @@ function createEngine() {
       n.board[ti]=p; n.board[fi]=0; n.hm=(ty==='p'||m.fl==='c'||m.fl==='e')?0:n.hm+1; n.turn=opp(n.turn); return n; 
   }
   
-  function legMs(s, sq) { return genPs(s).filter(m => (!sq||m.f===sq) && !inChk(apM(s,m), s.turn)); } function isMate(s) { return inChk(s,s.turn) && legMs(s).length===0; }
+  function legMs(s, sq) { return genPs(s).filter(m => (!sq||m.f===sq) && !inChk(apM(s,m), s.turn)); } 
+  function isMate(s) { return inChk(s,s.turn) && legMs(s).length===0; }
   
-  return { init, apM, legMs, inChk, isMate, tp, s2i };
+  function isInsufficientMaterial(s) {
+      const pieces = [];
+      for (let i = 0; i < 64; i++) if (s.board[i]) pieces.push(s.board[i]);
+      if (pieces.length === 2) return true; // K vs K
+      if (pieces.length === 3) {
+          const oddPiece = pieces.find(p => p !== 6 && p !== 12);
+          if (oddPiece && (tp(oddPiece) === 'b' || tp(oddPiece) === 'n')) return true;
+      }
+      if (pieces.length === 4) {
+          const bishops = pieces.filter(p => tp(p) === 'b');
+          if (bishops.length === 2) {
+              const colors = bishops.map(p => ((pC(p) === 'w' ? 1 : -1) * (Math.floor(s2i(p)/8) + s2i(p)%8) % 2));
+              if (colors[0] === colors[1]) return true;
+          }
+      }
+      return false;
+  }
+  
+  return { init, apM, legMs, inChk, isMate, isInsufficientMaterial, tp, s2i };
 }
 const CE = createEngine();
 
-/* --- 100% REAL STOCKFISH (LICHESS STYLE) - NO LOCAL FILES REQUIRED --- */
+/* --- STOCKFISH WORKER (ORIGINAL WORKING VERSION) --- */
 let aiWorker = null;
+let sfInitialized = false;
 
-const workerData = `
-    importScripts('https://cdnjs.cloudflare.com/ajax/libs/stockfish.js/10.0.2/stockfish.js');
-`;
-const blob = new Blob([workerData], {type: 'application/javascript'});
-
-try {
-    aiWorker = new Worker(URL.createObjectURL(blob));
-    
-    aiWorker.onmessage = function(e) {
-        const line = e.data;
-        if (typeof line !== 'string') return;
+function initStockfish() {
+    if (sfInitialized) return;
+    sfInitialized = true;
+    try {
+        // Use the original Blob method that worked before
+        const workerData = `
+            importScripts('https://cdnjs.cloudflare.com/ajax/libs/stockfish.js/10.0.2/stockfish.js');
+        `;
+        const blob = new Blob([workerData], { type: 'application/javascript' });
+        aiWorker = new Worker(URL.createObjectURL(blob));
         
-        if (line.includes("info depth") && line.includes("score")) {
-            const matchCP = line.match(/score cp (-?\d+)/);
-            const matchMate = line.match(/score mate (-?\d+)/);
+        aiWorker.onmessage = function(e) {
+            const line = e.data;
+            if (typeof line !== 'string') return;
             
-            let cpValue = null, isMate = false;
-            if (matchMate) {
-                cpValue = parseInt(matchMate[1]);
-                isMate = true;
-            } else if (matchCP) {
-                cpValue = parseInt(matchCP[1]);
+            // FIX: Ensure eval updates happen
+            if (line.includes("info depth") && line.includes("score")) {
+                const matchCP = line.match(/score cp (-?\d+)/);
+                const matchMate = line.match(/score mate (-?\d+)/);
+                
+                let cpValue = null, isMate = false;
+                if (matchMate) {
+                    cpValue = parseInt(matchMate[1]);
+                    isMate = true;
+                } else if (matchCP) {
+                    cpValue = parseInt(matchCP[1]);
+                }
+                if (cpValue !== null) updateEvalBarRealtime(cpValue, isMate);
             }
-            if (cpValue !== null) updateEvalBarRealtime(cpValue, isMate);
-        }
-        
-        if (line.startsWith("bestmove")) {
-            const match = line.match(/^bestmove ([a-h][1-8][a-h][1-8][qrbn]?)/);
-            if (match && gameOn && currentPly === moveHistory.length) {
-                const mvStr = match[1];
-                const f = mvStr.substring(0, 2);
-                const t = mvStr.substring(2, 4);
-                const pr = mvStr.length > 4 ? mvStr[4] : null;
+            
+            if (line.startsWith("bestmove")) {
+                const match = line.match(/^bestmove ([a-h][1-8][a-h][1-8][qrbn]?)/);
+                if (match && gameOn && currentPly === moveHistory.length) {
+                    const mvStr = match[1];
+                    const f = mvStr.substring(0, 2);
+                    const t = mvStr.substring(2, 4);
+                    const pr = mvStr.length > 4 ? mvStr[4] : null;
 
-                const isEngineTurn = gM === 'pvc' && ((sC === 'black' ? 'w' : 'b') === GS.turn);
-                if (isEngineTurn) {
-                    let legals = CE.legMs(GS);
-                    let mvObj = legals.find(m => m.f === f && m.t === t);
-                    if (mvObj) {
-                        execMv(mvObj, pr);
+                    const isEngineTurn = gM === 'pvc' && ((sC === 'black' ? 'w' : 'b') === GS.turn);
+                    if (isEngineTurn) {
+                        let legals = CE.legMs(GS);
+                        let mvObj = legals.find(m => m.f === f && m.t === t);
+                        if (mvObj) {
+                            execMv(mvObj, pr);
+                        }
                     }
                 }
             }
-        }
-    };
-    
-    aiWorker.postMessage("uci");
-    aiWorker.postMessage("isready");
-} catch(err) {
-    console.error("Stockfish Failed to load:", err);
+        };
+        
+        aiWorker.postMessage("uci");
+        aiWorker.postMessage("isready");
+    } catch(err) {
+        console.error("Stockfish Failed to load:", err);
+        // Fallback: disable engine mode
+        document.getElementById('btn-undo').disabled = true;
+    }
+}
+
+setTimeout(initStockfish, 500);
+
+let evalUnit = 'cp'; // 'cp' or 'mate'
+function toggleEvalUnit() {
+    evalUnit = evalUnit === 'cp' ? 'mate' : 'cp';
+    // Re-trigger eval display
+    if (aiWorker && GS) triggerEngine();
 }
 
 function updateEvalBarRealtime(val, isMate) {
@@ -1486,23 +1637,25 @@ function updateEvalBarRealtime(val, isMate) {
         let relativeMate = isWhiteTurn ? val : -val;
         sc = relativeMate > 0 ? 100 : 0;
         
-        if (isWhiteTurn) {
-            sVal = (val > 0 ? "+M" : "-M") + Math.abs(val);
+        if (evalUnit === 'mate') {
+            sVal = (isWhiteTurn ? (val > 0 ? "+M" : "-M") : (val > 0 ? "-M" : "+M")) + Math.abs(val);
         } else {
-            sVal = (val > 0 ? "-M" : "+M") + Math.abs(val);
+            absoluteCp = relativeMate > 0 ? 1000 : -1000;
         }
-    } else {
+    }
+    
+    if (!isMate || evalUnit === 'cp') {
         let winChance = 2 / (1 + Math.exp(-0.00368208 * absoluteCp)) - 1;
         sc = 50 + (winChance * 50);
-        
-        sVal = (absoluteCp > 0 ? '+' : '') + (absoluteCp / 100).toFixed(1);
+        if (evalUnit === 'cp') sVal = (absoluteCp > 0 ? '+' : '') + (absoluteCp / 100).toFixed(1);
+        else sVal = (absoluteCp > 0 ? "+M" : "-M") + "?";
     }
     
     const evS = document.getElementById('ev-s'), evF = document.getElementById('ev-f'), evL = document.getElementById('ev-l');
     if (evS) evS.textContent = sVal;
-    if (evF) evF.style.width = sc + '%';
+    if (evF) evF.style.width = Math.max(0, Math.min(100, sc)) + '%';
     if (evL) {
-        if (isMate) evL.textContent = "Mate";
+        if (isMate && evalUnit === 'mate') evL.textContent = "Mate";
         else evL.textContent = Math.abs(absoluteCp) < 30 ? TRANSLATIONS[currentLang].even : (absoluteCp > 0 ? 'White' : 'Black');
     }
 }
@@ -1533,8 +1686,23 @@ function triggerEngine() {
 
 /* --- GAME STATE & ROUTING --- */
 let gM = 'pvp', sC = 'white', sT = 10, eElo = 1500, initialGS = null, GS = null, moveHistory =[], currentPly = 0, flp = false, drg = null, gameOn = false, pendDrag = false, isResign = false, gameSaved = false, sel = null, lMvs =[], lastM = null, pend = null, tim = null, tw = 0, tb = 0, lastTk = 0, positionCounts = {}; 
+let winnerColor = null;
 
 function getPosHash(s) { return s.board.join(',') + '|' + s.turn + '|' + s.cast.K + s.cast.Q + s.cast.k + s.cast.q + '|' + s.ep; }
+
+function rebuildPositionCounts(upToPly) {
+    positionCounts = {};
+    let tempGS = initialGS;
+    positionCounts[getPosHash(tempGS)] = 1;
+    for (let i = 0; i < upToPly; i++) {
+        if (moveHistory[i]) {
+            tempGS = moveHistory[i].GS_after;
+            let hash = getPosHash(tempGS);
+            positionCounts[hash] = (positionCounts[hash] || 0) + 1;
+        }
+    }
+}
+
 function go(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById('pg-'+id).classList.add('active'); if(id==='history') renderHistory(); }
 function setM(m, b) { gM = m; document.querySelectorAll('#mseg .sb').forEach(x=>x.classList.remove('on')); b.classList.add('on'); document.getElementById('cr').style.display = m==='pvc'?'block':'none'; document.getElementById('dr').style.display = m==='pvc'?'block':'none'; document.getElementById('names-pvp').style.display = m==='pvp'?'flex':'none'; document.getElementById('names-pvc').style.display = m==='pvc'?'flex':'none'; }
 function setC(c, b) { sC = c; document.querySelectorAll('#cseg .color-btn').forEach(x=>x.classList.remove('on')); b.classList.add('on'); }
@@ -1550,20 +1718,27 @@ function updAvatars() {
   const avTop = document.getElementById('av-top'), avBot = document.getElementById('av-bot');
   let pic = currentUser.avatar || defaultAvatarSVG; 
   if(avTop && avBot) { 
-    avTop.src = getPImg(flp ? 6 : 12); avBot.src = getPImg(flp ? 12 : 6); 
+    avTop.src = getPImg(flp ? 6 : 12); 
+    avBot.src = getPImg(flp ? 12 : 6); 
     if(pic) { 
       let nmTop = document.getElementById('nm-top').textContent, nmBot = document.getElementById('nm-bot').textContent;
       let pNameW = document.getElementById('inp-w-name').value.trim() || TRANSLATIONS[currentLang].whitePlayer;
       let pNameB = document.getElementById('inp-b-name').value.trim() || TRANSLATIONS[currentLang].blackPlayer;
       let engineName = TRANSLATIONS[currentLang].vsEngine;
-      if (gM === 'pvc') { if(nmTop !== engineName) avTop.src = pic; if(nmBot !== engineName) avBot.src = pic; } 
-      else { if(nmTop === pNameW || nmTop === pNameB) avTop.src = pic; if(nmBot === pNameW || nmBot === pNameB) avBot.src = pic; } 
+      if (gM === 'pvc') { 
+        if(nmTop !== engineName && nmTop === currentUser.name) avTop.src = pic; 
+        if(nmBot !== engineName && nmBot === currentUser.name) avBot.src = pic; 
+      } else { 
+        if(nmTop === currentUser.name) avTop.src = pic; 
+        if(nmBot === currentUser.name) avBot.src = pic; 
+      } 
     } 
   } 
 }
 
-function saveGame(resStr, winnerColor) {
+function saveGame(resStr, winnerColorParam) {
   if (gameSaved) return; gameSaved = true; 
+  winnerColor = winnerColorParam;
   let nW = flp ? document.getElementById('nm-top').textContent : document.getElementById('nm-bot').textContent; 
   let nB = flp ? document.getElementById('nm-bot').textContent : document.getElementById('nm-top').textContent; 
   let lightweightMoves = moveHistory.map(m => ({ f: m.mv.f, t: m.mv.t, pr: m.mv.pr, fl: m.mv.fl, san: m.san })); 
@@ -1590,15 +1765,14 @@ function executeDelete() { if (matchToDeleteIndex > -1) { let games = JSON.parse
 
 function viewHistoryGame(idx) {
   let games = JSON.parse(localStorage.getItem('ce_games') || '[]'); let g = games[idx]; if(!g) return; clearInterval(tim); gameOn = false; isResign = false; flp = false;
-  document.getElementById('nm-top').textContent = g.b; document.getElementById('nm-bot').textContent = g.w; document.getElementById('el-top').textContent = ''; document.getElementById('el-bot').textContent = ''; document.getElementById('cap-top').innerHTML = ''; document.getElementById('cap-bot').innerHTML = ''; document.getElementById('timer-top').style.display = 'none'; document.getElementById('timer-bot').style.display = 'none'; document.getElementById('btn-undo').style.display = 'none'; document.getElementById('btn-resign').style.display = 'none';
+  document.getElementById('nm-top').textContent = g.b; document.getElementById('nm-bot').textContent = g.w; document.getElementById('el-top').textContent = ''; document.getElementById('el-bot').textContent = ''; document.getElementById('cap-top').innerHTML = ''; document.getElementById('cap-bot').innerHTML = ''; document.getElementById('timer-top').style.display = 'none'; document.getElementById('timer-bot').style.display = 'none'; document.getElementById('btn-undo').style.display = 'none'; document.getElementById('btn-resign').style.display = 'none'; document.getElementById('btn-draw').style.display = 'none';
   initialGS = CE.init(); GS = initialGS; moveHistory =[]; currentPly = 0;
   if(g.moves && g.moves.length > 0) { g.moves.forEach(m => { let nextGS = CE.apM(GS, m, m.pr); moveHistory.push({ mv: m, san: m.san, GS_after: nextGS, tw: 0, tb: 0 }); GS = nextGS; currentPly++; }); }
+  rebuildPositionCounts(currentPly);
   buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); go('game');
-  // Trigger eval only
   if (aiWorker) { aiWorker.postMessage("stop"); aiWorker.postMessage("position startpos moves " + g.moves.map(m=>m.f+m.t+(m.pr||"")).join(" ")); aiWorker.postMessage("go depth 15"); }
 }
 
-/* FIX 1: Zooming layout calculation */
 function bdSz() { 
   const w = window.innerWidth, h = window.innerHeight; 
   let maxW = document.querySelector('.board-col')?.clientWidth || w;
@@ -1684,8 +1858,48 @@ function renderMoves() {
   msGrid.innerHTML = html; requestAnimationFrame(() => { const container = document.getElementById('ms-container'), active = msGrid.querySelector('.mc'); if (active && container) { const cRect = container.getBoundingClientRect(), aRect = active.getBoundingClientRect(); if (aRect.right > cRect.right || aRect.left < cRect.left) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); } });
 }
 
-function goToPly(ply) { currentPly = ply; if(ply === 0) { GS = initialGS; lastM = null; tw = sT*60; tb = sT*60; } else { GS = moveHistory[ply - 1].GS_after; lastM = moveHistory[ply - 1].mv; tw = moveHistory[ply - 1].tw; tb = moveHistory[ply - 1].tb; } drawP('cb', GS); updUI(); renderMoves(); if(window.updTim) window.updTim(); triggerEngine(); }
-function navPly(dir) { let target = currentPly + dir; if (target < 0) target = 0; if (target > moveHistory.length) target = moveHistory.length; if (target !== currentPly) goToPly(target); }
+function goToPly(ply) { 
+  if (tim) { clearInterval(tim); tim = null; }
+  
+  currentPly = ply; 
+  if(ply === 0) { 
+    GS = initialGS; 
+    lastM = null; 
+    tw = sT*60; 
+    tb = sT*60; 
+  } else { 
+    GS = moveHistory[ply - 1].GS_after; 
+    lastM = moveHistory[ply - 1].mv; 
+    tw = moveHistory[ply - 1].tw; 
+    tb = moveHistory[ply - 1].tb; 
+  } 
+  rebuildPositionCounts(ply);
+  
+  drawP('cb', GS); 
+  updUI(); 
+  renderMoves(); 
+  
+  if (gameOn && ply === moveHistory.length && sT > 0) {
+    lastTk = Date.now();
+    tim = setInterval(window.updTim, 100);
+  }
+  
+  const show = gameOn && ply === moveHistory.length;
+  document.getElementById('btn-undo').style.display = show ? 'flex' : 'none';
+  document.getElementById('btn-resign').style.display = show ? 'flex' : 'none';
+  document.getElementById('btn-draw').style.display = show ? 'flex' : 'none';
+  
+  if(window.updTim) window.updTim(); 
+  triggerEngine(); 
+  updateOpeningName();
+}
+
+function navPly(dir) { 
+  let target = currentPly + dir; 
+  if (target < 0) target = 0; 
+  if (target > moveHistory.length) target = moveHistory.length; 
+  if (target !== currentPly) goToPly(target); 
+}
 
 function execMv(mv, pr=null, isDrag=false) {
   if(currentPly < moveHistory.length) moveHistory = moveHistory.slice(0, currentPly);
@@ -1703,18 +1917,58 @@ function execMv(mv, pr=null, isDrag=false) {
   const chk = CE.inChk(GS, GS.turn), mate = CE.isMate(GS), isCap = mv.fl==='c'||mv.fl==='e';
   if(mate) playSnd('e'); else if(chk) playSnd('k'); else if(isCap) playSnd('c'); else playSnd('m');
   
-  let currentHash = getPosHash(GS); positionCounts[currentHash] = (positionCounts[currentHash] || 0) + 1; let isThreefold = positionCounts[currentHash] >= 3;
+  let currentHash = getPosHash(GS); 
+  positionCounts[currentHash] = (positionCounts[currentHash] || 0) + 1; 
+  let isThreefold = positionCounts[currentHash] >= 3;
   
   updUI(); 
   renderMoves(); 
   
-  let drawReason = ''; let noMoves = CE.legMs(GS).length === 0;
-  if (noMoves && !mate) drawReason = TRANSLATIONS[currentLang].drawStalemate; else if (isThreefold) drawReason = TRANSLATIONS[currentLang].drawRep; else { let pc = 0; for(let i=0; i<64; i++) if(GS.board[i]) pc++; if (pc <= 2) drawReason = TRANSLATIONS[currentLang].drawMaterial; }
+  let drawReason = ''; 
+  let noMoves = CE.legMs(GS).length === 0;
+  if (noMoves && !mate) drawReason = TRANSLATIONS[currentLang].drawStalemate; 
+  else if (isThreefold) drawReason = TRANSLATIONS[currentLang].drawRep; 
+  else if (CE.isInsufficientMaterial(GS)) drawReason = TRANSLATIONS[currentLang].drawMaterial; 
   
-  if(mate || drawReason) { gameOn=false; clearInterval(tim); setTimeout(()=>showEnd(mate, drawReason), 500); return; }
+  if(mate || drawReason) { 
+    gameOn=false; 
+    clearInterval(tim); 
+    setTimeout(()=>showEnd(mate, drawReason), 500); 
+    return; 
+  }
   
   if(currentPly === moveHistory.length && gameOn) {
       triggerEngine();
+  }
+  updateOpeningName();
+}
+
+// FIX: Improved opening name detection and display
+const OPENINGS = {
+  "e2e4 e7e5": "Open Game",
+  "e2e4 c7c5": "Sicilian Defense",
+  "e2e4 e7e6": "French Defense",
+  "e2e4 c7c6": "Caro-Kann",
+  "d2d4 d7d5": "Queen's Pawn Game",
+  "d2d4 g8f6": "Indian Game",
+  "c2c4": "English Opening",
+  "g1f3": "Réti Opening",
+  "b2b3": "Nimzowitsch-Larsen Attack",
+  "f2f4": "Bird's Opening"
+};
+
+function updateOpeningName() {
+  let openingDiv = document.getElementById('opening-name');
+  if (moveHistory.length === 0) {
+    openingDiv.textContent = '';
+    return;
+  }
+  let movesStr = moveHistory.slice(0, Math.min(2, moveHistory.length)).map(m => m.mv.f + m.mv.t).join(" ");
+  let opening = OPENINGS[movesStr] || "";
+  if (opening) {
+    openingDiv.textContent = TRANSLATIONS[currentLang].opening + opening;
+  } else {
+    openingDiv.textContent = '';
   }
 }
 
@@ -1722,7 +1976,7 @@ function startGame() {
   if (!localStorage.getItem('ce_username')) { openProfile(); return; }
   
   initAudio(); if(sC==='random') sC = Math.random()<0.5?'white':'black'; flp = (gM==='pvc' && sC==='black'); initialGS = CE.init(); GS = initialGS; moveHistory =[]; currentPly = 0; lastM = null; gameOn = true; isResign = false; gameSaved = false; positionCounts = {}; positionCounts[getPosHash(GS)] = 1;
-  document.getElementById('flag-top').style.display = 'none'; document.getElementById('flag-bot').style.display = 'none'; document.getElementById('btn-undo').style.display = 'flex'; document.getElementById('btn-resign').style.display = 'flex';
+  document.getElementById('flag-top').style.display = 'none'; document.getElementById('flag-bot').style.display = 'none'; document.getElementById('btn-undo').style.display = 'flex'; document.getElementById('btn-resign').style.display = 'flex'; document.getElementById('btn-draw').style.display = 'flex';
   
   let pNameW = escapeHTML(document.getElementById('inp-w-name').value.trim()) || TRANSLATIONS[currentLang].whitePlayer; 
   let pNameB = escapeHTML(document.getElementById('inp-b-name').value.trim()) || TRANSLATIONS[currentLang].blackPlayer; 
@@ -1749,6 +2003,7 @@ function startGame() {
   if(evS) evS.textContent = "+0.2"; if(evF) evF.style.width = "52%"; if(evL) evL.textContent = TRANSLATIONS[currentLang].even;
 
   triggerEngine();
+  updateOpeningName();
 }
 
 function timeOut(col) { gameOn=false; clearInterval(tim); document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].timeout; document.getElementById('go-s').textContent = (col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins; document.getElementById('go-ov').classList.add('open'); saveGame((col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonTimeout, col==='w'?'b':'w'); }
@@ -1775,13 +2030,89 @@ function updUI() {
 }
 
 function showProm(isDrag, pColor='w') { pendDrag = isDrag; const isW = pColor === 'w', g = document.getElementById('pgrid'); g.innerHTML = '';['q','r','b','n'].forEach(pt => { const pId = isW ? {q:5,r:4,b:3,n:2}[pt] : {q:11,r:10,b:9,n:8}[pt]; const d = document.createElement('div'); d.className='psq2 gpu-accel'; d.style.backgroundImage=`url(${getPImg(pId)})`; d.onclick = () => { document.getElementById('promo-ov').classList.remove('open'); execMv(pend, pt, pendDrag); pend=null; }; g.appendChild(d); }); document.getElementById('promo-ov').classList.add('open'); }
-function undoM() { if(moveHistory.length === 0) return; const step = gM==='pvc' ? 2 : 1, targetPly = Math.max(0, currentPly - step); if (targetPly === currentPly) return; moveHistory = moveHistory.slice(0, targetPly); goToPly(targetPly); if(!gameOn && targetPly < moveHistory.length + step) { gameOn = true; if (sT > 0) { lastTk = Date.now(); tim = setInterval(window.updTim, 100); } document.getElementById('go-ov').classList.remove('open'); } }
+
+function undoM() { 
+  if(!gameOn || currentPly !== moveHistory.length || moveHistory.length === 0) return; 
+  const step = gM==='pvc' ? 2 : 1, targetPly = Math.max(0, currentPly - step); 
+  if (targetPly === currentPly) return; 
+  moveHistory = moveHistory.slice(0, targetPly); 
+  goToPly(targetPly); 
+  if(!gameOn && targetPly < moveHistory.length + step) { 
+    gameOn = true; 
+    if (sT > 0) { lastTk = Date.now(); tim = setInterval(window.updTim, 100); } 
+    document.getElementById('go-ov').classList.remove('open'); 
+  } 
+}
+
 function flipBd() { flp=!flp; buildBd(); updAvatars(); drawP('cb', GS); window.updTim && window.updTim(); updUI(); const nt = document.getElementById('nm-top').textContent; document.getElementById('nm-top').textContent = document.getElementById('nm-bot').textContent; document.getElementById('nm-bot').textContent = nt; const et = document.getElementById('el-top').textContent; document.getElementById('el-top').textContent = document.getElementById('el-bot').textContent; document.getElementById('el-bot').textContent = et; const ft = document.getElementById('flag-top').style.display; document.getElementById('flag-top').style.display = document.getElementById('flag-bot').style.display; document.getElementById('flag-bot').style.display = ft; }
-function resignG() { if(!gameOn) return; isResign = true; gameOn = false; clearInterval(tim); let isBotResigning = (GS.turn === 'w' && !flp) || (GS.turn === 'b' && flp); document.getElementById(isBotResigning ? 'flag-bot' : 'flag-top').style.display = 'block'; document.getElementById('go-t').textContent=TRANSLATIONS[currentLang].resignation; document.getElementById('go-s').textContent=(GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins; document.getElementById('go-ov').classList.add('open'); saveGame((GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonResign, GS.turn==='w'?'b':'w'); }
-function showEnd(mate, drawReason = '') { document.getElementById('go-t').textContent = mate ? TRANSLATIONS[currentLang].checkmate : TRANSLATIONS[currentLang].draw; document.getElementById('go-s').textContent = mate ? ((GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins) : (drawReason || TRANSLATIONS[currentLang].drawGen); document.getElementById('go-ov').classList.add('open'); saveGame(mate ? ((GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonMate) : (drawReason || TRANSLATIONS[currentLang].drawGen), mate ? (GS.turn==='w'?'b':'w') : 'd'); }
+
+function resignG() { 
+  if(!gameOn) return; 
+  isResign = true; gameOn = false; clearInterval(tim); 
+  let isBotResigning = (GS.turn === 'w' && !flp) || (GS.turn === 'b' && flp); 
+  document.getElementById(isBotResigning ? 'flag-bot' : 'flag-top').style.display = 'block'; 
+  document.getElementById('go-t').textContent=TRANSLATIONS[currentLang].resignation; 
+  document.getElementById('go-s').textContent=(GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins; 
+  document.getElementById('go-ov').classList.add('open'); 
+  saveGame((GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonResign, GS.turn==='w'?'b':'w'); 
+}
+
+function offerDraw() {
+  if (!gameOn || currentPly !== moveHistory.length) return;
+  if (gM === 'pvc') {
+    gameOn = false;
+    clearInterval(tim);
+    document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].draw;
+    document.getElementById('go-s').textContent = TRANSLATIONS[currentLang].drawGen;
+    document.getElementById('go-ov').classList.add('open');
+    saveGame(TRANSLATIONS[currentLang].drawGen, 'd');
+  } else {
+    document.getElementById('draw-msg').textContent = TRANSLATIONS[currentLang].drawConfirm;
+    document.getElementById('draw-ov').classList.add('open');
+  }
+}
+
+function closeDrawModal() {
+  document.getElementById('draw-ov').classList.remove('open');
+}
+
+function acceptDraw() {
+  closeDrawModal();
+  gameOn = false;
+  clearInterval(tim);
+  document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].draw;
+  document.getElementById('go-s').textContent = TRANSLATIONS[currentLang].drawGen;
+  document.getElementById('go-ov').classList.add('open');
+  saveGame(TRANSLATIONS[currentLang].drawGen, 'd');
+}
+
+function showEnd(mate, drawReason = '') { 
+  document.getElementById('go-t').textContent = mate ? TRANSLATIONS[currentLang].checkmate : TRANSLATIONS[currentLang].draw; 
+  document.getElementById('go-s').textContent = mate ? ((GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins) : (drawReason || TRANSLATIONS[currentLang].drawGen); 
+  document.getElementById('go-ov').classList.add('open'); 
+  saveGame(mate ? ((GS.turn==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonMate) : (drawReason || TRANSLATIONS[currentLang].drawGen), mate ? (GS.turn==='w'?'b':'w') : 'd'); 
+}
 function closeGO() { document.getElementById('go-ov').classList.remove('open'); if(isResign) { go('home'); GS = null; } }
 
-window.addEventListener('resize', () => { if(document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.isContentEditable)) return; clearTimeout(window.resizeTimeout); window.resizeTimeout = setTimeout(() => { if(document.getElementById('pg-game').classList.contains('active') && GS) { buildBd(); drawP('cb', GS); } }, 150); });
+function shareGame() {
+  if (moveHistory.length === 0) return;
+  let movesStr = moveHistory.map(m => m.mv.f + m.mv.t + (m.mv.pr || "")).join(" ");
+  let dummyLink = `https://chessegy.com/share?moves=${encodeURIComponent(movesStr)}`;
+  navigator.clipboard.writeText(dummyLink).then(() => {
+    alert(TRANSLATIONS[currentLang].shareCopied);
+  });
+}
+
+window.addEventListener('resize', () => { 
+  if(document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.isContentEditable)) return; 
+  clearTimeout(window.resizeTimeout); 
+  window.resizeTimeout = setTimeout(() => { 
+    if(document.getElementById('pg-game').classList.contains('active') && GS) { 
+      buildBd(); 
+      drawP('cb', GS); 
+    } 
+  }, 150); 
+});
 
 window.onload = () => { 
     loadLocalIdentity();
@@ -1798,7 +2129,9 @@ window.onload = () => {
     const savedCoords = localStorage.getItem('ce_coords'); if (savedCoords === '0') { const toggle = document.getElementById('coord-toggle'); if (toggle) toggle.checked = false; document.getElementById('cb-w').classList.add('hide-coords'); document.getElementById('theme-preview').classList.add('hide-coords');}
     
     document.querySelectorAll('.pl-nm, .nm-inp').forEach(el => { el.addEventListener('keydown', e => { if (e.key === 'Enter' && el.tagName !== 'TEXTAREA') { e.preventDefault(); el.blur(); } }); el.addEventListener('pointerdown', e => e.stopPropagation()); });
+    
+    initStockfish();
 };
 </script>
 </body>
-              </html>
+                                                                                                          </html>
