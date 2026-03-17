@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, interactive-widget=overlays-content">
-  <title>Chess Egy · Play & Learn</title>
+  <title>vochess · Play & Learn</title>
   
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Chess Egy">
+  <meta name="apple-mobile-web-app-title" content="vochess">
   <meta name="theme-color" content="#141311">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4cfc8'>♞</text></svg>">
 
@@ -48,8 +48,8 @@
       -webkit-tap-highlight-color: transparent; overscroll-behavior-x: none; position: relative; 
     }
     
-    body[dir="rtl"] { font-family: 'Cairo', sans-serif; }
-    body[dir="rtl"] button, body[dir="rtl"] input, body[dir="rtl"] textarea { font-family: 'Cairo', sans-serif; }
+    body[dir="rtl"] { font-family: 'Cairo', sans-serif; font-size: 1.02rem; }
+    body[dir="rtl"] button, body[dir="rtl"] input, body[dir="rtl"] textarea { font-family: 'Cairo', sans-serif; font-size: 1.02em; }
 
     body[dir="rtl"] .nav-links,
     body[dir="rtl"] .settings-dropdown,
@@ -87,15 +87,17 @@
     /* ==========================================================================
        3. NAVIGATION & LANG TOGGLE
        ========================================================================== */
-    nav { background: var(--bg2); border-bottom: 1px solid var(--border); height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); width: 100%; }
+    nav { background: var(--bg2); border-bottom: 1px solid var(--border); min-height: 70px; height: auto; display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); width: 100%; flex-wrap: wrap; gap: 10px; }
     
     .logo { display: flex; align-items: center; gap: 12px; user-select: none; }
     .logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
     .logo-box { width: 44px; height: 44px; border-radius: 10px; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; border: 2px solid var(--acc); box-shadow: 0 4px 10px hsla(var(--app-hue), 60%, 45%, 0.2); background-color: var(--bg4); cursor: pointer; transition: transform 0.2s var(--spring), border-color 0.2s; }
     .logo-box:hover { border-color: var(--acc-l); transform: scale(1.05); }
     
-    .nav-links { display: flex; gap: 10px; align-items: center; }
-    .nb { background: transparent; color: var(--text2); padding: 8px 16px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative;}
+    .nav-links { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
+    .nb { background: transparent; color: var(--text2); padding: 0 16px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative; height: 42px; box-sizing: border-box; }
+    .nb .icon { margin-right: 6px; }
+    body[dir="rtl"] .nb .icon { margin-right: 0; margin-left: 6px; }
     
     .nb:hover { color: var(--text); background: var(--bg4); }
     .nb.on { color: var(--white); background: var(--acc); box-shadow: 0 4px 12px hsla(var(--app-hue), 60%, 45%, 0.25); }
@@ -110,7 +112,8 @@
       padding: 0 16px; 
       cursor: pointer; 
       border: 1px solid var(--border); 
-      height: 36px; 
+      height: 42px; 
+      box-sizing: border-box;
       color: var(--text2); 
       font-weight: 800; 
       font-size: 0.85rem; 
@@ -124,16 +127,16 @@
       transform: scale(1.05); 
     }
 
-    .settings-dropdown { position: absolute; top: 60px; right: 0; background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); min-width: 220px; overflow: hidden; display: flex; flex-direction: column; transform-origin: top right; transform: scale(0.9) translateY(-10px); opacity: 0; visibility: hidden; transition: transform 0.2s var(--spring), opacity 0.15s ease, visibility 0.15s; z-index: 200; }
+    .settings-dropdown { position: absolute; top: 100%; right: 0; margin-top: 8px; background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); min-width: 220px; overflow: hidden; display: flex; flex-direction: column; transform-origin: top right; transform: scale(0.9) translateY(-10px); opacity: 0; visibility: hidden; transition: transform 0.2s var(--spring), opacity 0.15s ease, visibility 0.15s; z-index: 200; }
     .settings-dropdown.show { transform: scale(1) translateY(0); opacity: 1; visibility: visible; }
-    .settings-dropdown button { display:flex; align-items:center; gap: 12px; background: transparent; color: var(--text); padding: 16px 20px; text-align: left; font-size: 0.95rem; font-weight: 600; border-bottom: 1px solid var(--border);}
+    .settings-dropdown button { display:flex; align-items:center; gap: 12px; background: transparent; color: var(--text); padding: 0 20px; height: 48px; text-align: left; font-size: 0.95rem; font-weight: 600; border-bottom: 1px solid var(--border); box-sizing: border-box; }
     .settings-dropdown button .icon { margin: 0 !important; }
     .settings-dropdown button:hover { background: var(--bg4); color: var(--acc-l); padding-inline-start: 26px; }
 
     /* ==========================================================================
        4. HOME PAGE & DYNAMIC NEWS
        ========================================================================== */
-    .home-container { display: flex; flex-direction: column; flex: 1; height: calc(100vh - 70px); width: 100%; max-width: 100vw; }
+    .home-container { display: flex; flex-direction: column; flex: 1; min-height: 0; width: 100%; max-width: 100vw; }
     .news-wrapper { flex: 1; padding: 32px 24px; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
     .news-wrapper::-webkit-scrollbar { display: none; }
     
@@ -164,7 +167,7 @@
     .news-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.5; }
 
     .play-action-bottom { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.3); z-index: 10; position: sticky; bottom: 0; width: 100%; }
-    .play-btn-huge { display: block; width: 100%; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; padding: 20px; border-radius: 16px; font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; text-align: center; box-shadow: 0 8px 25px hsla(var(--app-hue), 60%, 40%, 0.3); border: 1px solid hsla(var(--app-hue), 70%, 60%, 0.3); transition: transform 0.2s var(--spring), box-shadow 0.2s; }
+    .play-btn-huge { display: flex; align-items: center; justify-content: center; height: 64px; box-sizing: border-box; width: 100%; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; padding: 0 20px; border-radius: 16px; font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; text-align: center; box-shadow: 0 8px 25px hsla(var(--app-hue), 60%, 40%, 0.3); border: 1px solid hsla(var(--app-hue), 70%, 60%, 0.3); transition: transform 0.2s var(--spring), box-shadow 0.2s; }
     .play-btn-huge:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 30px hsla(var(--app-hue), 65%, 50%, 0.4); }
 
     /* ==========================================================================
@@ -177,7 +180,7 @@
     .fl { font-size: 0.85rem; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
     
     .seg { display: grid; gap: 8px; background: var(--bg4); border-radius: 14px; padding: 6px; }
-    .sb { display:flex; align-items:center; justify-content:center; background: transparent; color: var(--text2); padding: 12px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; }
+    .sb { display:flex; align-items:center; justify-content:center; background: transparent; color: var(--text2); padding: 0 12px; height: 46px; box-sizing: border-box; border-radius: 10px; font-size: 0.95rem; font-weight: 700; }
     .sb:hover { color: var(--text); }
     .sb.on { background: var(--bg2); color: var(--text); box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
     
@@ -199,12 +202,14 @@
     .elo-n { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--text); }
     .elo-t { font-size: 0.95rem; color: var(--acc-l); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
     
+    .go-btn { display: flex; align-items: center; justify-content: center; height: 56px; box-sizing: border-box; }
+
     /* ==========================================================================
        6. CHESS BOARD & GAMEPLAY UI
        ========================================================================== */
-    .game-wrap { flex: 1; display: flex; align-items: flex-start; justify-content: center; gap: 40px; padding: 30px 20px; width: 100%; max-width: 1400px; margin: 0 auto; overflow-x: hidden; box-sizing: border-box; flex-wrap: wrap;}
+    .game-wrap { flex: 1; display: flex; align-items: flex-start; justify-content: center; gap: 40px; padding: 30px 20px; width: 100%; max-width: 1400px; margin: 0 auto; box-sizing: border-box; flex-wrap: wrap;}
     
-    .board-col { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; width: 100%; max-width: 100%; flex: 1 1 400px; }
+    .board-col { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; width: 100%; max-width: 100%; flex: 1 1 auto; }
     
     .pbar { background: var(--bg2); border: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; height: 68px; box-sizing: border-box; transition: background-color .15s; width: 100%;}
     .pbar.top { border-radius: 12px 12px 0 0; border-bottom: none; }
@@ -302,7 +307,7 @@
     @media (max-width: 500px) {
       .cbtns { grid-template-columns: repeat(2, 1fr); }
     }
-    .cb2 { display:flex; align-items:center; justify-content:center; gap: 6px; padding: 14px; background: var(--bg4); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s var(--spring); cursor: pointer;}
+    .cb2 { display:flex; align-items:center; justify-content:center; gap: 6px; padding: 0 14px; height: 48px; box-sizing: border-box; background: var(--bg4); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s var(--spring); cursor: pointer;}
     .cb2 .icon { margin: 0 !important; }
     .cb2:hover { background: var(--border2); color: var(--text); box-shadow: var(--shadow-sm); }
     .cb2.danger { color: var(--red); border-color: rgba(230, 80, 80, 0.4); background: rgba(230, 80, 80, 0.1); }
@@ -439,8 +444,8 @@
       font-size: 1rem !important; 
       font-weight: 600; 
       width: 100%; 
-      height: 50px !important; 
-      line-height: 46px !important; 
+      height: 52px !important; 
+      line-height: normal !important; 
       box-sizing: border-box !important; 
       transition: all 0.2s ease; 
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); 
@@ -479,19 +484,19 @@
     .stat-val { font-size: 1.6rem; font-weight: 900; color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1; }
     .stat-lbl { font-size: 0.8rem; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
 
-    #prof-pg-btn { background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border-radius: 14px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 16px; box-shadow: 0 6px 20px hsla(var(--app-hue), 60%, 45%, 0.25); transition: all 0.2s var(--spring); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
+    #prof-pg-btn { height: 56px; box-sizing: border-box; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border-radius: 14px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 0 16px; box-shadow: 0 6px 20px hsla(var(--app-hue), 60%, 45%, 0.25); transition: all 0.2s var(--spring); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
     #prof-pg-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px hsla(var(--app-hue), 60%, 45%, 0.35); }
     #prof-pg-btn:active { transform: translateY(1px); box-shadow: 0 4px 12px hsla(var(--app-hue), 60%, 45%, 0.2); }
 
     /* ==========================================================================
-       12. RESPONSIVE DESIGN (FIXED ZOOM)
+       12. RESPONSIVE DESIGN (FIXED ZOOM & MOBILE)
        ========================================================================== */
     @media (max-width: 1050px) {
       .game-wrap { flex-direction: column; align-items: center; padding: 20px; gap: 20px; }
       .sidebar { width: 100%; flex: 1 1 auto; max-width: 600px; padding: 0; }
     }
     @media (max-height: 600px) and (orientation: landscape) {
-      nav { height: 50px; }
+      nav { min-height: 50px; }
       .logo-box { width: 34px; height: 34px; }
       .game-wrap { flex-direction: row; align-items: flex-start; padding: 10px; gap: 20px; }
       .board-col { width: auto; max-width: 60vh; flex: 1; }
@@ -501,18 +506,21 @@
       .timer { padding: 4px 8px; font-size: 1rem; }
     }
     @media (max-width: 600px) {
-      nav { padding: 0 16px; height: 64px; }
-      .logo span { display: none; } 
-      .nb span { display: inline; font-size: 0.9rem; font-weight: 800;} 
-      .nb .icon { display: none; } 
-      .nb { padding: 8px; }
-      .lang-toggle { width: 76px; height: 32px; }
-      .lang-toggle span { padding: 0; font-size: 0.75rem; }
-      .play-btn-huge { font-size: 1.2rem; padding: 16px; }
+      nav { padding: 12px 16px; }
+      .logo { justify-content: center; width: 100%; margin-bottom: 4px; }
+      .logo span { display: inline; font-size: 1.1rem; }
+      .nav-links { justify-content: center; width: 100%; }
+      .nb span { display: inline; font-size: 0.85rem; font-weight: 800;}
+      .nb .icon { display: inline-block; width: 1.1em; height: 1.1em; margin-right: 4px; }
+      body[dir="rtl"] .nb .icon { margin-right: 0; margin-left: 4px; }
+      .nb { padding: 0 12px; height: auto; min-height: 40px; }
+      .lang-toggle { width: auto; min-width: 60px; height: auto; min-height: 40px; padding: 0 12px; }
+      .lang-toggle span { padding: 0; font-size: 0.85rem; }
+      .play-btn-huge { font-size: 1.2rem; height: auto; min-height: 64px; }
       .news-wrapper { padding: 16px; }
       .setup-wrap, .prof-wrap { padding: 0; align-items: flex-start; }
-      .setup-card, .prof-pg-card { background: transparent; box-shadow: none; border: none; border-radius: 0; padding: 20px 16px; gap: 16px; justify-content: flex-start; min-height: calc(100vh - 64px); }
-      .prof-pg-card::before { display: none; }
+      .setup-card, .prof-pg-card { background: transparent; box-shadow: none; border: none; border-radius: 0; padding: 20px 16px; gap: 16px; justify-content: flex-start; min-height: auto; }
+      .prof-pg-card::before { display: block; }
       .setup-h { font-size: 2.2rem; margin-bottom: 10px; }
       .game-wrap { padding: 10px 0; gap: 12px; } 
       .board-col { width: 100vw; max-width: 100vw; flex: none; }
@@ -552,7 +560,7 @@
     <nav>
       <div class="logo">
         <div class="logo-box" id="main-logo-box" title="Player Profile" onclick="openProfile()"></div>
-        <span>Chess Egy</span>
+        <span>vochess</span>
       </div>
       <div class="nav-links">
         <button class="lang-toggle" onclick="toggleLanguage()" title="Change Language">
@@ -572,7 +580,7 @@
     </nav>
     <div class="home-container">
       <div class="news-wrapper">
-        <div class="hero-h">Chess Egy<span data-i18n="playElegance" style="display:block; color:var(--acc-l); margin-top:8px;">Play with Elegance.</span></div>
+        <div class="hero-h">vochess<span data-i18n="playElegance" style="display:block; color:var(--acc-l); margin-top:8px;">Play with Elegance.</span></div>
         <div class="news-grid" id="dynamic-news-grid"></div>
       </div>
       <div class="play-action-bottom">
@@ -584,7 +592,7 @@
   <!-- PAGE: SETUP -->
   <div id="pg-setup" class="page gpu-accel">
     <nav>
-      <div class="logo"><div class="logo-box setup-logo-box" onclick="openProfile()"></div><span>Chess Egy</span></div>
+      <div class="logo"><div class="logo-box setup-logo-box" onclick="openProfile()"></div><span>vochess</span></div>
       <div class="nav-links">
         <button class="lang-toggle" onclick="toggleLanguage()" title="Change Language">
           <span class="lang-btn-text">AR</span>
@@ -650,7 +658,7 @@
           <input type="range" class="std-range" id="sl-e" min="250" max="3200" value="1500" step="50" oninput="updElo(this.value)">
         </div>
         
-        <button class="go-btn" onclick="startGame()" data-i18n="startGameBtn" style="background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border-radius: 14px; font-weight: 800; text-transform: uppercase; padding: 16px; margin-top: 10px;">Start Game</button>
+        <button class="go-btn" onclick="startGame()" data-i18n="startGameBtn" style="background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border-radius: 14px; font-weight: 800; text-transform: uppercase; padding: 0 16px; margin-top: 10px;">Start Game</button>
       </div>
     </div>
   </div>
@@ -659,10 +667,10 @@
   <div id="pg-game" class="page gpu-accel">
     <nav>
       <div class="logo" style="cursor:pointer;" onclick="window.handleExitMatchClick()">
-        <button class="nb" style="padding: 8px; margin-inline-end: 12px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--bg4);">
-          <svg class="icon exit-icon" viewBox="0 0 24 24"><use href="#ic-exit"></use></svg>
+        <button class="nb" style="padding: 0; margin-inline-end: 12px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--bg4); width: 42px; height: 42px;">
+          <svg class="icon exit-icon" viewBox="0 0 24 24" style="margin: 0;"><use href="#ic-exit"></use></svg>
         </button>
-        <span>Chess Egy</span>
+        <span>vochess</span>
       </div>
       <div class="nav-links"></div>
     </nav>
@@ -735,10 +743,10 @@
                 <div id="mtb" class="ms-grid"></div>
             </div>
             <div style="display: flex; justify-content: space-between; gap: 8px; margin-top: 16px; direction:ltr;">
-               <button class="cb2" style="flex: 1; padding: 10px;" onclick="navPly(-1000)" title="First Move">⏮</button>
-               <button class="cb2" style="flex: 1; padding: 10px;" onclick="navPly(-1)" title="Previous Move">◀</button>
-               <button class="cb2" style="flex: 1; padding: 10px;" onclick="navPly(1)" title="Next Move">▶</button>
-               <button class="cb2" style="flex: 1; padding: 10px;" onclick="navPly(1000)" title="Last Move">⏭</button>
+               <button class="cb2" style="flex: 1;" onclick="navPly(-1000)" title="First Move">⏮</button>
+               <button class="cb2" style="flex: 1;" onclick="navPly(-1)" title="Previous Move">◀</button>
+               <button class="cb2" style="flex: 1;" onclick="navPly(1)" title="Next Move">▶</button>
+               <button class="cb2" style="flex: 1;" onclick="navPly(1000)" title="Last Move">⏭</button>
             </div>
           </div>
         </div>
@@ -757,7 +765,7 @@
   <!-- PAGE: HISTORY -->
   <div id="pg-history" class="page gpu-accel">
     <nav>
-      <div class="logo"><div class="logo-box hist-logo-box" onclick="openProfile()"></div><span>Chess Egy</span></div>
+      <div class="logo"><div class="logo-box hist-logo-box" onclick="openProfile()"></div><span>vochess</span></div>
       <div class="nav-links">
         <button class="lang-toggle" onclick="toggleLanguage()" title="Change Language">
           <span class="lang-btn-text">AR</span>
@@ -783,7 +791,7 @@
   <!-- PAGE: SETTINGS -->
   <div id="pg-settings" class="page gpu-accel">
     <nav>
-      <div class="logo"><div class="logo-box set-logo-box" onclick="openProfile()"></div><span>Chess Egy</span></div>
+      <div class="logo"><div class="logo-box set-logo-box" onclick="openProfile()"></div><span>vochess</span></div>
       <div class="nav-links">
         <button class="lang-toggle" onclick="toggleLanguage()" title="Change Language">
           <span class="lang-btn-text">AR</span>
@@ -845,7 +853,7 @@
           </div>
         </div>
 
-        <button class="go-btn" style="width:100%; margin-top:40px; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border-radius: 14px; font-weight: 800; text-transform: uppercase; padding: 16px;" onclick="navPlay()" data-i18n="resumePlay">Resume / Play</button>
+        <button class="go-btn" style="width:100%; margin-top:40px; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border-radius: 14px; font-weight: 800; text-transform: uppercase; padding: 0 16px;" onclick="navPlay()" data-i18n="resumePlay">Resume / Play</button>
       </div>
     </div>
   </div>
@@ -853,7 +861,7 @@
   <!-- PAGE: PROFILE -->
   <div id="pg-profile" class="page gpu-accel">
     <nav>
-      <div class="logo"><div class="logo-box profile-logo-box" onclick="openProfile()"></div><span>Chess Egy</span></div>
+      <div class="logo"><div class="logo-box profile-logo-box" onclick="openProfile()"></div><span>vochess</span></div>
       <div class="nav-links">
         <button class="lang-toggle" onclick="toggleLanguage()" title="Change Language">
           <span class="lang-btn-text">AR</span>
@@ -1008,7 +1016,7 @@
               </div>
           </div>
       </div>
-      <button class="cb2" style="width:100%; margin-top:20px; padding: 14px;" onclick="closeAudio()" data-i18n="done">Done</button>
+      <button class="cb2" style="width:100%; margin-top:20px;" onclick="closeAudio()" data-i18n="done">Done</button>
     </div>
   </div>
 
@@ -1737,6 +1745,7 @@ function initStockfish() {
         };
         
         aiWorker.postMessage("uci");
+        aiWorker.postMessage("setoption name MultiPV value 1");
         aiWorker.postMessage("isready");
     } catch(err) {
         console.error("Stockfish Failed to load:", err);
@@ -1795,7 +1804,7 @@ function triggerEngine() {
         
         aiWorker.postMessage("go movetime " + Math.floor(thinkTime));
     } else if (gameOn) {
-        aiWorker.postMessage("go depth 15");
+        aiWorker.postMessage("go infinite");
     }
 }
 
@@ -1886,16 +1895,22 @@ function viewHistoryGame(idx) {
   rebuildPositionCounts(currentPly);
   buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); 
   go('game');
-  if (aiWorker) { aiWorker.postMessage("stop"); aiWorker.postMessage("position startpos moves " + g.moves.map(m=>m.f+m.t+(m.pr||"")).join(" ")); aiWorker.postMessage("go depth 15"); }
+  if (aiWorker) { aiWorker.postMessage("stop"); aiWorker.postMessage("position startpos moves " + g.moves.map(m=>m.f+m.t+(m.pr||"")).join(" ")); aiWorker.postMessage("go infinite"); }
 }
 
 function bdSz() { 
   const w = window.innerWidth, h = window.innerHeight; 
-  let maxW = document.querySelector('.board-col')?.clientWidth || w;
   if(h < 600 && w > h) return Math.floor(h - 40); 
-  if(w <= 600) return w; 
-  let sz = w <= 950 ? Math.min(maxW, h - 240) : Math.max(400, Math.floor(Math.min(maxW, h - 140)));
-  return Math.min(sz, 800); 
+  if(w <= 600) return w - 20; 
+  
+  let availW;
+  if (w > 1050) {
+     availW = w - 320 - 40 - 60; 
+  } else {
+     availW = w - 40; 
+  }
+  let sz = Math.min(availW, h - 180); 
+  return Math.max(300, Math.min(sz, 800)); 
 }
 
 function buildBd() {
@@ -2072,16 +2087,91 @@ function execMv(mv, pr=null, isDrag=false) {
 }
 
 const OPENINGS = {
+  "e2e4": "King's Pawn Opening",
+  "d2d4": "Queen's Pawn Opening",
+  "c2c4": "English Opening",
+  "g1f3": "Réti Opening",
+  "f2f4": "Bird's Opening",
+  "b2b3": "Nimzowitsch-Larsen Attack",
+  "b2b4": "Polish Opening",
+  "g2g3": "Benko's Opening",
   "e2e4 e7e5": "Open Game",
   "e2e4 c7c5": "Sicilian Defense",
   "e2e4 e7e6": "French Defense",
-  "e2e4 c7c6": "Caro-Kann",
+  "e2e4 c7c6": "Caro-Kann Defense",
+  "e2e4 d7d6": "Pirc Defense",
+  "e2e4 d7d5": "Scandinavian Defense",
+  "e2e4 g8f6": "Alekhine's Defense",
+  "e2e4 g7g6": "Modern Defense",
+  "e2e4 b7b6": "Owen Defense",
+  "e2e4 a7a6": "St. George Defense",
+  "e2e4 b8c6": "Nimzowitsch Defense",
   "d2d4 d7d5": "Queen's Pawn Game",
-  "d2d4 g8f6": "Indian Game",
-  "c2c4": "English Opening",
-  "g1f3": "Réti Opening",
-  "b2b3": "Nimzowitsch-Larsen Attack",
-  "f2f4": "Bird's Opening"
+  "d2d4 g8f6": "Indian Defense",
+  "d2d4 f7f5": "Dutch Defense",
+  "d2d4 e7e6": "Horwitz Defense",
+  "d2d4 d7d6": "Wade Defense",
+  "d2d4 c7c5": "Old Benoni Defense",
+  "c2c4 e7e5": "English Opening: King's English",
+  "c2c4 c7c5": "English Opening: Symmetrical",
+  "c2c4 g8f6": "English Opening: Anglo-Indian",
+  "e2e4 e7e5 g1f3": "King's Knight Opening",
+  "e2e4 e7e5 g1f3 b8c6": "King's Knight",
+  "e2e4 e7e5 g1f3 b8c6 f1b5": "Ruy Lopez",
+  "e2e4 e7e5 g1f3 b8c6 f1c4": "Italian Game",
+  "e2e4 e7e5 g1f3 b8c6 f1c4 f8c5": "Giuoco Piano",
+  "e2e4 e7e5 g1f3 b8c6 f1c4 g8f6": "Two Knights Defense",
+  "e2e4 e7e5 g1f3 b8c6 d2d4": "Scotch Game",
+  "e2e4 e7e5 g1f3 b8c6 c2c3": "Ponziani Opening",
+  "e2e4 e7e5 g1f3 b8c6 b1c3 g8f6": "Four Knights Game",
+  "e2e4 e7e5 g1f3 g8f6": "Petrov's Defense",
+  "e2e4 e7e5 f2f4": "King's Gambit",
+  "e2e4 e7e5 f2f4 e5f4": "King's Gambit Accepted",
+  "e2e4 e7e5 f2f4 d7d5": "Falkbeer Countergambit",
+  "e2e4 e7e5 b1c3": "Vienna Game",
+  "e2e4 e7e5 f1c4": "Bishop's Opening",
+  "e2e4 e7e5 d2d4": "Center Game",
+  "e2e4 e7e5 d2d4 e5d4 d1d4": "Center Game",
+  "e2e4 c7c5 g1f3": "Sicilian Defense",
+  "e2e4 c7c5 g1f3 d7d6": "Sicilian Defense",
+  "e2e4 c7c5 g1f3 d7d6 d2d4 c5d4 f3d4 g8f6 b1c3 a7a6": "Sicilian: Najdorf",
+  "e2e4 c7c5 g1f3 b8c6": "Sicilian Defense: Old Sicilian",
+  "e2e4 c7c5 g1f3 e7e6": "Sicilian Defense: French",
+  "e2e4 c7c5 b1c3": "Sicilian Defense: Closed",
+  "e2e4 c7c5 c2c3": "Sicilian Defense: Alapin",
+  "e2e4 e7e6 d2d4 d7d5": "French Defense",
+  "e2e4 e7e6 d2d4 d7d5 b1c3": "French Defense: Paulsen",
+  "e2e4 e7e6 d2d4 d7d5 e4e5": "French Defense: Advance",
+  "e2e4 e7e6 d2d4 d7d5 b1d2": "French Defense: Tarrasch",
+  "e2e4 e7e6 d2d4 d7d5 e4d5": "French Defense: Exchange",
+  "e2e4 c7c6 d2d4 d7d5": "Caro-Kann Defense",
+  "e2e4 c7c6 d2d4 d7d5 e4e5": "Caro-Kann: Advance",
+  "e2e4 c7c6 d2d4 d7d5 e4d5 c6d5 c2c4": "Caro-Kann: Panov Attack",
+  "e2e4 d7d6 d2d4 g8f6 b1c3": "Pirc Defense",
+  "e2e4 g7g6 d2d4 f8g7": "Modern Defense",
+  "e2e4 d7d5 e4d5 d1d5 b1c3": "Scandinavian Defense",
+  "e2e4 g8f6 e4e5 f6d5 d2d4 d7d6 c2c4": "Alekhine's Defense",
+  "d2d4 d7d5 c2c4": "Queen's Gambit",
+  "d2d4 d7d5 c2c4 d5c4": "Queen's Gambit Accepted",
+  "d2d4 d7d5 c2c4 e7e6": "Queen's Gambit Declined",
+  "d2d4 d7d5 c2c4 c7c6": "Slav Defense",
+  "d2d4 d7d5 c2c4 e7e6 b1c3 g8f6": "Queen's Gambit Declined",
+  "d2d4 d7d5 g1f3": "Queen's Pawn Game: Zukertort",
+  "d2d4 d7d5 c1f4": "London System",
+  "d2d4 g8f6 c2c4 g7g6": "King's Indian Defense",
+  "d2d4 g8f6 c2c4 g7g6 b1c3 d7d5": "Grünfeld Defense",
+  "d2d4 g8f6 c2c4 e7e6": "Indian Defense",
+  "d2d4 g8f6 c2c4 e7e6 b1c3 f8b4": "Nimzo-Indian Defense",
+  "d2d4 g8f6 c2c4 e7e6 g1f3 b7b6": "Queen's Indian Defense",
+  "d2d4 g8f6 c2c4 e7e6 g1f3 d7d5": "Queen's Gambit Declined",
+  "d2d4 g8f6 c2c4 c7c5": "Benoni Defense",
+  "d2d4 g8f6 c2c4 c7c5 d4d5": "Benoni Defense: Modern",
+  "d2d4 g8f6 c2c4 c7c5 d4d5 b7b5": "Benko Gambit",
+  "d2d4 f7f5 c2c4": "Dutch Defense",
+  "c2c4 e7e5 b1c3 b8c6 g1f3 g8f6": "English: Four Knights",
+  "c2c4 c7c5 b1c3 b8c6": "English: Symmetrical",
+  "g1f3 d7d5 d2d4": "Réti Opening",
+  "g1f3 d7d5 c2c4": "Réti Opening: Réti Gambit"
 };
 
 function updateOpeningName() {
@@ -2090,11 +2180,17 @@ function updateOpeningName() {
     openingDiv.textContent = '';
     return;
   }
-  let movesStr = moveHistory.slice(0, Math.min(2, moveHistory.length)).map(m => m.mv.f + m.mv.t).join(" ");
-  let opening = OPENINGS[movesStr] || "";
-  if (opening) {
-    openingDiv.textContent = TRANSLATIONS[currentLang].opening + opening;
-  } else {
+  let bestMatch = "";
+  for (let i = Math.min(12, moveHistory.length); i > 0; i--) {
+    let movesStr = moveHistory.slice(0, i).map(m => m.mv.f + m.mv.t).join(" ");
+    if (OPENINGS[movesStr]) {
+      bestMatch = OPENINGS[movesStr];
+      break;
+    }
+  }
+  if (bestMatch) {
+    openingDiv.textContent = TRANSLATIONS[currentLang].opening + bestMatch;
+  } else if (moveHistory.length === 1) {
     openingDiv.textContent = '';
   }
 }
