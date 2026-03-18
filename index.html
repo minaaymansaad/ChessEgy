@@ -53,19 +53,9 @@
 
     body[dir="rtl"] .nav-links,
     body[dir="rtl"] .settings-dropdown,
-    body[dir="rtl"] .nb {
-      direction: rtl;
-    }
-    body[dir="rtl"] .logo span {
-      margin-right: 12px;
-      margin-left: 0;
-    }
-    body[dir="rtl"] .settings-dropdown {
-      transform-origin: top left;
-      right: auto;
-      left: 0;
-    }
-    
+    body[dir="rtl"] .nb { direction: rtl; }
+    body[dir="rtl"] .logo span { margin-right: 12px; margin-left: 0; }
+    body[dir="rtl"] .settings-dropdown { transform-origin: top left; right: auto; left: 0; }
     body[dir="rtl"] .exit-icon { transform: scaleX(-1); }
 
     button, input, textarea { outline: none; border: none; font-family: inherit; }
@@ -104,28 +94,12 @@
     body.light-mode .nb.on { color: #fff; }
 
     .lang-toggle { 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      background: var(--bg4); 
-      border-radius: 12px; 
-      padding: 0 16px; 
-      cursor: pointer; 
-      border: 1px solid var(--border); 
-      height: 42px; 
-      box-sizing: border-box;
-      color: var(--text2); 
-      font-weight: 800; 
-      font-size: 0.85rem; 
-      transition: all 0.2s var(--spring); 
-      white-space: nowrap;
+      display: flex; align-items: center; justify-content: center; background: var(--bg4); 
+      border-radius: 12px; padding: 0 16px; cursor: pointer; border: 1px solid var(--border); 
+      height: 42px; box-sizing: border-box; color: var(--text2); font-weight: 800; 
+      font-size: 0.85rem; transition: all 0.2s var(--spring); white-space: nowrap;
     }
-    .lang-toggle:hover { 
-      color: var(--white); 
-      background: var(--bg3); 
-      border-color: var(--acc-l); 
-      transform: scale(1.05); 
-    }
+    .lang-toggle:hover { color: var(--white); background: var(--bg3); border-color: var(--acc-l); transform: scale(1.05); }
 
     .settings-dropdown { position: absolute; top: 100%; right: 0; margin-top: 8px; background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); min-width: 220px; overflow: hidden; display: flex; flex-direction: column; transform-origin: top right; transform: scale(0.9) translateY(-10px); opacity: 0; visibility: hidden; transition: transform 0.2s var(--spring), opacity 0.15s ease, visibility 0.15s; z-index: 200; }
     .settings-dropdown.show { transform: scale(1) translateY(0); opacity: 1; visibility: visible; }
@@ -245,22 +219,16 @@
       overflow: hidden; 
     }
     .eval-container.hidden { 
-      max-height: 0; 
-      opacity: 0; 
-      padding-top: 0; 
-      padding-bottom: 0; 
-      margin-top: 0; 
-      margin-bottom: 0; 
-      border: none; 
+      max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0; border: none; 
     }
     
     .eval-bar-track { height: 16px; width: 100%; background: #2b2b2b; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.5); display: flex; direction: ltr !important;}
-    .eval-bar-fill { height: 100%; background: #ffffff; transition: width 0.3s var(--smooth); width: 50%; }
+    .eval-bar-fill { height: 100%; background: #ffffff; transition: width 0.15s cubic-bezier(0.4, 0, 0.2, 1); width: 50%; }
 
-    #cb-w { position: relative; overflow: hidden; filter: brightness(var(--board-bright)) hue-rotate(var(--board-hue)); box-shadow: var(--shadow-lg); contain: layout style; touch-action: none; direction: ltr !important; max-width: 100%; }
+    #cb-w { position: relative; overflow: hidden; filter: brightness(var(--board-bright)) hue-rotate(var(--board-hue)); box-shadow: var(--shadow-lg); contain: layout style; touch-action: none; direction: ltr !important; width: 100%; aspect-ratio: 1; }
     .hide-coords .co { display: none !important; }
 
-    #cb, .theme-preview { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); user-select: none; -webkit-user-select: none; position: relative; touch-action: none; direction: ltr !important;}
+    #cb, .theme-preview { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); user-select: none; -webkit-user-select: none; position: relative; touch-action: none; direction: ltr !important; width: 100%; height: 100%;}
     #cb { contain: strict; }
     
     .theme-preview { width: 100%; max-width: 320px; aspect-ratio: 1; border: 2px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); background-color: var(--bg3); margin: 0 auto; filter: brightness(var(--board-bright)) hue-rotate(var(--board-hue)); transition: filter 0.2s ease; }
@@ -314,18 +282,9 @@
     .cb2.danger:hover { background: var(--red); color: #fff; box-shadow: 0 4px 12px rgba(230, 80, 80, 0.3); }
 
     #opening-name { 
-      font-size: 0.8rem; 
-      margin-top: 6px; 
-      color: var(--acc-l); 
-      text-align: center; 
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      opacity: 0.9;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-      padding: 0 5px;
+      font-size: 0.8rem; margin-top: 6px; color: var(--acc-l); text-align: center; 
+      font-weight: 600; letter-spacing: 0.5px; opacity: 0.9; white-space: nowrap; 
+      overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 5px;
     }
 
     /* ==========================================================================
@@ -436,34 +395,16 @@
     .prof-avatar-edit:hover .upload-icon { opacity: 1; transform: scale(1.1); }
 
     .nm-inp { 
-      background: var(--bg4); 
-      border: 2px solid transparent; 
-      color: var(--text); 
-      padding: 0 18px !important; 
-      border-radius: 14px; 
-      font-size: 1rem !important; 
-      font-weight: 600; 
-      width: 100%; 
-      height: 52px !important; 
-      line-height: normal !important; 
-      box-sizing: border-box !important; 
-      transition: all 0.2s ease; 
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); 
-      font-family: inherit;
+      background: var(--bg4); border: 2px solid transparent; color: var(--text); padding: 0 18px !important; 
+      border-radius: 14px; font-size: 1rem !important; font-weight: 600; width: 100%; height: 52px !important; 
+      line-height: normal !important; box-sizing: border-box !important; transition: all 0.2s ease; 
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); font-family: inherit;
     }
     .nm-inp:focus { border-color: var(--acc-l); background: var(--bg2); box-shadow: 0 0 0 4px hsla(var(--app-hue), 60%, 55%, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); outline: none; }
     .nm-inp:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    /* Validation Error Styles */
     .nm-inp.error { border-color: var(--red) !important; background: rgba(230,80,80,0.05) !important; box-shadow: 0 0 0 4px rgba(230,80,80,0.15), inset 0 2px 4px rgba(0,0,0,0.02) !important; }
 
-    textarea.nm-inp {
-      padding: 14px 18px !important;
-      height: auto !important;
-      line-height: 1.5 !important;
-      min-height: 100px !important;
-      background-image: none !important; 
-    }
+    textarea.nm-inp { padding: 14px 18px !important; height: auto !important; line-height: 1.5 !important; min-height: 100px !important; background-image: none !important; }
     textarea.nm-inp::-webkit-resizer { display: none; }
 
     .fg { display: flex; flex-direction: column; gap: 8px; transition: transform 0.2s var(--spring); }
@@ -492,7 +433,7 @@
        12. RESPONSIVE DESIGN (FIXED ZOOM & MOBILE)
        ========================================================================== */
     @media (max-width: 1050px) {
-      .game-wrap { flex-direction: column; align-items: center; padding: 20px; gap: 20px; }
+      .game-wrap { flex-direction: column; align-items: center; padding: 20px; gap: 20px; overflow-x: hidden; }
       .sidebar { width: 100%; flex: 1 1 auto; max-width: 600px; padding: 0; }
     }
     @media (max-height: 600px) and (orientation: landscape) {
@@ -522,12 +463,15 @@
       .setup-card, .prof-pg-card { background: transparent; box-shadow: none; border: none; border-radius: 0; padding: 20px 16px; gap: 16px; justify-content: flex-start; min-height: auto; }
       .prof-pg-card::before { display: block; }
       .setup-h { font-size: 2.2rem; margin-bottom: 10px; }
-      .game-wrap { padding: 10px 0; gap: 12px; } 
-      .board-col { width: 100vw; max-width: 100vw; flex: none; }
-      .pbar { border-radius: 0; border-left: none; border-right: none; }
-      #cb-w { border-radius: 0; border-left: none; border-right: none; width: 100vw !important;}
-      .eval-container { width: 100vw !important; padding: 0;}
+      
+      /* Mobile Chess Board Fixes */
+      .game-wrap { padding: 10px; gap: 12px; width: 100vw; box-sizing: border-box; overflow-x: hidden; } 
+      .board-col { width: 100%; max-width: 100%; flex: none; margin: 0; padding: 0; }
+      .pbar { border-radius: 0; border-left: none; border-right: none; width: 100% !important; box-sizing: border-box; }
+      #cb-w { border-radius: 0; border-left: none; border-right: none; width: 100% !important; max-width: 100%; box-sizing: border-box; }
+      .eval-container { width: 100% !important; padding: 0; box-sizing: border-box; }
       .eval-bar-track { border-radius: 0; }
+      
       .nbox-content { padding: 20px; }
       .co { font-size: 0.6rem; }
     }
@@ -882,7 +826,7 @@
       <div class="prof-pg-card">
         <div class="prof-header">
           <h2 id="prof-pg-title" data-i18n="authTitle">Welcome</h2>
-          <p id="prof-pg-sub" data-i18n="authSub">Create your unique player identity</p>
+          <p id="prof-pg-sub" data-i18n="authSub">Create your player identity</p>
         </div>
 
         <div class="prof-avatar-edit" id="prof-pg-avatar" onclick="document.getElementById('prof-pg-upload').click()">
@@ -906,10 +850,10 @@
         </div>
 
         <div class="fg" style="margin-bottom: 16px;" dir="auto">
-          <label class="fl" data-i18n="authName">Display Name</label>
+          <label class="fl" data-i18n="authName">Name</label>
           <input type="text" id="prof-pg-name" class="nm-inp" placeholder="e.g. Ahmed Ali" dir="auto" maxlength="15">
           <div id="prof-name-error" class="err-msg"></div>
-          <div class="help-msg" data-i18n="nameHelp">Can be changed once for free.</div>
+          <div class="help-msg" data-i18n="nameHelp">Name can only be changed once.</div>
         </div>
 
         <div class="fg" style="margin-bottom: 16px;" dir="auto">
@@ -1061,7 +1005,7 @@ const TRANSLATIONS = {
     drawRep: "Draw by Repetition", drawMaterial: "Draw by Insufficient Material", drawGen: "Game ended in a draw.", checkmate: "Checkmate",
     draw: "Draw", timeout: "Timeout", resignation: "Resignation", beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced", master: "Master",
     wins: "wins!", wood: "Classic Wood", green: "Tourney Green", marble: "Royal Marble", dark: "Midnight Violet", pharaoh: "Pharaonic Blue", ruby: "Ruby Red",
-    authTitle: "Welcome", authSub: "Create your unique player identity", authName: "Display Name", authUsername: "Username", authStart: "Save Identity",
+    authTitle: "Welcome", authSub: "Create your player identity", authName: "Name", authUsername: "Username", authStart: "Save Identity",
     statMatches: "Matches", statWins: "Wins", statRate: "Win Rate", authEdit: "Edit Identity",
     nameHelp: "Name can only be changed once.", usernameHelp: "Letters & Numbers only. Cannot be changed later.",
     errUserEmpty: "Username cannot be empty", errUserRegex: "3 to 15 characters, letters & numbers only.",
@@ -1893,23 +1837,32 @@ function viewHistoryGame(idx) {
   initialGS = CE.init(); GS = initialGS; moveHistory =[]; currentPly = 0;
   if(g.moves && g.moves.length > 0) { g.moves.forEach(m => { let nextGS = CE.apM(GS, m, m.pr); moveHistory.push({ mv: m, san: m.san, GS_after: nextGS, tw: 0, tb: 0 }); GS = nextGS; currentPly++; }); }
   rebuildPositionCounts(currentPly);
+  
+  // Clear Eval UI safely
+  document.getElementById('ev-s').textContent = "+0.0";
+  document.getElementById('ev-f').style.width = "50%";
+  document.getElementById('ev-l').textContent = TRANSLATIONS[currentLang].even;
+  
+  if (aiWorker) { 
+      aiWorker.postMessage("stop"); 
+      aiWorker.postMessage("ucinewgame"); 
+  }
+  
   buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); 
   go('game');
-  if (aiWorker) { aiWorker.postMessage("stop"); aiWorker.postMessage("position startpos moves " + g.moves.map(m=>m.f+m.t+(m.pr||"")).join(" ")); aiWorker.postMessage("go infinite"); }
+  if (aiWorker) { 
+      aiWorker.postMessage("position startpos moves " + g.moves.map(m=>m.f+m.t+(m.pr||"")).join(" ")); 
+      aiWorker.postMessage("go infinite"); 
+  }
 }
 
 function bdSz() { 
   const w = window.innerWidth, h = window.innerHeight; 
-  if(h < 600 && w > h) return Math.floor(h - 40); 
   if(w <= 600) return w - 20; 
   
-  let availW;
-  if (w > 1050) {
-     availW = w - 320 - 40 - 60; 
-  } else {
-     availW = w - 40; 
-  }
-  let sz = Math.min(availW, h - 180); 
+  let availW = w > 1050 ? w - 320 - 40 - 60 : w - 40; 
+  let availH = h - 180; 
+  let sz = Math.min(availW, availH); 
   return Math.max(300, Math.min(sz, 800)); 
 }
 
@@ -2229,15 +2182,23 @@ function startGame() {
   
   if(sT>0) { lastTk=Date.now(); tim = setInterval(window.updTim, 100); } 
   document.getElementById('timer-top').style.display = sT>0?'block':'none'; document.getElementById('timer-bot').style.display = sT>0?'block':'none';
+  
+  // Clear Eval UI safely immediately before starting
+  document.getElementById('ev-s').textContent = "+0.0";
+  document.getElementById('ev-f').style.width = "50%";
+  document.getElementById('ev-l').textContent = TRANSLATIONS[currentLang].even;
+  
+  if (aiWorker) { 
+      aiWorker.postMessage("stop");
+      aiWorker.postMessage("ucinewgame"); 
+  }
+  
   buildBd(); updAvatars(); drawP('cb', GS); updUI(); renderMoves(); 
   
   document.getElementById('eng-panel').classList.remove('hidden'); evalVisible = true;
   document.querySelectorAll('.use-eval-icon').forEach(ic => ic.setAttribute('href', '#ic-eye'));
   
   go('game'); 
-  
-  const evS = document.getElementById('ev-s'), evF = document.getElementById('ev-f'), evL = document.getElementById('ev-l');
-  if(evS) evS.textContent = "+0.2"; if(evF) evF.style.width = "52%"; if(evL) evL.textContent = TRANSLATIONS[currentLang].even;
 
   triggerEngine();
   updateOpeningName();
