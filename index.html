@@ -2,8 +2,11 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, interactive-widget=overlays-content">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>vochess · Play & Learn</title>
+  
+  <!-- Content Security Policy (CSP) for security -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; font-src https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; worker-src 'self' blob:; connect-src 'self'">
   
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
@@ -223,7 +226,7 @@
     }
     
     .eval-bar-track { height: 16px; width: 100%; background: #2b2b2b; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.5); display: flex; direction: ltr !important;}
-    .eval-bar-fill { height: 100%; background: #ffffff; transition: width 0.15s cubic-bezier(0.4, 0, 0.2, 1); width: 50%; }
+    .eval-bar-fill { height: 100%; background: #ffffff; transition: width 0.1s cubic-bezier(0.2, 0.8, 0.2, 1); width: 50%; }
 
     #cb-w { position: relative; overflow: hidden; filter: brightness(var(--board-bright)) hue-rotate(var(--board-hue)); box-shadow: var(--shadow-lg); contain: layout style; touch-action: none; direction: ltr !important; width: 100%; aspect-ratio: 1; }
     .hide-coords .co { display: none !important; }
@@ -395,10 +398,15 @@
     .prof-avatar-edit:hover .upload-icon { opacity: 1; transform: scale(1.1); }
 
     .nm-inp { 
-      background: var(--bg4); border: 2px solid transparent; color: var(--text); padding: 0 18px !important; 
-      border-radius: 14px; font-size: 1rem !important; font-weight: 600; width: 100%; height: 52px !important; 
-      line-height: normal !important; box-sizing: border-box !important; transition: all 0.2s ease; 
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); font-family: inherit;
+      background: var(--bg4); border: 2px solid transparent; color: var(--text); 
+      padding: 0 1rem; border-radius: 14px; font-size: 1rem; font-weight: 600; 
+      width: 100%; height: 52px; line-height: normal; box-sizing: border-box; 
+      transition: all 0.2s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); 
+      font-family: inherit;
+    }
+    body[dir="rtl"] .nm-inp {
+      font-size: 1rem;
+      font-family: 'Cairo', sans-serif;
     }
     .nm-inp:focus { border-color: var(--acc-l); background: var(--bg2); box-shadow: 0 0 0 4px hsla(var(--app-hue), 60%, 55%, 0.15), inset 0 2px 4px rgba(0,0,0,0.02); outline: none; }
     .nm-inp:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -406,6 +414,20 @@
 
     textarea.nm-inp { padding: 14px 18px !important; height: auto !important; line-height: 1.5 !important; min-height: 100px !important; background-image: none !important; }
     textarea.nm-inp::-webkit-resizer { display: none; }
+
+    @media (max-width: 600px) {
+      .nm-inp {
+        font-size: 0.95rem;
+        padding: 0 0.9rem;
+        height: 48px;
+      }
+      body[dir="rtl"] .nm-inp {
+        font-size: 0.95rem;
+      }
+      .prof-pg-card {
+        padding: 1.5rem 1rem;
+      }
+    }
 
     .fg { display: flex; flex-direction: column; gap: 8px; transition: transform 0.2s var(--spring); }
     .fg:focus-within { transform: translateX(4px); }
@@ -498,6 +520,9 @@
       <g id="ic-exit"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></g>
     </defs>
   </svg>
+
+  <!-- Attribution for used resources (Lichess pieces & Stockfish) -->
+  <!-- Pieces: https://github.com/lichess-org/lila under GPL-3.0, Stockfish: https://stockfishchess.org/ under GPL-3.0 -->
 
   <!-- PAGE: HOME -->
   <div id="pg-home" class="page active gpu-accel">
@@ -634,7 +659,7 @@
         <!-- Top Player -->
         <div class="pbar top" id="pb-top">
           <div class="pl-l">
-            <img class="pl-av" id="av-top" src="" alt="">
+            <img class="pl-av" id="av-top" src="" alt="Player avatar">
             <div>
               <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <div class="pl-nm" id="nm-top" dir="auto">Black</div>
@@ -653,7 +678,7 @@
         <!-- Bottom Player -->
         <div class="pbar bot" id="pb-bot">
           <div class="pl-l">
-            <img class="pl-av" id="av-bot" src="" alt="">
+            <img class="pl-av" id="av-bot" src="" alt="Player avatar">
             <div>
               <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <div class="pl-nm" id="nm-bot" dir="auto">White</div>
@@ -832,7 +857,7 @@
         <div class="prof-avatar-edit" id="prof-pg-avatar" onclick="document.getElementById('prof-pg-upload').click()">
           <svg class="upload-icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
         </div>
-        <input type="file" id="prof-pg-upload" style="display:none" accept="image/*" onchange="previewProfAvatar(event)">
+        <input type="file" id="prof-pg-upload" style="display:none" accept="image/jpeg, image/png, image/webp, image/gif" onchange="previewProfAvatar(event)">
 
         <div class="stats-grid" id="prof-pg-stats" style="display: none;">
           <div class="stat-card">
@@ -1043,6 +1068,22 @@ const TRANSLATIONS = {
 let currentLang = localStorage.getItem('ce_lang') || (navigator.language.startsWith('ar') ? 'ar' : 'en');
 const defaultAvatarSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32' fill='%23a39e95'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
 
+// ==================== تحسين دالة escapeHTML ====================
+function escapeHTML(str) {
+    return String(str).replace(/[&<>"'`=\/]/g, function(s) {
+        return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+            '/': '&#47;',
+            '`': '&#96;',
+            '=': '&#61;'
+        }[s];
+    });
+}
+
 function toggleLanguage() {
   currentLang = currentLang === 'en' ? 'ar' : 'en';
   localStorage.setItem('ce_lang', currentLang);
@@ -1180,7 +1221,6 @@ function openNews(idx) {
   document.getElementById('news-ov').classList.add('open'); 
 }
 function closeNews() { document.getElementById('news-ov').classList.remove('open'); }
-function escapeHTML(str) { return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])); }
 
 /* --- SECURE IDENTITY & PROFILE SYSTEM --- */
 let _internalState = { name: '', username: '', avatar: '', bio: '' };
@@ -1285,7 +1325,19 @@ function openProfile() {
 }
 
 function previewProfAvatar(e) {
-  const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
+  const file = e.target.files[0]; if(!file) return;
+  
+  // التحقق من نوع وحجم الصورة
+  if (!file.type.startsWith('image/')) {
+      alert('Please select an image file.');
+      return;
+  }
+  if (file.size > 2 * 1024 * 1024) { // 2 MB limit
+      alert('Image size must be less than 2MB.');
+      return;
+  }
+  
+  const reader = new FileReader();
   reader.onload = (ev) => { 
       tempAvatarData = ev.target.result; 
       document.getElementById('prof-pg-avatar').style.backgroundImage = `url(${tempAvatarData})`; 
@@ -1498,7 +1550,7 @@ window.forceExitMatch = function() {
   closeExitModal();
   document.getElementById('go-ov').classList.remove('open');
   gameOn = false;
-  if (tim) { clearInterval(tim); tim = null; }
+  if (timerRequest) { cancelAnimationFrame(timerRequest); timerRequest = null; }
   GS = null;
   go('home');
 }
@@ -1699,33 +1751,55 @@ function initStockfish() {
 
 setTimeout(initStockfish, 500);
 
+// ==================== تحسين سرعة شريط التقييم ====================
+let evalRafPending = false;
+
 function updateEvalBarRealtime(val, isMate) {
     if (!GS || !gameOn) return;
     
-    let isWhiteTurn = GS.turn === 'w';
-    let sc = 50;
-    let sVal = "";
+    if (evalRafPending) return;
+    evalRafPending = true;
     
-    if (isMate) {
-        let absoluteMate = isWhiteTurn ? val : -val;
-        sc = absoluteMate > 0 ? 100 : 0;
-        sVal = absoluteMate > 0 ? "#" + Math.abs(absoluteMate) : "-#" + Math.abs(absoluteMate);
-    } else {
-        let absoluteCp = isWhiteTurn ? val : -val;
-        let winChance = 2 / (1 + Math.exp(-0.00368208 * absoluteCp)) - 1;
-        sc = 50 + (winChance * 50);
-        sVal = (absoluteCp > 0 ? '+' : '') + (absoluteCp / 100).toFixed(1);
-    }
-    
-    const evS = document.getElementById('ev-s'), evF = document.getElementById('ev-f'), evL = document.getElementById('ev-l');
-    if (evS && evS.textContent !== sVal) evS.textContent = sVal;
-    const targetWidth = Math.max(0, Math.min(100, sc)) + '%';
-    if (evF && evF.style.width !== targetWidth) evF.style.width = targetWidth;
-    if (evL) {
-        let absoluteVal = isWhiteTurn ? val : -val;
-        let newL = isMate ? (TRANSLATIONS[currentLang].mate || "Mate") : (Math.abs(absoluteVal) < 30 ? TRANSLATIONS[currentLang].even : (absoluteVal > 0 ? 'White' : 'Black'));
-        if (evL.textContent !== newL) evL.textContent = newL;
-    }
+    requestAnimationFrame(() => {
+        evalRafPending = false;
+        
+        let isWhiteTurn = GS.turn === 'w';
+        let sc = 50;
+        let sVal = "";
+        
+        if (isMate) {
+            let absoluteMate = isWhiteTurn ? val : -val;
+            sc = absoluteMate > 0 ? 100 : 0;
+            sVal = absoluteMate > 0 ? "#" + Math.abs(absoluteMate) : "-#" + Math.abs(absoluteMate);
+        } else {
+            let absoluteCp = isWhiteTurn ? val : -val;
+            // صيغة محسنة وسريعة لحساب النسبة
+            let winChance = 1 / (1 + Math.exp(-0.004 * absoluteCp));
+            sc = 50 + (winChance - 0.5) * 100;
+            sVal = (absoluteCp > 0 ? '+' : '') + (absoluteCp / 100).toFixed(1);
+        }
+        
+        const evS = document.getElementById('ev-s');
+        const evF = document.getElementById('ev-f');
+        const evL = document.getElementById('ev-l');
+        
+        if (evS && evS.textContent !== sVal) {
+            evS.textContent = sVal;
+        }
+        
+        const targetWidth = Math.max(0, Math.min(100, sc)) + '%';
+        if (evF && evF.style.width !== targetWidth) {
+            evF.style.width = targetWidth;
+        }
+        
+        if (evL) {
+            let absoluteVal = isWhiteTurn ? val : -val;
+            let newL = isMate ? (TRANSLATIONS[currentLang].mate || "Mate") : (Math.abs(absoluteVal) < 30 ? TRANSLATIONS[currentLang].even : (absoluteVal > 0 ? 'White' : 'Black'));
+            if (evL.textContent !== newL) {
+                evL.textContent = newL;
+            }
+        }
+    });
 }
 
 function triggerEngine() {
@@ -1753,7 +1827,7 @@ function triggerEngine() {
 }
 
 /* --- GAME STATE & ROUTING --- */
-let gM = 'pvp', sC = 'white', sT = 10, eElo = 1500, initialGS = null, GS = null, moveHistory =[], currentPly = 0, flp = false, drg = null, gameOn = false, pendDrag = false, isResign = false, gameSaved = false, sel = null, lMvs =[], lastM = null, pend = null, tim = null, tw = 0, tb = 0, lastTk = 0, positionCounts = {}; 
+let gM = 'pvp', sC = 'white', sT = 10, eElo = 1500, initialGS = null, GS = null, moveHistory =[], currentPly = 0, flp = false, drg = null, gameOn = false, pendDrag = false, isResign = false, gameSaved = false, sel = null, lMvs =[], lastM = null, pend = null, timerRequest = null, tw = 0, tb = 0, lastTk = 0, positionCounts = {}; 
 let winnerColor = null;
 
 function getPosHash(s) { return s.board.join(',') + '|' + s.turn + '|' + s.cast.K + s.cast.Q + s.cast.k + s.cast.q + '|' + s.ep; }
@@ -1816,14 +1890,64 @@ function saveGame(resStr, winnerColorParam) {
   localStorage.setItem('ce_games', JSON.stringify(games)); renderHistory();
 }
 
+// ==================== تحسين دالة renderHistory (إصلاح onclick) ====================
 function renderHistory() {
-  const list = document.getElementById('hist-list'); if(!list) return; let games = JSON.parse(localStorage.getItem('ce_games') || '[]');
-  if(games.length === 0) { list.innerHTML = `<div style="text-align:center; color:var(--text2); padding: 40px; font-size: 1.1rem">${TRANSLATIONS[currentLang].noGames}</div>`; return; }
-  let wKing = `<div class="h-king" style="background-image:url(${getPImg(6)})"></div>`, bKing = `<div class="h-king" style="background-image:url(${getPImg(12)})"></div>`;
-  list.innerHTML = games.map((g, i) => { 
-      let isDraw = g.winner === 'd'; let resultClass = isDraw ? 'draw' : 'win'; 
-      return `<div class="hist-item gpu-accel" onclick="viewHistoryGame(${i})"><div class="h-info"><div class="h-date">${g.date} &nbsp;•&nbsp; <span class="badge mode">${g.m}</span></div><div class="h-players"><span>${wKing} ${g.w}</span> <span class="h-vs">VS</span> <span>${bKing} ${g.b}</span></div></div><div class="h-actions"><div class="badge ${resultClass}">${g.res}</div><button class="del-btn gpu-accel" onclick="deleteMatch(${i}, event)" title="${TRANSLATIONS[currentLang].deleteMatch}"><svg class="icon" viewBox="0 0 24 24" style="margin:0"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div></div>`; 
-  }).join('');
+    const list = document.getElementById('hist-list'); if(!list) return; 
+    let games = JSON.parse(localStorage.getItem('ce_games') || '[]');
+    if(games.length === 0) { 
+        list.innerHTML = `<div style="text-align:center; color:var(--text2); padding: 40px; font-size: 1.1rem">${TRANSLATIONS[currentLang].noGames}</div>`; 
+        return; 
+    }
+    let wKing = `<div class="h-king" style="background-image:url(${getPImg(6)})"></div>`, 
+        bKing = `<div class="h-king" style="background-image:url(${getPImg(12)})"></div>`;
+    
+    list.innerHTML = ''; // مسح القائمة
+    games.forEach((g, i) => {
+        const item = document.createElement('div');
+        item.className = 'hist-item gpu-accel';
+        
+        // استخدام addEventListener بدلاً من onclick لضمان العمل
+        item.addEventListener('click', (e) => {
+            // منع الحدث إذا كان الضغط على زر الحذف
+            if (e.target.closest('.del-btn')) return;
+            viewHistoryGame(i);
+        });
+        
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'h-info';
+        
+        const dateDiv = document.createElement('div');
+        dateDiv.className = 'h-date';
+        dateDiv.innerHTML = `${escapeHTML(g.date)} &nbsp;•&nbsp; <span class="badge mode">${escapeHTML(g.m)}</span>`;
+        
+        const playersDiv = document.createElement('div');
+        playersDiv.className = 'h-players';
+        playersDiv.innerHTML = `<span>${wKing} ${escapeHTML(g.w)}</span> <span class="h-vs">VS</span> <span>${bKing} ${escapeHTML(g.b)}</span>`;
+        
+        infoDiv.appendChild(dateDiv);
+        infoDiv.appendChild(playersDiv);
+        
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'h-actions';
+        
+        const resultBadge = document.createElement('div');
+        resultBadge.className = `badge ${g.winner === 'd' ? 'draw' : 'win'}`;
+        resultBadge.textContent = g.res;
+        
+        const delBtn = document.createElement('button');
+        delBtn.className = 'del-btn gpu-accel';
+        delBtn.title = TRANSLATIONS[currentLang].deleteMatch;
+        delBtn.addEventListener('click', (e) => { e.stopPropagation(); deleteMatch(i, e); });
+        delBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" style="margin:0"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+        
+        actionsDiv.appendChild(resultBadge);
+        actionsDiv.appendChild(delBtn);
+        
+        item.appendChild(infoDiv);
+        item.appendChild(actionsDiv);
+        
+        list.appendChild(item);
+    });
 }
 
 let matchToDeleteIndex = -1;
@@ -1873,21 +1997,62 @@ function buildBd() {
   for(let r=0; r<8; r++) { for(let c=0; c<8; c++) { const s = document.createElement('div'); const colorClass = (r+c)%2!==0?'d':'l'; s.className = 'sq ' + colorClass; s.dataset.color = colorClass; const fi = flp?7-c:c, ri = flp?r:7-r, sqId = F[fi]+R[ri]; s.dataset.sq = sqId; if(c===0) s.innerHTML += `<span class="co rank">${R[ri]}</span>`; if(r===7) s.innerHTML += `<span class="co file">${F[fi]}</span>`; el.appendChild(s); } }
 }
 
-function drawP(bid, s, mvFrom=null, mvTo=null) {
-  const cb = document.getElementById(bid); if(!cb) return; const pieces = Array.from(cb.querySelectorAll('.piece')); pieces.forEach(p => p.dataset.used = "0");
-  for(let i=0; i<64; i++) {
-      const pVal = s.board[i]; if(!pVal) continue;
-      const sqId = 'abcdefgh'[i%8] + '12345678'[Math.floor(i/8)]; let file = flp ? 7 - (i%8) : (i%8); let rank = flp ? Math.floor(i/8) : 7 - Math.floor(i/8);
-      let pEl = null; if(mvTo === sqId && mvFrom) pEl = pieces.find(p => p.dataset.sq === mvFrom && p.dataset.used === "0");
-      if(!pEl) pEl = pieces.find(p => p.dataset.sq === sqId && p.dataset.p == pVal && p.dataset.used === "0"); if(!pEl) pEl = pieces.find(p => p.dataset.p == pVal && p.dataset.used === "0");
-      if(!pEl) { pEl = document.createElement('div'); pEl.className = 'piece gpu-accel'; cb.appendChild(pEl); }
-      pEl.dataset.used = "1"; pEl.dataset.sq = sqId; 
-      if (pEl.dataset.p != pVal) { pEl.dataset.p = pVal; pEl.style.backgroundImage = `url(${getPImg(pVal)})`; }
-      if(mvTo === sqId && mvFrom) pEl.style.transition = 'transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1)'; else if (!pEl.classList.contains('dragging')) pEl.style.transition = 'none';
-      const targetTransform = `translate3d(${file * 100}%, ${rank * 100}%, 0)`;
-      if (pEl.style.transform !== targetTransform) pEl.style.transform = targetTransform;
-  }
-  pieces.filter(p => p.dataset.used === "0").forEach(p => p.remove()); updHL(s);
+// ==================== تحسين دالة drawP لتحديث القطع فقط دون إعادة إنشاء ====================
+function drawP(bid, s, mvFrom = null, mvTo = null) {
+    const cb = document.getElementById(bid);
+    if (!cb) return;
+    
+    let pieces = Array.from(cb.querySelectorAll('.piece'));
+    
+    // إعادة استخدام القطع أو إنشاء جديدة
+    for (let i = 0; i < 64; i++) {
+        const pVal = s.board[i];
+        const file = i % 8;
+        const rank = Math.floor(i / 8);
+        const sqId = 'abcdefgh'[file] + '12345678'[rank];
+        
+        let displayFile = flp ? 7 - file : file;
+        let displayRank = flp ? rank : 7 - rank;
+        
+        let piece = pieces.find(p => p.dataset.sq === sqId);
+        
+        if (pVal) {
+            if (!piece) {
+                piece = document.createElement('div');
+                piece.className = 'piece gpu-accel';
+                cb.appendChild(piece);
+                pieces.push(piece);
+            }
+            // تحديث البيانات فقط إذا تغيرت
+            if (piece.dataset.sq !== sqId) piece.dataset.sq = sqId;
+            if (piece.dataset.p != pVal) {
+                piece.dataset.p = pVal;
+                piece.style.backgroundImage = `url(${getPImg(pVal)})`;
+            }
+            // تحديث التحويل
+            const targetTransform = `translate3d(${displayFile * 100}%, ${displayRank * 100}%, 0)`;
+            if (piece.style.transform !== targetTransform) {
+                if (mvTo === sqId && mvFrom) {
+                    piece.style.transition = 'transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                } else if (!piece.classList.contains('dragging')) {
+                    piece.style.transition = 'none';
+                }
+                piece.style.transform = targetTransform;
+            }
+        } else {
+            if (piece) {
+                piece.remove();
+                pieces = pieces.filter(p => p !== piece);
+            }
+        }
+    }
+    
+    // إزالة القطع الزائدة
+    pieces.forEach(p => {
+        if (!s.board[CE.s2i(p.dataset.sq)]) p.remove();
+    });
+    
+    updHL(s);
 }
 
 function updHL(s) {
@@ -1955,7 +2120,7 @@ function renderMoves() {
 }
 
 function goToPly(ply) { 
-  if (tim) { clearInterval(tim); tim = null; }
+  if (timerRequest) { cancelAnimationFrame(timerRequest); timerRequest = null; }
   
   currentPly = ply; 
   if(ply === 0) { 
@@ -1976,8 +2141,8 @@ function goToPly(ply) {
   renderMoves(); 
   
   if (gameOn && ply === moveHistory.length && sT > 0) {
-    lastTk = Date.now();
-    tim = setInterval(window.updTim, 100);
+    lastTk = performance.now();
+    startTimer();
   }
   
   const show = gameOn && ply === moveHistory.length;
@@ -1985,7 +2150,6 @@ function goToPly(ply) {
   document.getElementById('btn-resign').style.display = show ? 'flex' : 'none';
   document.getElementById('btn-draw').style.display = show ? 'flex' : 'none';
   
-  if(window.updTim) window.updTim(); 
   triggerEngine(); 
   updateOpeningName();
 }
@@ -1995,6 +2159,49 @@ function navPly(dir) {
   if (target < 0) target = 0; 
   if (target > moveHistory.length) target = moveHistory.length; 
   if (target !== currentPly) goToPly(target); 
+}
+
+// ==================== تحسين التايمر باستخدام requestAnimationFrame ====================
+function startTimer() {
+    if (timerRequest) cancelAnimationFrame(timerRequest);
+    lastTk = performance.now();
+    
+    function updateTimer(now) {
+        if (!gameOn || currentPly < moveHistory.length) return;
+        
+        let dt = (now - lastTk) / 1000;
+        lastTk = now;
+        
+        if (GS.turn === 'w') {
+            tw -= dt;
+            if (tw <= 0) {
+                tw = 0;
+                timeOut('w');
+                return;
+            }
+        } else {
+            tb -= dt;
+            if (tb <= 0) {
+                tb = 0;
+                timeOut('b');
+                return;
+            }
+        }
+        
+        const fmt = s => {
+            if (s <= 0) return "0:00";
+            const m = Math.floor(s / 60);
+            const sc = Math.floor(s % 60);
+            return m + ":" + (sc < 10 ? "0" : "") + sc;
+        };
+        
+        document.getElementById('timer-' + (flp ? 'bot' : 'top')).textContent = fmt(tb);
+        document.getElementById('timer-' + (flp ? 'top' : 'bot')).textContent = fmt(tw);
+        
+        timerRequest = requestAnimationFrame(updateTimer);
+    }
+    
+    timerRequest = requestAnimationFrame(updateTimer);
 }
 
 function execMv(mv, pr=null, isDrag=false) {
@@ -2028,7 +2235,7 @@ function execMv(mv, pr=null, isDrag=false) {
   
   if(mate || drawReason) { 
     gameOn=false; 
-    clearInterval(tim); 
+    if (timerRequest) { cancelAnimationFrame(timerRequest); timerRequest = null; }
     setTimeout(()=>showEnd(mate, drawReason), 500); 
     return; 
   }
@@ -2168,19 +2375,9 @@ function startGame() {
   document.getElementById('el-top').textContent = (gM==='pvc' && (flp ? pNameW : pNameB) === TRANSLATIONS[currentLang].vsEngine) ? eElo : ''; 
   document.getElementById('el-bot').textContent = (gM==='pvc' && (flp ? pNameB : pNameW) === TRANSLATIONS[currentLang].vsEngine) ? eElo : '';
   
-  tw = sT*60; tb = sT*60; if(tim) clearInterval(tim); 
+  tw = sT*60; tb = sT*60; if(timerRequest) cancelAnimationFrame(timerRequest); 
   
-  let lastTwStr = '', lastTbStr = '';
-  window.updTim = function() { 
-      if(!gameOn || currentPly < moveHistory.length) return; let n=Date.now(), dt=(n-lastTk)/1000; lastTk=n; 
-      if(GS.turn==='w'){tw-=dt; if(tw<=0){tw=0; timeOut('w');}} else {tb-=dt; if(tb<=0){tb=0; timeOut('b');}} 
-      const fmt = s => { if(s<=0)return"0:00"; const m=Math.floor(s/60),sc=Math.floor(s%60); return m===0&&s<10?(sc+"."+Math.floor((s%1)*10)):m+":"+(sc<10?"0":"")+sc; };
-      let tbStr = fmt(tb), twStr = fmt(tw);
-      if (lastTbStr !== tbStr) { document.getElementById('timer-'+(flp?'bot':'top')).textContent = tbStr; lastTbStr = tbStr; }
-      if (lastTwStr !== twStr) { document.getElementById('timer-'+(flp?'top':'bot')).textContent = twStr; lastTwStr = twStr; }
-  };
-  
-  if(sT>0) { lastTk=Date.now(); tim = setInterval(window.updTim, 100); } 
+  if(sT>0) { lastTk = performance.now(); startTimer(); } 
   document.getElementById('timer-top').style.display = sT>0?'block':'none'; document.getElementById('timer-bot').style.display = sT>0?'block':'none';
   
   // Clear Eval UI safely immediately before starting
@@ -2204,7 +2401,7 @@ function startGame() {
   updateOpeningName();
 }
 
-function timeOut(col) { gameOn=false; clearInterval(tim); document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].timeout; document.getElementById('go-s').textContent = (col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins; document.getElementById('go-ov').classList.add('open'); saveGame((col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonTimeout, col==='w'?'b':'w'); }
+function timeOut(col) { gameOn=false; if (timerRequest) { cancelAnimationFrame(timerRequest); timerRequest = null; } document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].timeout; document.getElementById('go-s').textContent = (col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wins; document.getElementById('go-ov').classList.add('open'); saveGame((col==='w'?'Black':'White') + " " + TRANSLATIONS[currentLang].wonTimeout, col==='w'?'b':'w'); }
 
 function drawCap(arr, containerId, adv) {
     const c = document.getElementById(containerId); if (!c) return; c.innerHTML = ''; if (arr.length === 0 && adv <= 0) return;
@@ -2237,16 +2434,16 @@ function undoM() {
   goToPly(targetPly); 
   if(!gameOn && targetPly < moveHistory.length + step) { 
     gameOn = true; 
-    if (sT > 0) { lastTk = Date.now(); tim = setInterval(window.updTim, 100); } 
+    if (sT > 0) { lastTk = performance.now(); startTimer(); } 
     document.getElementById('go-ov').classList.remove('open'); 
   } 
 }
 
-function flipBd() { flp=!flp; buildBd(); updAvatars(); drawP('cb', GS); window.updTim && window.updTim(); updUI(); const topEl = document.getElementById('nm-top'), botEl = document.getElementById('nm-bot'); const nt = topEl.dataset.secure; topEl.dataset.secure = botEl.dataset.secure; topEl.textContent = topEl.dataset.secure; botEl.dataset.secure = nt; botEl.textContent = botEl.dataset.secure; const et = document.getElementById('el-top').textContent; document.getElementById('el-top').textContent = document.getElementById('el-bot').textContent; document.getElementById('el-bot').textContent = et; const ft = document.getElementById('flag-top').style.display; document.getElementById('flag-top').style.display = document.getElementById('flag-bot').style.display; document.getElementById('flag-bot').style.display = ft; }
+function flipBd() { flp=!flp; buildBd(); updAvatars(); drawP('cb', GS); updUI(); const topEl = document.getElementById('nm-top'), botEl = document.getElementById('nm-bot'); const nt = topEl.dataset.secure; topEl.dataset.secure = botEl.dataset.secure; topEl.textContent = topEl.dataset.secure; botEl.dataset.secure = nt; botEl.textContent = botEl.dataset.secure; const et = document.getElementById('el-top').textContent; document.getElementById('el-top').textContent = document.getElementById('el-bot').textContent; document.getElementById('el-bot').textContent = et; const ft = document.getElementById('flag-top').style.display; document.getElementById('flag-top').style.display = document.getElementById('flag-bot').style.display; document.getElementById('flag-bot').style.display = ft; }
 
 function resignG() { 
   if(!gameOn) return; 
-  isResign = true; gameOn = false; clearInterval(tim); 
+  isResign = true; gameOn = false; if (timerRequest) { cancelAnimationFrame(timerRequest); timerRequest = null; }
   let isBotResigning = (GS.turn === 'w' && !flp) || (GS.turn === 'b' && flp); 
   document.getElementById(isBotResigning ? 'flag-bot' : 'flag-top').style.display = 'block'; 
   document.getElementById('go-t').textContent=TRANSLATIONS[currentLang].resignation; 
@@ -2259,7 +2456,7 @@ function offerDraw() {
   if (!gameOn || currentPly !== moveHistory.length) return;
   if (gM === 'pvc') {
     gameOn = false;
-    clearInterval(tim);
+    if (timerRequest) { cancelAnimationFrame(timerRequest); timerRequest = null; }
     document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].draw;
     document.getElementById('go-s').textContent = TRANSLATIONS[currentLang].drawGen;
     document.getElementById('go-ov').classList.add('open');
@@ -2277,7 +2474,7 @@ function closeDrawModal() {
 function acceptDraw() {
   closeDrawModal();
   gameOn = false;
-  clearInterval(tim);
+  if (timerRequest) { cancelAnimationFrame(timerRequest); timerRequest = null; }
   document.getElementById('go-t').textContent = TRANSLATIONS[currentLang].draw;
   document.getElementById('go-s').textContent = TRANSLATIONS[currentLang].drawGen;
   document.getElementById('go-ov').classList.add('open');
